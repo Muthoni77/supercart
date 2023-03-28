@@ -1,14 +1,34 @@
-import React from "react";
+import { useState } from "react";
 import { ProductCardType } from "@/Types/products";
-import { AiFillStar } from "react-icons/ai";
+import { AiFillHeart, AiFillStar, AiOutlineHeart } from "react-icons/ai";
 
 function ProductCardMax({ bg, title, body, photo }: ProductCardType) {
+  const [isLiked, setIsLiked] = useState<boolean>(false);
   return (
-    <div
-      style={{ backgroundColor: bg }}
-      className={`flex flex-col rounded-lg  relative h-fit hover:shadow `}
-    >
-      <img src={photo} alt="" className="w-full -mt-5  mx-auto" />
+    <>
+      <div
+        style={{ backgroundColor: bg }}
+        className={`flex flex-col rounded-3xl  relative h-fit hover:shadow `}
+      >
+        {!isLiked ? (
+          <AiOutlineHeart
+            size={40}
+            className="absolute text-darkish cursor-pointer right-2 top-2 bg-white rounded-full p-2 hover:scale-105"
+            onClick={() => {
+              setIsLiked(true);
+            }}
+          />
+        ) : (
+          <AiFillHeart
+            size={40}
+            className="absolute text-red-500 cursor-pointer right-2 top-2 bg-white rounded-full p-2 hover:scale-105"
+            onClick={() => {
+              setIsLiked(false);
+            }}
+          />
+        )}
+        <img src={photo} alt="" className="w-full  -mt-5  mx-auto" />
+      </div>
       <div className=" flex flex-col space-y-1 p-3 bg-white">
         <span className="text-[#0f172a] font-bold">{body}</span>
         <span className="text-[#556377]">{title}</span>
@@ -22,7 +42,7 @@ function ProductCardMax({ bg, title, body, photo }: ProductCardType) {
           </span>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

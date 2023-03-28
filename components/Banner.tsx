@@ -36,24 +36,25 @@ function Banner() {
         slidesPerView={1}
         onSlideChange={(swiper) => handleSlideChange(swiper)}
         onSwiper={(swiper) => console.log(swiper)}
-        className="p-5"
+        className="p-5 h-1/2 md:h-screen"
       >
         {/* Banner Slide 1 */}
         <SwiperSlide
-          className=" w-full"
-          style={{ display: "flex", minHeight: "100vh" }}
+          id="bannerSlider"
+          className=" .banner-slider    "
+          style={{ display: "flex" }}
         >
           {({ isActive }) => (
             <>
               <div
-                className="flex flex-col space-y-10 m-0 items-start justify-center w-3/4  md:p-20"
+                className="flex flex-col space-y-10 m-0 items-start justify-center w-full md:w-3/4 p-6  md:p-20"
                 style={{ zIndex: "30" }}
               >
                 <motion.h3
                   animate={{ x: isActive ? 0 : -50, opacity: isActive ? 1 : 0 }}
                   initial={{ x: -50, opacity: 0 }}
                   transition={{ duration: 0.3, delay: 0 }}
-                  className="text-xl font-bold text-[#334155] "
+                  className="text-lg md:text-xl font-bold text-[#334155] "
                 >
                   In this season, find the best 🔥
                 </motion.h3>
@@ -61,7 +62,7 @@ function Banner() {
                   animate={{ x: 0 }}
                   initial={{ x: -50 }}
                   transition={{ duration: 0.3, delay: 0.1 }}
-                  className="text-6xl font-bold text-[#0f172a] "
+                  className="text-4xl md:text-6xl font-bold text-[#0f172a] "
                   data-aos="fade-up"
                 >
                   Exclusive Collection for everyone
@@ -80,14 +81,14 @@ function Banner() {
                 animate={{ scale: 1, opacity: 1 }}
                 initial={{ scale: 1.2, opacity: 0.5 }}
                 transition={{ duration: 0.2 }}
-                className=""
+                className="absolute w-full md:w-1/2 bottom-0 md:right-[20px] md:top-[5%]"
                 exit={{ scale: 1.2, opacity: 0.5 }}
-                style={{
-                  width: "50%",
-                  position: "absolute",
-                  right: "20px",
-                  top: "5%",
-                }}
+                // style={{
+                //   width: "50%",
+                //   position: "absolute",
+                //   right: "20px",
+                //   top: "5%",
+                // }}
               >
                 <img
                   className="w-full"
@@ -100,18 +101,18 @@ function Banner() {
         </SwiperSlide>
         {/* Banner Slide 2 */}
         <SwiperSlide
-          className=" w-full"
-          style={{ display: "flex", minHeight: "100vh" }}
+          id="bannerSlider"
+          style={{ display: "flex", minHeight: "" }}
         >
           <div
-            className="flex flex-col space-y-10 m-0 items-start justify-center w-3/4  md:p-20"
+            className="flex flex-col space-y-10 m-0 items-start justify-center w-full md:w-3/4 p-6  md:p-20"
             style={{ zIndex: "30" }}
           >
             <motion.h3
               animate={{ x: 0 }}
               initial={{ x: -50 }}
               transition={{ duration: 0.3, delay: 0 }}
-              className="text-xl font-bold text-[#334155] "
+              className="text-lg md:text-xl font-bold text-[#334155] "
             >
               Discover More. Shop Better 🌟
             </motion.h3>
@@ -119,7 +120,7 @@ function Banner() {
               animate={{ x: 0 }}
               initial={{ x: -50 }}
               transition={{ duration: 0.3, delay: 0.1 }}
-              className="text-6xl font-bold text-[#0f172a] "
+              className="text-4xl md:text-6xl font-bold text-[#0f172a] "
             >
               Shop Smarter Today!
             </motion.h1>
@@ -137,13 +138,13 @@ function Banner() {
             animate={{ scale: 0.9, opacity: 1 }}
             initial={{ scale: 0.5, opacity: 0.5 }}
             transition={{ duration: 0.2 }}
-            className=""
-            style={{
-              width: "50%",
-              position: "absolute",
-              right: "20px",
-              top: "5%",
-            }}
+            className="absolute w-full md:w-1/2 bottom-0 md:right-[20px] md:top-[5%]"
+            // style={{
+            //   width: "50%",
+            //   position: "absolute",
+            //   right: "20px",
+            //   top: "5%",
+            // }}
           >
             <img
               className="w-full"
@@ -155,18 +156,18 @@ function Banner() {
 
         {/* Banner Slide 3 */}
         <SwiperSlide
-          className=" w-full"
-          style={{ display: "flex", minHeight: "100vh" }}
+          id="bannerSlider"
+          style={{ display: "flex", minHeight: "" }}
         >
           <div
-            className="flex flex-col space-y-10 m-0 items-start justify-center w-3/4  md:p-20"
+            className="flex flex-col space-y-10 m-0 items-start justify-center w-full md:w-3/4 p-6  md:p-20"
             style={{ zIndex: "30" }}
           >
             <motion.h3
               animate={{ x: 0 }}
               initial={{ x: -50 }}
               transition={{ duration: 0.3, delay: 0 }}
-              className="text-xl font-bold text-[#334155] "
+              className="text-lg md:text-xl font-bold text-[#334155] "
             >
               In this season, find the best 🔥
             </motion.h3>
@@ -174,7 +175,7 @@ function Banner() {
               animate={{ x: 0 }}
               initial={{ x: -50 }}
               transition={{ duration: 0.3, delay: 0.1 }}
-              className="text-6xl font-bold text-[#0f172a] "
+              className="text-4xl md:text-6xl font-bold text-[#0f172a] "
             >
               Exclusive Collection for everyone
             </motion.h1>
@@ -192,13 +193,13 @@ function Banner() {
             animate={{ scale: 1, opacity: 1 }}
             initial={{ scale: 0.5, opacity: 0.5 }}
             transition={{ duration: 0.2 }}
-            className=""
-            style={{
-              width: "50%",
-              position: "absolute",
-              right: "20px",
-              bottom: "0",
-            }}
+            className="absolute w-full md:w-1/2 bottom-0 md:right-[20px] md:top-[5%]"
+            // style={{
+            //   width: "50%",
+            //   position: "absolute",
+            //   right: "20px",
+            //   bottom: "0",
+            // }}
           >
             <img
               className="w-full"
@@ -212,14 +213,14 @@ function Banner() {
         <BsArrowLeft
           size={40}
           color={"black"}
-          className=" swiper_prev_btn  swiper_btn rounded-circle p-2 bg-light absolute top-[50%] left-5 z-30 hover:cursor-pointer hover:border p-3 rounded-full hover:border-[#060b13]"
+          className=" swiper_prev_btn  swiper_btn rounded-circle p-2 bg-light absolute bottom-4 md:top-[50%] left-5 z-30 hover:cursor-pointer hover:border p-3 rounded-full hover:border-[#060b13]"
         />
       </span>
       <span ref={nextRef}>
         <BsArrowRight
           size={40}
           color={"black"}
-          className=" swiper_next_btn  swiper_btn rounded-circle p-2 bg-light absolute top-[50%] right-5 z-30 hover:cursor-pointer hover:border p-3 rounded-full hover:border-[#060b13]"
+          className=" swiper_next_btn  swiper_btn rounded-circle p-2 bg-light absolute bottom-4 md:top-[50%] right-5 z-30 hover:cursor-pointer hover:border p-3 rounded-full hover:border-[#060b13]"
         />
       </span>
     </div>

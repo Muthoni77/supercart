@@ -43,8 +43,8 @@ function ProductsSliderCoverMin() {
   ]);
 
   return (
-    <div className="w-full p-5 min-h-[300px] pt-24  pb-10  pl-20 ">
-      <div className=" flex items-center justify-between mb-14">
+    <div className="w-full p-4 min-h-[300px] pt-20 md:pt-24   md:pb-10  md:pl-20 ">
+      <div className=" flex flex-col items-end  md:flex-row md:items-center md:justify-between mb-14">
         <div className="">
           <span className="text-[#111827] text-3xl font-bold mr-2">
             Discover more.
@@ -60,7 +60,7 @@ function ProductsSliderCoverMin() {
               onClick={() => setActiveBtn("left")}
               className={` ${
                 activeBtn === "left" ? "border" : ""
-              } text-[#6b7280] mr-8 hover:cursor-pointer hover:border p-3 rounded-full border-[#a7acb6]`}
+              } text-[#6b7280] mt-2 md:mt-0 mr-4 md:mr-8 hover:cursor-pointer hover:border p-3 rounded-full border-[#a7acb6]`}
             />
           </span>
           <span ref={nextRef}>
@@ -69,7 +69,7 @@ function ProductsSliderCoverMin() {
               onClick={() => setActiveBtn("right")}
               className={` ${
                 activeBtn === "right" ? "border" : ""
-              } text-[#6b7280] mr-8 hover:cursor-pointer hover:border p-3 rounded-full border-[#a7acb6]`}
+              } text-[#6b7280] mt-2 md:mt-0 mr-2 md:mr-8 hover:cursor-pointer hover:border p-3 rounded-full border-[#a7acb6]`}
             />
           </span>
         </div>
@@ -85,14 +85,19 @@ function ProductsSliderCoverMin() {
         autoplay={{ delay: 3000 }}
         modules={[Autoplay, Navigation]}
         pagination={{ clickable: true }}
-        slidesPerView={3}
+        slidesPerView={1}
         onSlideChange={(swiper) => handleSlideChange(swiper)}
         onSwiper={(swiper) => console.log(swiper)}
-        className=" w-full pb-16 "
+        className=" w-full m-0 md:pb-16  "
+        breakpoints={{
+          768: {
+            slidesPerView: 3,
+          },
+        }}
       >
         {products &&
           products.map((product, index) => (
-            <SwiperSlide key={index} className="pt-3 pb-3 pr-3">
+            <SwiperSlide key={index} className="md:pt-3 pb-3  px-3">
               <ProductCard {...product} />
             </SwiperSlide>
           ))}

@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Banner from "@/components/Banner";
 import ProductsSliderCover from "@/components/sliders/ProductsSliderCoverMin";
 import ProductsSliderCoverMax from "@/components/sliders/ProductSliderCoverMax";
+import Steps from "@/components/Steps";
 
 export default function Home() {
   return (
@@ -24,6 +25,8 @@ export default function Home() {
         <Banner />
         <ProductsSliderCover />
         <ProductsSliderCoverMax />
+        <hr className="m-4 md:mx-20 md:my-12" />
+        <Steps />
       </main>
     </>
   );
