@@ -9,6 +9,9 @@
   scroll-behavior: smooth;
 }
 
+.text-dark {
+  color: #374151 !important;
+}
 .text-darkish {
   color: #556377 !important;
 }
@@ -31,4 +34,9 @@
 
 .exploreTab::-webkit-scrollbar {
   display: none; /* hide scrollbar on Chrome, Safari, and Opera */
+}
+
+#footer span:hover {
+  cursor: pointer;
+  color: black;
 }
