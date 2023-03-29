@@ -21,7 +21,7 @@ function ShopDepartments() {
     {
       bg: "#e0e7ff",
       photo: "/products/5.webp",
-      title: "Explore new arrivals",
+      title: "Travelling kits",
       categories: 20,
     },
     {
@@ -33,25 +33,25 @@ function ShopDepartments() {
     {
       bg: "#e0f2fe",
       photo: "/products/7.webp",
-      title: "Digital gift cards",
+      title: "Beauty products",
       categories: 28,
     },
     {
       bg: "#ffedd5",
       photo: "/products/8.webp",
-      title: "Digital gift cards",
+      title: "New in the market",
       categories: 14,
     },
     {
       bg: "#f1f5f9",
       photo: "/products/8.webp",
-      title: "Digital gift cards",
+      title: "Trendy vibes",
       categories: 1,
     },
     {
       bg: "#e0e7ff",
       photo: "/products/3.webp",
-      title: "Digital gift cards",
+      title: "Other gift cards",
       categories: 17,
     },
   ]);

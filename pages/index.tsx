@@ -11,6 +11,7 @@ import ExploreCover from "@/components/Explore/ExploreCover";
 import KidsBanner from "@/components/KidsBanner";
 import ExpertsChoiceCover from "@/components/ExpertsChoiceCover";
 import ShopDepartments from "@/components/ShopDepartments";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -42,6 +43,7 @@ export default function Home() {
         <KidsBanner />
         <ExpertsChoiceCover />
         <ShopDepartments />
+        <Footer />
       </main>
     </>
   );
