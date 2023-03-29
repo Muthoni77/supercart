@@ -3,15 +3,11 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 
-import { ProductCardType } from "@/Types/products";
-import ProductCardMax from "../product/ProductCardMax";
+import { ProductDepartmentType } from "@/Types/products";
 
-interface titleType {
-  title1: string;
-  title2: string;
-}
+import DepartmentCard from "./product/DepartmentCard";
 
-function ProductsSliderCoverMax(props: titleType) {
+function ShopDepartments() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
   const [activeBtn, setActiveBtn] = useState<string>("right");
   const prevRef = useRef(null);
@@ -21,50 +17,54 @@ function ProductsSliderCoverMax(props: titleType) {
     setCurrentSlideIndex(swiper.activeIndex);
   };
 
-  const [products, setProducts] = useState<ProductCardType[]>([
+  const [products, setProducts] = useState<ProductDepartmentType[]>([
     {
-      bg: "#fefce8",
-      title: "Explore new arrivals",
-      body: "Products from top brands",
+      bg: "#e0e7ff",
       photo: "/products/5.webp",
+      title: "Explore new arrivals",
+      categories: 20,
     },
     {
-      bg: "#fef2f2",
-      title: "Digital gift cards",
-      body: "Give the gift of choice",
+      bg: "#f1f5f9",
       photo: "/products/2.webp",
+      title: "Digital gift cards",
+      categories: 30,
     },
     {
-      bg: "#e8eff8",
-      title: "Hurry! Hurry!",
-      body: "New stock\nIn the market",
+      bg: "#e0f2fe",
       photo: "/products/7.webp",
+      title: "Digital gift cards",
+      categories: 28,
     },
     {
-      bg: "#f0fdf4",
-      title: "Explore new arrivals",
-      body: "Up to\n80% off retail",
+      bg: "#ffedd5",
       photo: "/products/8.webp",
+      title: "Digital gift cards",
+      categories: 14,
     },
     {
-      bg: "#f0fdf4",
-      title: "Explore new arrivals",
-      body: "Up to\n80% off retail",
-      photo: "/products/6.webp",
+      bg: "#f1f5f9",
+      photo: "/products/8.webp",
+      title: "Digital gift cards",
+      categories: 1,
+    },
+    {
+      bg: "#e0e7ff",
+      photo: "/products/3.webp",
+      title: "Digital gift cards",
+      categories: 17,
     },
   ]);
 
   return (
-    <div className="w-full p-4 min-h-[300px] pt-14 md:pt-24  pb-10  md:pl-20 ">
-      <div className=" flex flex-col items-end  md:flex-row md:items-center md:justify-between mb-14">
-        <div className="">
+    <div className="w-full p-4 min-h-[300px] pt-8 md:pt-14  pb-10  md:pl-20 ">
+      <div className=" flex flex-col items-end  md:items-end  md:flex-row md:items-center md:justify-between mb-14">
+        <div className=" w-full flex justify-start">
           <span className="text-[#111827] text-3xl font-bold mr-2">
-            {props.title1}
-          </span>
-          <span className="text-[#6b7280] text-3xl font-bold">
-            {props.title2}
+            Shop by department
           </span>
         </div>
+
         <div className="flex">
           <span ref={prevRef}>
             <BsArrowLeft
@@ -109,8 +109,8 @@ function ProductsSliderCoverMax(props: titleType) {
       >
         {products &&
           products.map((product, index) => (
-            <SwiperSlide key={index} className="pt-3 pb-3 px-3">
-              <ProductCardMax {...product} />
+            <SwiperSlide key={index} className="pt-1 pb-3 px-3">
+              <DepartmentCard {...product} />
             </SwiperSlide>
           ))}
       </Swiper>
@@ -118,4 +118,4 @@ function ProductsSliderCoverMax(props: titleType) {
   );
 }
 
-export default ProductsSliderCoverMax;
+export default ShopDepartments;

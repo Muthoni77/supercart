@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
 import {
@@ -10,12 +11,21 @@ import {
 } from "react-icons/ai";
 
 function Navbar() {
+  const router = useRouter();
   return (
     <>
-      <div className="navbar w-screen fixed top-0 left-0 right-0 z-50 bg-white">
+      <div
+        id="navbar"
+        className="navbar w-screen fixed top-0 left-0 right-0 z-50 bg-white"
+      >
         <div className="md:container  mx-auto flex items-center justify-around md:justify-around">
           <AiOutlineMenu size={30} className="block md:hidden ml-4 mr-4" />
-          <div className="flex items-center p-3  w-fit md:w-1/4  ">
+          <div
+            className="flex items-center p-3  w-fit md:w-1/4 hover:cursor-pointer"
+            onClick={() => {
+              window.scroll({ top: 0, left: 0, behavior: "smooth" });
+            }}
+          >
             <Image src={"/logo.PNG"} alt="logo" width={60} height={60} />
             <div className="flex flex-col pl-3">
               <span className="text-2xl font-bold">SuperCart</span>

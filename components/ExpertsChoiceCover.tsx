@@ -3,15 +3,10 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 
-import { ProductCardType } from "@/Types/products";
-import ProductCardMax from "../product/ProductCardMax";
+import { ProductCardPhotoType } from "@/Types/products";
+import ProductCardPhotos from "./product/ProductCartPhotos";
 
-interface titleType {
-  title1: string;
-  title2: string;
-}
-
-function ProductsSliderCoverMax(props: titleType) {
+function ExpertsChoiceCover() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
   const [activeBtn, setActiveBtn] = useState<string>("right");
   const prevRef = useRef(null);
@@ -21,48 +16,47 @@ function ProductsSliderCoverMax(props: titleType) {
     setCurrentSlideIndex(swiper.activeIndex);
   };
 
-  const [products, setProducts] = useState<ProductCardType[]>([
+  const [products, setProducts] = useState<ProductCardPhotoType[]>([
     {
-      bg: "#fefce8",
-      title: "Explore new arrivals",
-      body: "Products from top brands",
+      title: "Long sleeved sweater",
+      productColor: "Green",
       photo: "/products/5.webp",
+      price: 30,
+      rating: 650,
+      reviews: 23,
     },
     {
-      bg: "#fef2f2",
-      title: "Digital gift cards",
-      body: "Give the gift of choice",
-      photo: "/products/2.webp",
-    },
-    {
-      bg: "#e8eff8",
-      title: "Hurry! Hurry!",
-      body: "New stock\nIn the market",
-      photo: "/products/7.webp",
-    },
-    {
-      bg: "#f0fdf4",
-      title: "Explore new arrivals",
-      body: "Up to\n80% off retail",
-      photo: "/products/8.webp",
-    },
-    {
-      bg: "#f0fdf4",
-      title: "Explore new arrivals",
-      body: "Up to\n80% off retail",
+      title: "Classy umbrella",
+      productColor: "Black",
       photo: "/products/6.webp",
+      price: 30,
+      rating: 590,
+      reviews: 123,
+    },
+    {
+      title: "Sling bag",
+      productColor: "Black",
+      photo: "/products/7.webp",
+      price: 300,
+      rating: 99,
+      reviews: 84,
+    },
+    {
+      title: "Sweat shorts",
+      productColor: "Grey",
+      photo: "/products/8.webp",
+      price: 780,
+      rating: 98,
+      reviews: 37,
     },
   ]);
 
   return (
-    <div className="w-full p-4 min-h-[300px] pt-14 md:pt-24  pb-10  md:pl-20 ">
+    <div className="w-full p-4 min-h-[300px] pt-8 md:pt-14  pb-10  md:pl-20 ">
       <div className=" flex flex-col items-end  md:flex-row md:items-center md:justify-between mb-14">
-        <div className="">
+        <div className=" w-full flex justify-start">
           <span className="text-[#111827] text-3xl font-bold mr-2">
-            {props.title1}
-          </span>
-          <span className="text-[#6b7280] text-3xl font-bold">
-            {props.title2}
+            Chosen by our experts
           </span>
         </div>
         <div className="flex">
@@ -100,7 +94,7 @@ function ProductsSliderCoverMax(props: titleType) {
         slidesPerView={1}
         breakpoints={{
           768: {
-            slidesPerView: 4,
+            slidesPerView: 3,
           },
         }}
         onSlideChange={(swiper) => handleSlideChange(swiper)}
@@ -109,8 +103,8 @@ function ProductsSliderCoverMax(props: titleType) {
       >
         {products &&
           products.map((product, index) => (
-            <SwiperSlide key={index} className="pt-3 pb-3 px-3">
-              <ProductCardMax {...product} />
+            <SwiperSlide key={index} className="pt-1 pb-3 px-3">
+              <ProductCardPhotos {...product} />
             </SwiperSlide>
           ))}
       </Swiper>
@@ -118,4 +112,4 @@ function ProductsSliderCoverMax(props: titleType) {
   );
 }
 
-export default ProductsSliderCoverMax;
+export default ExpertsChoiceCover;

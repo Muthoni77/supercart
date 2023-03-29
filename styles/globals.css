@@ -6,6 +6,7 @@
 * {
   font-family: "Poppins", sans-serif !important;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 .text-darkish {
@@ -20,4 +21,14 @@
   #bannerSlider {
     height: 50vh !important;
   }
+}
+
+.exploreTab {
+  overflow: scroll;
+  scrollbar-width: none; /* hide scrollbar on Firefox */
+  -ms-overflow-style: none; /* hide scrollbar on Internet Explorer and Edge */
+}
+
+.exploreTab::-webkit-scrollbar {
+  display: none; /* hide scrollbar on Chrome, Safari, and Opera */
 }

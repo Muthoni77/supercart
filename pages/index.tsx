@@ -7,6 +7,10 @@ import Banner from "@/components/Banner";
 import ProductsSliderCover from "@/components/sliders/ProductsSliderCoverMin";
 import ProductsSliderCoverMax from "@/components/sliders/ProductSliderCoverMax";
 import Steps from "@/components/Steps";
+import ExploreCover from "@/components/Explore/ExploreCover";
+import KidsBanner from "@/components/KidsBanner";
+import ExpertsChoiceCover from "@/components/ExpertsChoiceCover";
+import ShopDepartments from "@/components/ShopDepartments";
 
 export default function Home() {
   return (
@@ -24,9 +28,20 @@ export default function Home() {
         <Navbar />
         <Banner />
         <ProductsSliderCover />
-        <ProductsSliderCoverMax />
+        <ProductsSliderCoverMax
+          title1={"New Arrivals."}
+          title2={"AMAZING backpacks and bags"}
+        />
         <hr className="m-4 md:mx-20 md:my-12" />
         <Steps />
+        <ExploreCover />
+        <ProductsSliderCoverMax
+          title1={"Best Sellers."}
+          title2={"Best sellings of the month"}
+        />
+        <KidsBanner />
+        <ExpertsChoiceCover />
+        <ShopDepartments />
       </main>
     </>
   );

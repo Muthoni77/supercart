@@ -19,6 +19,7 @@ function Banner() {
   };
   return (
     <div
+      id="top"
       className="relative"
       style={{ minHeight: "", backgroundColor: "#e3ffe6" }}
     >
@@ -193,7 +194,7 @@ function Banner() {
             animate={{ scale: 1, opacity: 1 }}
             initial={{ scale: 0.5, opacity: 0.5 }}
             transition={{ duration: 0.2 }}
-            className="absolute w-full md:w-1/2 bottom-0 md:right-[20px] md:top-[5%]"
+            className="absolute w-full md:w-1/2 bottom-0 md:right-[20px] md:bottom-[0%]"
             // style={{
             //   width: "50%",
             //   position: "absolute",
