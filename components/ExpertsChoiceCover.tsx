@@ -53,9 +53,9 @@ function ExpertsChoiceCover() {
 
   return (
     <div className="w-full p-4 min-h-[300px] pt-8 md:pt-14  pb-10  md:pl-20 ">
-      <div className=" flex flex-col items-end  md:flex-row md:items-center md:justify-between mb-14">
+      <div className=" flex flex-col items-end  md:flex-row md:items-center md:justify-between mb-6 md:mb-14">
         <div className=" w-full flex justify-start">
-          <span className="text-[#111827] text-3xl font-bold mr-2">
+          <span className="text-[#111827] text-2xl md:text-3xl font-bold mr-2">
             Chosen by our experts
           </span>
         </div>
@@ -99,11 +99,11 @@ function ExpertsChoiceCover() {
         }}
         onSlideChange={(swiper) => handleSlideChange(swiper)}
         onSwiper={(swiper) => console.log(swiper)}
-        className="p-5 w-full   md:pb-16 "
+        className=" md:p-5 w-full   md:pb-16 "
       >
         {products &&
           products.map((product, index) => (
-            <SwiperSlide key={index} className="pt-1 pb-3 px-3">
+            <SwiperSlide key={index} className="pt-1 pb-3 px-0 md:px-3">
               <ProductCardPhotos {...product} />
             </SwiperSlide>
           ))}

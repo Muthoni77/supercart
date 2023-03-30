@@ -50,8 +50,8 @@ function ExploreCover() {
   ]);
 
   return (
-    <div className="w-full bg-[#f7f7f9] pt-24 mt-16 pb-20">
-      <h1 className="text-[#111827] mx-auto mb-10 text-4xl font-bold w-fit">
+    <div className="w-full bg-[#f7f7f9] pt-12 md:pt-24 mt-16 pb-20">
+      <h1 className="text-[#111827] mx-auto mb-10 text-2xl md:text-4xl font-bold w-fit">
         Start exploring.
       </h1>
       <ExploreTab />

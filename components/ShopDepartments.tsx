@@ -58,9 +58,9 @@ function ShopDepartments() {
 
   return (
     <div className="w-full p-4 min-h-[300px] pt-8 md:pt-14  pb-10  md:pl-20 ">
-      <div className=" flex flex-col items-end  md:items-end  md:flex-row md:items-center md:justify-between mb-14">
+      <div className=" flex flex-col items-end  md:items-end  md:flex-row md:items-center md:justify-between mb-8 md:mb-14">
         <div className=" w-full flex justify-start">
-          <span className="text-[#111827] text-3xl font-bold mr-2">
+          <span className="text-[#111827] text-[24px] md:text-3xl font-bold mr-2">
             Shop by department
           </span>
         </div>

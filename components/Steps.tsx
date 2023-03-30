@@ -2,8 +2,8 @@ import React from "react";
 
 function Steps() {
   return (
-    <div className="w-full flex flex-col md:flex-row pl-20 pr-20 my-24">
-      <div className="flex flex-col items-center space-y-6 w-full md:w-1/4">
+    <div className="w-full flex flex-col md:flex-row pl-20 pr-20 py-12 md:my-24">
+      <div className="flex flex-col items-center space-y-2 border-b pb-4 md:border-b-0 md:pb-0 md:space-y-6 w-full md:w-1/4 mt-8 md:mt-0">
         <img className="w-1/2" src="/steps/1.webp" alt="" />
         <span className="py-1 mt-6 px-4 rounded-full font-medium text-xs w-fit text-red-800 bg-red-100  relative">
           Step 1
@@ -13,7 +13,7 @@ function Steps() {
           Smart filtering and suggestions make it easy to find
         </span>
       </div>
-      <div className="flex flex-col items-center space-y-6 w-full md:w-1/4">
+      <div className="flex flex-col items-center space-y-2 border-b pb-4 md:border-b-0 md:pb-0 md:space-y-6 w-full md:w-1/4 mt-8 md:mt-0">
         <img className="w-1/2" src="/steps/2.webp" alt="" />
         <span className="py-1 mt-6 px-4 rounded-full font-medium text-xs w-fit text-blue-800 bg-blue-100  relative">
           Step 2
@@ -23,7 +23,7 @@ function Steps() {
           Easily select the correct items and add them to the cart
         </span>
       </div>
-      <div className="flex flex-col items-center space-y-6 w-full md:w-1/4">
+      <div className="flex flex-col items-center space-y-2 border-b pb-4 md:border-b-0 md:pb-0 md:space-y-6 w-full md:w-1/4 mt-8 md:mt-0">
         <img className="w-1/2" src="/steps/3.webp" alt="" />
         <span className="py-1 mt-6 px-4 rounded-full font-medium text-xs w-fit text-yellow-800 bg-yellow-100  relative">
           Step 3
@@ -33,7 +33,7 @@ function Steps() {
           The carrier will confirm and ship quickly to you
         </span>
       </div>
-      <div className="flex flex-col items-center space-y-6 w-full md:w-1/4">
+      <div className="flex flex-col items-center space-y-2 border-b pb-4 md:border-b-0 md:pb-0 md:space-y-6 w-full md:w-1/4 mt-8 md:mt-0">
         <img className="w-1/2" src="/steps/4.webp" alt="" />
         <span className="py-1 mt-6 px-4 rounded-full font-medium text-xs w-fit text-purple-800 bg-purple-100  relative">
           Step 4

@@ -8,7 +8,7 @@ function ProductCardMax({ bg, title, body, photo }: ProductCardType) {
     <>
       <div
         style={{ backgroundColor: bg }}
-        className={`flex flex-col rounded-3xl  relative h-fit hover:shadow `}
+        className={`flex flex-col rounded-3xl py-6 md:py-0  relative h-fit hover:shadow `}
       >
         {!isLiked ? (
           <AiOutlineHeart
@@ -27,7 +27,12 @@ function ProductCardMax({ bg, title, body, photo }: ProductCardType) {
             }}
           />
         )}
-        <img src={photo} alt="" className="w-full  -mt-5  mx-auto" />
+        <img
+          src={photo}
+          alt=""
+          onDoubleClick={() => setIsLiked(!isLiked)}
+          className="w-3/4 md:w-full  -mt-5  mx-auto"
+        />
       </div>
       <div className=" flex flex-col space-y-1 p-3 bg-white">
         <span className="text-[#0f172a] font-bold">{body}</span>

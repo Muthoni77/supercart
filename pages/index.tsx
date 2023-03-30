@@ -31,7 +31,7 @@ export default function Home() {
         <ProductsSliderCover />
         <ProductsSliderCoverMax
           title1={"New Arrivals."}
-          title2={"AMAZING backpacks and bags"}
+          title2={"We have AMAZING backpacks and bags"}
         />
         <hr className="m-4 md:mx-20 md:my-12" />
         <Steps />

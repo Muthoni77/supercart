@@ -37,7 +37,7 @@ function Banner() {
         slidesPerView={1}
         onSlideChange={(swiper) => handleSlideChange(swiper)}
         onSwiper={(swiper) => console.log(swiper)}
-        className="p-5 h-1/2 md:h-screen"
+        className="p-5 h-[60vh]  md:h-screen"
       >
         {/* Banner Slide 1 */}
         <SwiperSlide
@@ -48,14 +48,14 @@ function Banner() {
           {({ isActive }) => (
             <>
               <div
-                className="flex flex-col space-y-10 m-0 items-start justify-center w-full md:w-3/4 p-6  md:p-20"
+                className="bg-gray-100 bg-opacity-20 md:bg-opacity-0 flex flex-col space-y-6 md:space-y-10 m-0 items-start justify-center w-full md:w-3/4 p-6  md:p-20"
                 style={{ zIndex: "30" }}
               >
                 <motion.h3
                   animate={{ x: isActive ? 0 : -50, opacity: isActive ? 1 : 0 }}
                   initial={{ x: -50, opacity: 0 }}
                   transition={{ duration: 0.3, delay: 0 }}
-                  className="text-lg md:text-xl font-bold text-[#334155] "
+                  className=" text-base md:text-lg md:text-xl font-bold text-[#334155] "
                 >
                   In this season, find the best 🔥
                 </motion.h3>
@@ -63,7 +63,7 @@ function Banner() {
                   animate={{ x: 0 }}
                   initial={{ x: -50 }}
                   transition={{ duration: 0.3, delay: 0.1 }}
-                  className="text-4xl md:text-6xl font-bold text-[#0f172a] "
+                  className="text-3xl md:text-6xl font-bold text-[#0f172a] "
                   data-aos="fade-up"
                 >
                   Exclusive Collection for everyone
@@ -73,7 +73,7 @@ function Banner() {
                   initial={{ x: -50 }}
                   transition={{ duration: 0.3, delay: 0.2 }}
                   style={{ marginTop: "50px" }}
-                  className="flex items-center bg-[#0f172a] hover:bg-[#060b13] hover:scale-95 duration-100 text-slate-50 pt-4 pb-4 pl-6 pr-6 rounded-3xl "
+                  className="flex items-center bg-[#0f172a] hover:bg-[#060b13] hover:scale-95 duration-100 text-slate-50 pt-3 pb-3 md:pt-4 md:pb-4 pl-6 pr-6 rounded-3xl "
                 >
                   Explore now <RiSearchLine size={20} className="ml-2" />
                 </motion.button>
@@ -82,7 +82,7 @@ function Banner() {
                 animate={{ scale: 1, opacity: 1 }}
                 initial={{ scale: 1.2, opacity: 0.5 }}
                 transition={{ duration: 0.2 }}
-                className="absolute w-full md:w-1/2 bottom-0 md:right-[20px] md:top-[5%]"
+                className="absolute w-full md:w-1/2  bottom-0 md:right-[20px] md:top-[5%]"
                 exit={{ scale: 1.2, opacity: 0.5 }}
                 // style={{
                 //   width: "50%",
@@ -106,14 +106,14 @@ function Banner() {
           style={{ display: "flex", minHeight: "" }}
         >
           <div
-            className="flex flex-col space-y-10 m-0 items-start justify-center w-full md:w-3/4 p-6  md:p-20"
+            className="bg-gray-100 bg-opacity-20 md:bg-opacity-0 flex flex-col space-y-6 md:space-y-10 m-0 items-start justify-center w-full md:w-3/4 p-6  md:p-20"
             style={{ zIndex: "30" }}
           >
             <motion.h3
               animate={{ x: 0 }}
               initial={{ x: -50 }}
               transition={{ duration: 0.3, delay: 0 }}
-              className="text-lg md:text-xl font-bold text-[#334155] "
+              className="text-base md:text-lg md:text-xl font-bold text-[#334155]"
             >
               Discover More. Shop Better 🌟
             </motion.h3>
@@ -121,7 +121,7 @@ function Banner() {
               animate={{ x: 0 }}
               initial={{ x: -50 }}
               transition={{ duration: 0.3, delay: 0.1 }}
-              className="text-4xl md:text-6xl font-bold text-[#0f172a] "
+              className="text-3xl  md:text-6xl font-bold text-[#0f172a]"
             >
               Shop Smarter Today!
             </motion.h1>
@@ -161,14 +161,14 @@ function Banner() {
           style={{ display: "flex", minHeight: "" }}
         >
           <div
-            className="flex flex-col space-y-10 m-0 items-start justify-center w-full md:w-3/4 p-6  md:p-20"
+            className="bg-gray-100 bg-opacity-20 md:bg-opacity-0 flex flex-col space-y-6 md:space-y-10 m-0 items-start justify-center w-full md:w-3/4 p-6  md:p-20"
             style={{ zIndex: "30" }}
           >
             <motion.h3
               animate={{ x: 0 }}
               initial={{ x: -50 }}
               transition={{ duration: 0.3, delay: 0 }}
-              className="text-lg md:text-xl font-bold text-[#334155] "
+              className="text-base md:text-lg md:text-xl font-bold text-[#334155]"
             >
               In this season, find the best 🔥
             </motion.h3>
@@ -176,7 +176,7 @@ function Banner() {
               animate={{ x: 0 }}
               initial={{ x: -50 }}
               transition={{ duration: 0.3, delay: 0.1 }}
-              className="text-4xl md:text-6xl font-bold text-[#0f172a] "
+              className="text-3xl md:text-6xl font-bold text-[#0f172a]"
             >
               Exclusive Collection for everyone
             </motion.h1>

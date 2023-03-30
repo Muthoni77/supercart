@@ -43,13 +43,13 @@ function ProductsSliderCoverMin() {
   ]);
 
   return (
-    <div className="w-full p-4 min-h-[300px] pt-20 md:pt-24   md:pb-10  md:pl-20 ">
-      <div className=" flex flex-col items-end  md:flex-row md:items-center md:justify-between mb-14">
+    <div className="w-full p-4 min-h-[300px] pt-14 md:pt-20 md:pt-24   md:pb-10  md:pl-20 ">
+      <div className=" flex flex-col items-end  md:flex-row md:items-center md:justify-between mb-4 md:mb-14">
         <div className="">
-          <span className="text-[#111827] text-3xl font-bold mr-2">
+          <span className="text-[#111827] text-[20px]  md:text-3xl font-bold mr-2">
             Discover more.
           </span>
-          <span className="text-[#6b7280] text-3xl font-bold">
+          <span className="text-[#6b7280] text-[20px]  md:text-3xl font-bold">
             Good things are waiting for you
           </span>
         </div>
@@ -88,7 +88,7 @@ function ProductsSliderCoverMin() {
         slidesPerView={1}
         onSlideChange={(swiper) => handleSlideChange(swiper)}
         onSwiper={(swiper) => console.log(swiper)}
-        className=" w-full m-0 md:pb-16  "
+        className=" w-full m-0 md:pb-16   "
         breakpoints={{
           768: {
             slidesPerView: 3,
@@ -97,7 +97,10 @@ function ProductsSliderCoverMin() {
       >
         {products &&
           products.map((product, index) => (
-            <SwiperSlide key={index} className="md:pt-3 pb-3  px-3">
+            <SwiperSlide
+              key={index}
+              className="pt-0 md:pt-3 pb-0 md:pb-3 px-0   md:px-3"
+            >
               <ProductCard {...product} />
             </SwiperSlide>
           ))}

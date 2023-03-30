@@ -9,14 +9,17 @@ function ExploreTab() {
 
   return (
     <div>
-      <div id="exploreTab" className="flex w-full  md:w-fit overflow-x-auto  mx-auto shadow-xl rounded-3xl my-12 p-1 bg-white">
+      <div
+        id="exploreTab"
+        className="flex w-full  md:w-fit overflow-x-auto  mx-auto shadow-xl rounded-3xl my-8 md:my-12 p-1 bg-white"
+      >
         <span
           onClick={() => setActiveTab(0)}
           className={` ${
             activeTab === 0
               ? "bg-[#0f172a] text-white"
               : " text-[#475569] bg-transparent hover:text-black"
-          } flex items-center  hover:cursor-pointer py-3 px-4 md:px-7 mr-1 rounded-3xl text-sm justify-center`}
+          } flex items-center  hover:cursor-pointer py-2 md:py-3 px-4 md:px-7 mr-1 rounded-3xl text-xs md:text-base justify-center`}
         >
           <BsGenderFemale size={18} className="mr-1 md:mr-2" />
           Women
@@ -27,7 +30,7 @@ function ExploreTab() {
             activeTab === 1
               ? "bg-[#0f172a] text-white"
               : " text-[#475569] bg-transparent hover:text-black"
-          } flex items-center  hover:cursor-pointer py-3 px-4 md:px-7 mr-1 rounded-3xl text-base justify-center`}
+          } flex items-center  hover:cursor-pointer py-2 md:py-3 px-4 md:px-7 mr-1 rounded-3xl text-xs md:text-base justify-center`}
         >
           <BsGenderMale size={18} className="mr-1 md:mr-2" />
           Men
@@ -38,7 +41,7 @@ function ExploreTab() {
             activeTab === 2
               ? "bg-[#0f172a] text-white"
               : " text-[#475569] bg-transparent hover:text-black"
-          } flex items-center  hover:cursor-pointer py-3 px-4 md:px-7 mr-1 rounded-3xl text-base justify-center`}
+          } flex items-center  hover:cursor-pointer py-2 md:py-3 px-4 md:px-7 mr-1 rounded-3xl text-xs md:text-base justify-center`}
         >
           <MdOutlineChildFriendly size={18} className="mr-1 md:mr-2" />
           Kids
@@ -49,7 +52,7 @@ function ExploreTab() {
             activeTab === 3
               ? "bg-[#0f172a] text-white"
               : " text-[#475569] bg-transparent hover:text-black"
-          } flex items-center  hover:cursor-pointer py-3 px-4 md:px-7 mr-1 rounded-3xl text-base justify-center`}
+          } flex items-center  hover:cursor-pointer py-2 md:py-3 px-4 md:px-7 mr-1 rounded-3xl text-xs md:text-base justify-center`}
         >
           <CiDumbbell size={18} className="mr-1 md:mr-2" />
           Sports
@@ -60,7 +63,7 @@ function ExploreTab() {
             activeTab === 4
               ? "bg-[#0f172a] text-white"
               : " text-[#475569] bg-transparent hover:text-black"
-          } flex items-center  hover:cursor-pointer py-3 px-4 md:px-7 mr-1 rounded-3xl text-base justify-center`}
+          } flex items-center  hover:cursor-pointer py-2 md:py-3 px-4 md:px-7 mr-1 rounded-3xl text-xs md:text-base justify-center`}
         >
           <AiOutlineCrown size={18} className="mr-1 md:mr-2" />
           Beauty
@@ -71,7 +74,7 @@ function ExploreTab() {
             activeTab === 5
               ? "bg-[#0f172a] text-white"
               : " text-[#475569] bg-transparent hover:text-black"
-          } flex items-center  hover:cursor-pointer py-3 px-4 md:px-7 mr-1 rounded-3xl text-base justify-center`}
+          } flex items-center  hover:cursor-pointer py-2 md:py-3 px-4 md:px-7 mr-1 rounded-3xl text-xs md:text-base justify-center`}
         >
           <MdOutlineDiamond size={18} className="mr-1 md:mr-2" />
           Jewellery

@@ -15,7 +15,7 @@ function DepartmentCard({
         style={{ backgroundColor: bg }}
         className={`flex flex-col rounded-3xl  relative h-fit hover:shadow `}
       >
-        <img src={photo} alt="" className="w-full  -mt-5  mx-auto" />
+        <img src={photo} alt="" className="w-3/4 md:w-full  -mt-5  mx-auto" />
       </div>
       <div className=" flex flex-col space-y-1 p-3 bg-white items-center">
         <span className="text-[#0f172a] font-bold text-lg mt-4">{title}</span>
