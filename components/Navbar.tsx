@@ -10,11 +10,21 @@ import {
   AiOutlineMenu,
   AiOutlineClose,
   AiOutlineLogin,
+  AiOutlineHeart,
 } from "react-icons/ai";
+import { RiUserSettingsLine } from "react-icons/ri";
+import { HiOutlineClipboardList } from "react-icons/hi";
+import { IoHelpBuoyOutline } from "react-icons/io5";
+import { CiLogin, CiLogout } from "react-icons/ci";
+import { MdClose, MdLogin, MdOutlineAccountCircle } from "react-icons/md";
 
 function Navbar() {
   const router = useRouter();
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
+  const [showProfileDropdown, setShowProfileDropdown] =
+    useState<boolean>(false);
+
+  const isAuthenticated = false;
   return (
     <>
       <div
@@ -26,7 +36,15 @@ function Navbar() {
             <AiOutlineClose
               onClick={() => {
                 document.body.style.overflow = "visible";
-                setShowMobileNav(false);
+                const mobileNav = document.getElementById("mobileNav");
+                mobileNav?.classList?.replace(
+                  "animate__fadeInLeft",
+                  "animate__fadeOutLeft"
+                );
+                setTimeout(() => {
+                  setShowProfileDropdown(false);
+                  setShowMobileNav(false);
+                }, 200);
               }}
               size={24}
               className="block md:hidden ml-4 mr-4"
@@ -35,6 +53,7 @@ function Navbar() {
             <AiOutlineMenu
               onClick={() => {
                 document.body.style.overflow = "hidden";
+                setShowProfileDropdown(false);
                 setShowMobileNav(true);
               }}
               size={24}
@@ -62,31 +81,31 @@ function Navbar() {
           <div className="flex   justify-end md:justify-between w-fit  md:w-3/4">
             <div className="hidden  justify-center items-center w-fit   md:w-3/4 md:flex">
               <Link
-                className="mr-3 hover:cursor-pointer pt-2 pb-2 pl-5 pr-5 rounded-2xl hover:bg-[#f2fff3] "
+                className="mr-3 hover:cursor-pointer pt-2 pb-2 pl-5 pr-5 rounded-2xl hover:bg-[#f1f5f9] "
                 href={"#"}
               >
                 Men
               </Link>
               <Link
-                className="mr-3 hover:cursor-pointer pt-2 pb-2 pl-5 pr-5 rounded-2xl hover:bg-[#f2fff3] "
+                className="mr-3 hover:cursor-pointer pt-2 pb-2 pl-5 pr-5 rounded-2xl hover:bg-[#f1f5f9] "
                 href={"#"}
               >
                 Women
               </Link>
               <Link
-                className="mr-3 hover:cursor-pointer pt-2 pb-2 pl-5 pr-5 rounded-2xl hover:bg-[#f2fff3] "
+                className="mr-3 hover:cursor-pointer pt-2 pb-2 pl-5 pr-5 rounded-2xl hover:bg-[#f1f5f9] "
                 href={"#"}
               >
                 Beauty
               </Link>
               <Link
-                className="mr-3 hover:cursor-pointer pt-2 pb-2 pl-5 pr-5 rounded-2xl hover:bg-[#f2fff3] "
+                className="mr-3 hover:cursor-pointer pt-2 pb-2 pl-5 pr-5 rounded-2xl hover:bg-[#f1f5f9] "
                 href={"#"}
               >
                 Sports
               </Link>
               <Link
-                className="mr-3 hover:cursor-pointer pt-2 pb-2 pl-5 pr-5 rounded-2xl hover:bg-[#f2fff3] "
+                className="mr-3 hover:cursor-pointer pt-2 pb-2 pl-5 pr-5 rounded-2xl hover:bg-[#f1f5f9] "
                 href={"#"}
               >
                 Explore
@@ -96,22 +115,113 @@ function Navbar() {
               <AiOutlineSearch
                 size={40}
                 color={"#334155"}
-                className="hidden md:block mr-5 hover:cursor-pointer hover:bg-[#f2fff3] rounded-full p-2"
+                className="hidden md:block mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
               />
               <AiOutlineUser
+                onClick={() => {
+                  const dropCont =
+                    document.getElementsByClassName("profile-dropdown")[0];
+
+                  if (window.innerWidth > 700) {
+                    dropCont?.classList.add("animate__slideInUp");
+                  } else {
+                    dropCont?.classList.add("animate__fadeInLeft");
+                  }
+                  setShowMobileNav(false);
+                  setShowProfileDropdown(!showProfileDropdown);
+                  // setTimeout(() => {
+                  // }, 200);
+                }}
                 size={40}
                 color={"#334155"}
-                className=" mr-0  ml-0 md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f2fff3] rounded-full p-2"
+                className=" mr-0  ml-0 md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
               />
               <AiOutlineShoppingCart
                 size={40}
                 color={"#334155"}
-                className=" mr-0 ml-0  md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f2fff3] rounded-full p-2"
+                className=" mr-0 ml-0  md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
               />
             </div>
           </div>
         </div>
       </div>
+
+      {showProfileDropdown && (
+        <div className="profile-dropdown bg-white h-full md:h-fit rounded-none md:rounded-3xl shadow pt-12 md:pt-6 pb-2 w-full md:w-[19%] fixed  top-[7.5%] md:top-[9.8%] z-[100] min-h-1/8 p-6 md:p-3 right-0 md:right-[7%] animate__animated   animate__faster">
+          <MdClose
+            className="block md:hidden absolute right-6 top-6 hover:scale-110"
+            size={22}
+            onClick={() => {
+              const dropCont =
+                document.getElementsByClassName("profile-dropdown")[0];
+              dropCont.classList.remove(
+                "animate__fadeOutUp",
+                "animate__fadeInLeft"
+              );
+              if (window.innerWidth > 700) {
+                dropCont.classList.add("animate__fadeOutUp");
+              } else {
+                dropCont.classList.add("animate__fadeOutLeft");
+              }
+
+              setTimeout(() => {
+                setShowProfileDropdown(false);
+              }, 200);
+            }}
+          />
+          {isAuthenticated && (
+            <div className="flex items-center border-b pb-4 mb-4 px-4">
+              <img
+                src="/jb.png"
+                className="w-[40px]  rounded-full mr-3"
+                alt=""
+              />
+              <div className="flex flex-col space-y-1">
+                <span className="font-bold text-base ">Jonathan Baraza</span>
+                <span className="text-xs text-darkish">Nairobi , KENYA</span>
+              </div>
+            </div>
+          )}
+          <span className="text-darkish text-base hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center  rounded-xl pl-2">
+            <RiUserSettingsLine size={20} className="mr-3" /> My Account
+          </span>
+          <span className="text-darkish text-base hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center  rounded-xl pl-2">
+            <HiOutlineClipboardList size={20} className="mr-3" /> My Orders
+          </span>
+          <span className="text-darkish text-base hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center rounded-xl pl-2 ">
+            <AiOutlineHeart size={20} className="mr-3" /> Wishlist
+          </span>
+          <span className="text-darkish text-base hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center rounded-xl pl-2 ">
+            <IoHelpBuoyOutline size={20} className="mr-3" /> Help
+          </span>
+          <hr className="w-full mx-2 my-2" />
+          {!isAuthenticated ? (
+            <>
+              <span
+                onClick={() => {
+                  router.push("/auth/login");
+                }}
+                className="text-darkish text-base rounded-xl hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center   pl-2 "
+              >
+                <MdLogin size={20} className="mr-3" /> Login
+              </span>{" "}
+              <span
+                onClick={() => {
+                  router.push("/auth/register");
+                }}
+                className="text-darkish text-base rounded-xl hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center   pl-2 "
+              >
+                <MdOutlineAccountCircle size={20} className="mr-3" /> Register
+              </span>{" "}
+            </>
+          ) : (
+            <span className="text-darkish text-base rounded-xl hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center   pl-2 ">
+              <CiLogout size={20} className="mr-3" /> Logout
+            </span>
+          )}
+        </div>
+      )}
+
       {showMobileNav && (
         <div
           id="mobileNav"
