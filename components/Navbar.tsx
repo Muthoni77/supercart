@@ -17,6 +17,10 @@ import { HiOutlineClipboardList } from "react-icons/hi";
 import { IoHelpBuoyOutline } from "react-icons/io5";
 import { CiLogin, CiLogout } from "react-icons/ci";
 import { MdClose, MdLogin, MdOutlineAccountCircle } from "react-icons/md";
+import { useAppSelector } from "@/hooks";
+import { UserType } from "@/Types/Auth";
+import { toast } from "react-toastify";
+import axiosWrapper from "@/utils/axios/axiosWrapper";
 
 function Navbar() {
   const router = useRouter();
@@ -24,7 +28,34 @@ function Navbar() {
   const [showProfileDropdown, setShowProfileDropdown] =
     useState<boolean>(false);
 
-  const isAuthenticated = false;
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const user: UserType = useAppSelector((state) => {
+    if (typeof state.auth.user !== "string") {
+      return state.auth.user;
+    }
+  })!;
+
+  const handleLogout = async () => {
+    try {
+      const response: any = await axiosWrapper({
+        method: "get",
+        url: "/auth/logout",
+        data: {},
+      });
+
+      console.log(response);
+      if (response.data.success) {
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    }
+  };
   return (
     <>
       <div
@@ -172,13 +203,13 @@ function Navbar() {
           {isAuthenticated && (
             <div className="flex items-center border-b pb-4 mb-4 px-4">
               <img
-                src="/jb.png"
+                src="/avatar.png"
                 className="w-[40px]  rounded-full mr-3"
                 alt=""
               />
-              <div className="flex flex-col space-y-1">
-                <span className="font-bold text-base ">Jonathan Baraza</span>
-                <span className="text-xs text-darkish">Nairobi , KENYA</span>
+              <div className="flex flex-col ">
+                <span className="font-bold text-base ">{user.username}</span>
+                <span className="text-xs text-darkish">{user.email}</span>
               </div>
             </div>
           )}
@@ -215,7 +246,10 @@ function Navbar() {
               </span>{" "}
             </>
           ) : (
-            <span className="text-darkish text-base rounded-xl hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center   pl-2 ">
+            <span
+              onClick={handleLogout}
+              className="text-darkish text-base rounded-xl hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center   pl-2 "
+            >
               <CiLogout size={20} className="mr-3" /> Logout
             </span>
           )}
