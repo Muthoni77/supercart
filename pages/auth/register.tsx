@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { toast } from "react-toastify";
-import { AuthPayloadType, RegisterType } from "@/Types/Auth";
+import { AuthPayloadType, RegisterType, UserType } from "@/Types/Auth";
 import publicAxiosWrapper from "@/utils/axios/publicAxiosWrapper";
 import SpinnerOnly from "@/components/Spinners/SpinnerOnly";
 import LoadingOverlay from "@/components/Spinners/LoadingOverlay";
@@ -15,7 +15,7 @@ import { updateUserDetails } from "@/features/slices/AuthSlice";
 function Register() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const { isAuthenticated, user } = useAppSelector((state) => state.auth);
 
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -106,7 +106,12 @@ function Register() {
   useEffect(() => {
     if (isAuthenticated) {
       toast.success("Authentication was successfull");
-      router.push("/auth/verification/phone-number");
+      const userData = user as UserType;
+      if (userData.phoneVerified) {
+        router.push("/");
+      } else {
+        router.push("/auth/verification/phone-number");
+      }
     }
   }, [isAuthenticated]);
 

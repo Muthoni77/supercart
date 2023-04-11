@@ -24,6 +24,7 @@ const PhoneVerification = () => {
 
   //loading
   const [loading, setLoading] = useState<boolean>(false);
+  const [resendLoading, setResendLoading] = useState<boolean>(false);
 
   const [showResendBtn, setShowResendBtn] = useState<boolean>(false);
 
@@ -76,7 +77,8 @@ const PhoneVerification = () => {
   }, []);
 
   useEffect(() => {
-    let num = 118;
+    // let num = 118;
+    let num = 5;
     if (!showResendBtn) {
       const counterInterval = setInterval(() => {
         if (num === 0) {
@@ -89,7 +91,32 @@ const PhoneVerification = () => {
   }, [showResendBtn]);
 
   const handleResendOTP = async () => {
-    setShowResendBtn(false);
+    setResendLoading(true);
+    try {
+      const response: any = await axiosWrapper({
+        method: "post",
+        url: "/auth/resend-otp",
+        data: {},
+      });
+
+      const responseData: ResponseDataType = response.data!;
+
+      setLoading(false);
+      if (!responseData?.success) {
+        toast.error(responseData.message);
+      } else {
+        setResendLoading(false);
+        setShowResendBtn(false);
+        toast.success(responseData.message);
+        toast.success("Check your phone for an OTP sent.");
+      }
+    } catch (error) {
+      setResendLoading(false);
+      console.log(error);
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    }
   };
 
   return (
@@ -124,13 +151,26 @@ const PhoneVerification = () => {
           />
 
           {showResendBtn ? (
-            <div className="text-darkish text-sm mb-4 font-bold">
-              You didn&apos;t receive the OTP?{" "}
+            <div className="text-darkish text-sm mb-4 font-bold flex">
+              You didn&apos;t receive the OTP ?{" "}
               <span
                 onClick={handleResendOTP}
-                className="ml-1 text-[#007acc] hover:text-[#006bb3] hover:cursor-pointer"
+                className="ml-2 text-[#007acc]  hover:text-[#006bb3] hover:cursor-pointer"
               >
-                Resend OTP
+                {!resendLoading ? (
+                  "Resend OTP"
+                ) : (
+                  <>
+                    <span className="flex items-center flex-row">
+                      Resending{" "}
+                      <SpinnerOnly
+                        spinnerClassName="ml-1"
+                        color={"#007acc"}
+                        size={14}
+                      />
+                    </span>{" "}
+                  </>
+                )}
               </span>
             </div>
           ) : (

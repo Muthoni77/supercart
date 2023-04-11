@@ -32,3 +32,7 @@ export interface RegisterType {
   password: string;
   phone: string;
 }
+export interface LoginType {
+  email: string;
+  password: string;
+}

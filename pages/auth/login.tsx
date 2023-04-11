@@ -1,9 +1,98 @@
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React from "react";
 import { BsArrowLeft } from "react-icons/bs";
+import { toast } from "react-toastify";
+import publicAxiosWrapper from "@/utils/axios/publicAxiosWrapper";
+import { AuthPayloadType, LoginType, UserType } from "@/Types/Auth";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { updateUserDetails } from "@/features/slices/AuthSlice";
+import SpinnerOnly from "@/components/Spinners/SpinnerOnly";
+import LoadingOverlay from "@/components/Spinners/LoadingOverlay";
 function Login() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const { isAuthenticated, user } = useAppSelector((state) => state.auth);
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  //Email regex
+  const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+  //Loading state
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleValidate = () => {
+    if (!email) {
+      toast.warning("Please enter your email");
+    } else if (!password) {
+      toast.warning("Please enter your password");
+    } else {
+      handleSubmit();
+    }
+  };
+
+  const handleSubmit = async (): Promise<void> => {
+    try {
+      setLoading(true);
+      const data: LoginType = {
+        email,
+        password,
+      };
+
+      const response: any = await publicAxiosWrapper({
+        method: "post",
+        url: "/auth/login",
+        data,
+      });
+
+      console.log(response);
+
+      setLoading(false);
+      if (response && response.data) {
+        // const data: ResponseDataType = response?.data!;
+        if (response.data.success) {
+          toast.success(response.data.message);
+          // console.log("data.data");
+          // console.log(response.data.data);
+          const userData: AuthPayloadType = {
+            user: response.data.data,
+            accessToken: response.data.accessToken!,
+            refreshToken: response.data.refreshToken!,
+          };
+          dispatch(updateUserDetails(userData));
+          clearInputs();
+        } else {
+          toast.error(response.data.message);
+        }
+      }
+    } catch (error: unknown) {
+      console.log(error);
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    }
+  };
+
+  const clearInputs = () => {
+    setEmail("");
+    setPassword("");
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      toast.success("Authentication was successfull");
+      const userData = user as UserType;
+      if (userData.phoneVerified) {
+        router.push("/");
+      } else {
+        router.push("/auth/verification/phone-number");
+      }
+    }
+  }, [isAuthenticated]);
+
   return (
     <>
       <Head>
@@ -39,15 +128,29 @@ function Login() {
               className="border w-full  py-3 px-4  rounded-3xl mt-2 text-xs placeholder-gray md:mt-4 bg-[#f4fff5]  outline-none"
               placeholder="Email"
               type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               className="border w-full  py-3 px-4  rounded-3xl mt-2 text-xs placeholder-gray md:mt-4 bg-[#f4fff5]  outline-none"
               placeholder="Password"
               type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button className="w-full bg-[#0f172a] text-sm md:text-base rounded-3xl py-2 px-4 text-white hover:cursor-pointer hover:shadow-xl mt-12">
+            <button
+              className="w-full bg-[#0f172a] text-sm md:text-base rounded-3xl py-2 px-4 text-white hover:cursor-pointer hover:shadow-xl mt-8 flex items-center justify-center"
+              onClick={handleValidate}
+            >
               Login
+              {loading && (
+                <SpinnerOnly
+                  spinnerClassName="ml-2"
+                  color={"white"}
+                  size={18}
+                />
+              )}
             </button>
           </div>
           <div className="flex flex-col items-center mx-auto w-fit text-sm md:text-sm text-dark mt-8">
@@ -56,11 +159,12 @@ function Login() {
               className="font-bold mt-2 hover:cursor-pointer hover:text-black"
               onClick={() => router.push("/auth/register")}
             >
-              Sign up{" "}
+              Sign up
             </span>
           </div>
         </div>
       </div>
+      {loading && <LoadingOverlay />}
     </>
   );
 }
