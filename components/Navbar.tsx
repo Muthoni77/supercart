@@ -17,13 +17,15 @@ import { HiOutlineClipboardList } from "react-icons/hi";
 import { IoHelpBuoyOutline } from "react-icons/io5";
 import { CiLogin, CiLogout } from "react-icons/ci";
 import { MdClose, MdLogin, MdOutlineAccountCircle } from "react-icons/md";
-import { useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { UserType } from "@/Types/Auth";
 import { toast } from "react-toastify";
 import axiosWrapper from "@/utils/axios/axiosWrapper";
+import { logout } from "@/features/slices/AuthSlice";
 
 function Navbar() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
   const [showProfileDropdown, setShowProfileDropdown] =
     useState<boolean>(false);
@@ -43,9 +45,11 @@ function Navbar() {
         data: {},
       });
 
+      console.log("logout response");
       console.log(response);
       if (response.data.success) {
         toast.success(response.data.message);
+        dispatch(logout());
       } else {
         toast.error(response.data.message);
       }
@@ -200,7 +204,7 @@ function Navbar() {
               }, 200);
             }}
           />
-          {isAuthenticated && (
+          {isAuthenticated && user && (
             <div className="flex items-center border-b pb-4 mb-4 px-4">
               <img
                 src="/avatar.png"
@@ -208,8 +212,8 @@ function Navbar() {
                 alt=""
               />
               <div className="flex flex-col ">
-                <span className="font-bold text-base ">{user.username}</span>
-                <span className="text-xs text-darkish">{user.email}</span>
+                <span className="font-bold text-base ">{user?.username}</span>
+                <span className="text-xs text-darkish">{user?.email}</span>
               </div>
             </div>
           )}
