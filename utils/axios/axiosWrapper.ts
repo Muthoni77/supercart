@@ -15,7 +15,7 @@ const axiosWrapper = async ({ method, url, data }: AxiosRequestType) => {
       url: BACKEND_URL + url,
       data,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     });
 
