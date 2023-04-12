@@ -132,6 +132,7 @@ function Login() {
               className="border w-full  py-3 px-4  rounded-3xl mt-2 text-xs placeholder-gray md:mt-4 bg-[#f4fff5]  outline-none"
               placeholder="Email"
               type="text"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -176,15 +177,22 @@ function Login() {
               )}
             </button>
           </div>
-          <div className="flex flex-col items-center mx-auto w-fit text-sm md:text-sm text-dark mt-8">
+          <div className="flex flex-row items-center mx-auto w-fit text-sm md:text-sm text-dark mt-8">
             <span>You dont have an account? </span>
             <span
-              className="font-bold mt-2 hover:cursor-pointer hover:text-black"
+              className="font-bold  ml-2 hover:cursor-pointer hover:text-black"
               onClick={() => router.push("/auth/register")}
             >
               Sign up
             </span>
           </div>
+
+          <span
+            onClick={() => router.push("/auth/reset/forgot-password")}
+            className="text-xs font-bold mt-4 text-[#007acc]  hover:cursor-pointer"
+          >
+            Forgot password
+          </span>
         </div>
       </div>
       {loading && <LoadingOverlay />}
