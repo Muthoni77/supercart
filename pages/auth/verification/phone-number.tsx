@@ -73,7 +73,9 @@ const PhoneVerification = () => {
   };
 
   useEffect(() => {
-    toast.success("Check your phone for an OTP sent.");
+    if (!user.phoneVerified) {
+      toast.success("Check your phone for an OTP sent.");
+    }
   }, []);
 
   useEffect(() => {
@@ -94,7 +96,7 @@ const PhoneVerification = () => {
     setResendLoading(true);
     try {
       const response: any = await axiosWrapper({
-        method: "post",
+        method: "get",
         url: "/auth/resend-otp",
         data: {},
       });
@@ -107,6 +109,7 @@ const PhoneVerification = () => {
       } else {
         setResendLoading(false);
         setShowResendBtn(false);
+        setOtp("");
         toast.success(responseData.message);
         toast.success("Check your phone for an OTP sent.");
       }
@@ -118,6 +121,13 @@ const PhoneVerification = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (user.phoneVerified) {
+      toast.info("Phone number is already verified");
+      router.push("/");
+    }
+  }, [user.phoneVerified]);
 
   return (
     <div className="h-screen flex items-center justify-center bg-[#e3ffe6] w-full p-4">
@@ -135,7 +145,7 @@ const PhoneVerification = () => {
           </center>
           <center>
             <span className="mt-4 text-sm text-dark ">
-              Enter the OTP sent to{" "}
+              Enter the OTP sent to
               <span className="font-bold">+{user.phone}</span>
             </span>
           </center>
