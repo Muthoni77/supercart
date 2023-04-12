@@ -166,7 +166,7 @@ function Login() {
               className="w-full bg-[#0f172a] text-sm md:text-base rounded-3xl py-2 px-4 text-white hover:cursor-pointer hover:shadow-xl mt-8 flex items-center justify-center"
               onClick={handleValidate}
             >
-              Login
+              {!loading ? "Login" : "Please wait"}
               {loading && (
                 <SpinnerOnly
                   spinnerClassName="ml-2"
