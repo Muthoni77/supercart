@@ -196,7 +196,7 @@ const PhoneVerification = () => {
             className="w-full bg-[#0f172a] text-sm md:text-base rounded-3xl py-2 px-4 mb-2 text-white hover:cursor-pointer hover:shadow-xl hover:scale-95  flex items-center justify-center"
             onClick={handleVerify}
           >
-            Verify OTP
+            {!loading ? "Verify OTP" : "Please wait"}
             {loading && (
               <SpinnerOnly spinnerClassName="ml-2" color={"white"} size={18} />
             )}

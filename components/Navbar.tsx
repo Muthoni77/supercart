@@ -22,6 +22,7 @@ import { UserType } from "@/Types/Auth";
 import { toast } from "react-toastify";
 import axiosWrapper from "@/utils/axios/axiosWrapper";
 import { logout } from "@/features/slices/AuthSlice";
+import DarkOverlaySpinner from "./Spinners/DarkOverlaySpinner";
 
 function Navbar() {
   const router = useRouter();
@@ -37,16 +38,19 @@ function Navbar() {
     }
   })!;
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleLogout = async () => {
     try {
+      setShowProfileDropdown(false);
+      setLoading(true);
       const response: any = await axiosWrapper({
         method: "get",
         url: "/auth/logout",
         data: {},
       });
 
-      console.log("logout response");
-      console.log(response);
+      setLoading(false);
       if (response.data.success) {
         toast.success(response.data.message);
         dispatch(logout());
@@ -54,6 +58,7 @@ function Navbar() {
         toast.error(response.data.message);
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
       if (error instanceof Error) {
         toast.error(error.message);
@@ -318,6 +323,7 @@ function Navbar() {
           </div>
         </div>
       )}
+      {loading && <DarkOverlaySpinner />}
     </>
   );
 }
