@@ -12,6 +12,7 @@ import LoadingOverlay from "@/components/Spinners/LoadingOverlay";
 import { ResponseDataType } from "@/Types/Requests";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { updateUserDetails } from "@/features/slices/AuthSlice";
+import { BiHide, BiShow } from "react-icons/bi";
 function Register() {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -22,6 +23,10 @@ function Register() {
   const [phone, setPhone] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [password2, setPassword2] = useState<string>("");
+
+  //Toggle passwords visibility state
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPassword2, setShowPassword2] = useState<boolean>(false);
 
   //Email regex
   const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -131,7 +136,7 @@ function Register() {
             className="w-full animate__animated animate__fadeIn animate__faster"
           />
         </div>
-        <div className="w-full md:w-1/2 flex flex-col items-center py-0 md:py-12">
+        <div className="w-full md:w-1/2 flex flex-col items-center py-0 md:py-8">
           <BsArrowLeft
             size={30}
             className="absolute hover:cursor-pointer hover:scale-105 top-4 left-5"
@@ -163,20 +168,58 @@ function Register() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <PhoneNumberInput phone={phone} setPhone={setPhone} />
-            <input
-              className="border w-full  py-3 px-4  rounded-3xl mt-2 text-xs placeholder-gray md:mt-3 bg-[#f4fff5]  outline-none"
-              placeholder="Password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <input
-              className="border w-full  py-3 px-4  rounded-3xl mt-2 text-xs placeholder-gray md:mt-3 bg-[#f4fff5]  outline-none"
-              placeholder="Confirm Password"
-              type="password"
-              value={password2}
-              onChange={(e) => setPassword2(e.target.value)}
-            />
+            <div className="w-full relative">
+              <input
+                className="border w-full  py-3 px-4  rounded-3xl mt-2 text-xs placeholder-gray md:mt-3 bg-[#f4fff5]  outline-none"
+                placeholder="Password"
+                type={`${showPassword ? "text" : "password"}`}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {showPassword ? (
+                <BiHide
+                  className="absolute right-4 top-[50%] cursor-pointer hover:scale-105 text-dark"
+                  size={18}
+                  onClick={() => {
+                    setShowPassword(false);
+                  }}
+                />
+              ) : (
+                <BiShow
+                  className="absolute right-4 top-[50%] cursor-pointer hover:scale-105 text-dark"
+                  size={18}
+                  onClick={() => {
+                    setShowPassword(true);
+                  }}
+                />
+              )}
+            </div>
+            <div className="w-full relative">
+              <input
+                className="border w-full  py-3 px-4  rounded-3xl mt-2 text-xs placeholder-gray md:mt-3 bg-[#f4fff5]  outline-none"
+                placeholder="Confirm Password"
+                type={`${showPassword2 ? "text" : "password"}`}
+                value={password2}
+                onChange={(e) => setPassword2(e.target.value)}
+              />
+              {showPassword2 ? (
+                <BiHide
+                  className="absolute right-4 top-[50%] cursor-pointer hover:scale-105 text-dark"
+                  size={18}
+                  onClick={() => {
+                    setShowPassword2(false);
+                  }}
+                />
+              ) : (
+                <BiShow
+                  className="absolute right-4 top-[50%] cursor-pointer hover:scale-105 text-dark"
+                  size={18}
+                  onClick={() => {
+                    setShowPassword2(true);
+                  }}
+                />
+              )}
+            </div>
 
             <button
               className="w-full bg-[#0f172a] text-sm md:text-base rounded-3xl py-2 px-4 text-white hover:cursor-pointer hover:shadow-xl mt-8 flex items-center justify-center"

@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { updateUserDetails } from "@/features/slices/AuthSlice";
 import SpinnerOnly from "@/components/Spinners/SpinnerOnly";
 import LoadingOverlay from "@/components/Spinners/LoadingOverlay";
+import { BiHide, BiShow } from "react-icons/bi";
 function Login() {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -17,6 +18,9 @@ function Login() {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  //Toggle password visibility state
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   //Email regex
   const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -131,13 +135,32 @@ function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <input
-              className="border w-full  py-3 px-4  rounded-3xl mt-2 text-xs placeholder-gray md:mt-4 bg-[#f4fff5]  outline-none"
-              placeholder="Password"
-              type="text"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="w-full relative">
+              <input
+                className="border w-full  py-3 px-4  rounded-3xl mt-2 text-xs placeholder-gray md:mt-4 bg-[#f4fff5]  outline-none"
+                placeholder="Password"
+                type={`${showPassword ? "text" : "password"}`}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {showPassword ? (
+                <BiHide
+                  className="absolute right-4 top-[50%] cursor-pointer hover:scale-105 text-dark"
+                  size={18}
+                  onClick={() => {
+                    setShowPassword(false);
+                  }}
+                />
+              ) : (
+                <BiShow
+                  className="absolute right-4 top-[50%] cursor-pointer hover:scale-105 text-dark"
+                  size={18}
+                  onClick={() => {
+                    setShowPassword(true);
+                  }}
+                />
+              )}
+            </div>
 
             <button
               className="w-full bg-[#0f172a] text-sm md:text-base rounded-3xl py-2 px-4 text-white hover:cursor-pointer hover:shadow-xl mt-8 flex items-center justify-center"
