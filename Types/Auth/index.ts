@@ -5,6 +5,9 @@ export interface UserType {
   phone: string;
   emailVerified: boolean;
   phoneVerified: boolean;
+  dob?: string;
+  country?: string;
+  language?: string;
 }
 
 export interface AuthStateType {

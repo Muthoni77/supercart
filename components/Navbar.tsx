@@ -113,7 +113,7 @@ function Navbar() {
             />
             <div className="flex flex-col pl-1 md:pl-3 ">
               <span className="text-lg md:text-2xl font-bold">SuperCart</span>
-              <span className="hidden md-block mt-0 text-sm">
+              <span className="hidden md:block mt-0 text-sm">
                 Shop smarter not harder
               </span>
             </div>
@@ -222,7 +222,12 @@ function Navbar() {
               </div>
             </div>
           )}
-          <span className="text-darkish text-base hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center  rounded-xl pl-2">
+          <span
+            onClick={() => {
+              router.push("/account/user/4");
+            }}
+            className="text-darkish text-base hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center  rounded-xl pl-2"
+          >
             <RiUserSettingsLine size={20} className="mr-3" /> My Account
           </span>
           <span className="text-darkish text-base hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center  rounded-xl pl-2">
