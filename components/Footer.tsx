@@ -5,7 +5,7 @@ function Footer() {
   return (
     <div
       id="footer"
-      className="bg-[#f9fff9] flex  flex-wrap items-center border-t border-gray-100 w-full py-12 md:py-20 mt-8 md:mt-12 px-5 md:px-20"
+      className="bg-[#f9fff9] flex  flex-wrap items-center border-t border-gray-100 w-full py-12 md:py-20  px-5 md:px-20"
     >
       <div className=" flex flex-row items-center w-full md:flex-col md:items-start  space-y-2 md:space-y-1 md:w-1/5 text-[#4b5563]">
         <div className="w-1/2 flex items-center -ml-1 my-3 ">
