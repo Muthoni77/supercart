@@ -5,15 +5,35 @@ import Navbar from "@/components/Navbar";
 import { useAppSelector } from "@/hooks";
 import { useRouter } from "next/router";
 import PersonalInformation from "@/components/accountDetails/PersonalInformation";
+import Billing from "@/components/accountDetails/Billing";
+import OrderHistory from "@/components/Orders/OrderHistory";
+import GiftCard from "@/components/Incentives/GiftCard";
 
 const UserAccount = () => {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<number>(0);
+  const [activeTab, setActiveTab] = useState<string>("0");
   const user: UserType = useAppSelector((state) => {
     if (typeof state.auth.user !== "string") {
       return state.auth.user;
     }
   })!;
+
+  const setView = () => {
+    switch (activeTab) {
+      case "0":
+        return <PersonalInformation />;
+      case "1":
+        return <Billing />;
+      case "2":
+        return <OrderHistory />;
+      case "3":
+        return <GiftCard />;
+    }
+  };
+
+  useEffect(() => {
+    setView();
+  }, [activeTab]);
 
   return (
     <>
@@ -30,48 +50,48 @@ const UserAccount = () => {
               <div className="nav-tabs flex flex-col space-y-4 mt-10">
                 <span
                   className={`nav-tab-link hover:cursor-pointer hover:font-bold duration-200  ${
-                    activeTab === 0
+                    activeTab === "0"
                       ? "font-bold text-[#e79c01]"
                       : "text-darkish"
                   }`}
                   onClick={() => {
-                    setActiveTab(0);
+                    setActiveTab("0");
                   }}
                 >
                   Personal Information
                 </span>
                 <span
                   className={`nav-tab-link hover:cursor-pointer hover:font-bold duration-200  ${
-                    activeTab === 1
+                    activeTab === "1"
                       ? "font-bold text-[#e79c01]"
                       : "text-darkish"
                   }`}
                   onClick={() => {
-                    setActiveTab(1);
+                    setActiveTab("1");
                   }}
                 >
                   Billing and payments
                 </span>
                 <span
                   className={`nav-tab-link hover:cursor-pointer hover:font-bold duration-200  ${
-                    activeTab === 2
+                    activeTab === "2"
                       ? "font-bold text-[#e79c01]"
                       : "text-darkish"
                   }`}
                   onClick={() => {
-                    setActiveTab(2);
+                    setActiveTab("2");
                   }}
                 >
                   Order History
                 </span>
                 <span
                   className={`nav-tab-link hover:cursor-pointer hover:font-bold duration-200  ${
-                    activeTab === 3
+                    activeTab === "3"
                       ? "font-bold text-[#e79c01]"
                       : "text-darkish"
                   }`}
                   onClick={() => {
-                    setActiveTab(3);
+                    setActiveTab("3");
                   }}
                 >
                   Gift Cards
@@ -81,7 +101,7 @@ const UserAccount = () => {
               </div>
             </div>
             <div className="min-h-[50vh] w-full md:w-3/4 md:pl-12 pt-4 ">
-              <PersonalInformation />
+              {setView()}
             </div>
           </div>
         </div>
