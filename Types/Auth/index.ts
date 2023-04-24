@@ -8,6 +8,7 @@ export interface UserType {
   dob?: string;
   country?: string;
   language?: string;
+  profile: any;
 }
 
 export interface AuthStateType {
