@@ -22,41 +22,11 @@ function Billing() {
           />
         </span>
         <span className=" text-dark text-sm mt-2">
-          Manage your personal information including contacts, email address,
-          where you can be contacted.
+          At our online store, we believe that payment should be as easy and
+          effortless as shopping. That`&apos;s why we&apos;ve created a seamless
+          checkout and billing process that lets you focus on what really
+          matters – finding the perfect products for you.
         </span>
-      </div>
-      <div className="flex flex-wrap w-full mt-4 justify-between ">
-        <div className="relative rounded-2xl w-[45%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
-          <span className="font-bold text-base text-dark text-sm">
-            Username
-          </span>
-          <span className="text-sm">{user.username}</span>
-        </div>
-        <div className="relative rounded-2xl w-[45%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
-          <span className="font-bold text-base text-dark text-sm">
-            Date of birth
-          </span>
-          <span className="text-sm">{user.dob ? user.dob : "N/A"}</span>
-        </div>
-        <div className="relative rounded-2xl w-[45%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
-          <span className="font-bold text-base text-dark text-sm">Country</span>
-          <span className="text-sm">{user.country ? user.country : "N/A"}</span>
-        </div>
-        <div className="relative rounded-2xl w-[45%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
-          <span className="font-bold text-base text-dark text-sm">
-            Language
-          </span>
-          <span className="text-sm">
-            {user.language ? user.language : "N/A"}
-          </span>
-        </div>
-        <div className="relative rounded-2xl w-[70%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
-          <span className="font-bold text-base text-dark text-sm">
-            Contactable at
-          </span>
-          <span className="text-sm">{user.email}</span>
-        </div>
       </div>
     </div>
   );
