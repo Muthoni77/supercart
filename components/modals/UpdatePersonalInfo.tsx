@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { UserType } from "@/Types/Auth";
-import { useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { MdClose } from "react-icons/md";
 import SpinnerOnly from "../Spinners/SpinnerOnly";
 import { toast } from "react-toastify";
 import LoadingOverlay from "../Spinners/LoadingOverlay";
+import axiosWrapper from "@/utils/axios/axiosWrapper";
+import { updateUserProfile } from "@/features/slices/AuthSlice";
 
 const UpdatePersonalInfo = ({ closeModal }: any) => {
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const user: UserType = useAppSelector((state) => {
     if (typeof state.auth.user !== "string") {
@@ -16,9 +19,13 @@ const UpdatePersonalInfo = ({ closeModal }: any) => {
 
   //formdata
   const [username, setUsername] = useState<string>(user.username);
-  const [dob, setDob] = useState<string | undefined>(user.dob);
-  const [country, setCountry] = useState<string | undefined>(user.country);
-  const [language, setLanguage] = useState<string | undefined>(user.language);
+  const [dob, setDob] = useState<string | undefined>(user.profile?.dob);
+  const [country, setCountry] = useState<string | undefined>(
+    user.profile?.country
+  );
+  const [language, setLanguage] = useState<string | undefined>(
+    user.profile?.language
+  );
   const handleValidate = () => {
     if (!username) {
       toast.warning("You must enter a username");
@@ -33,9 +40,52 @@ const UpdatePersonalInfo = ({ closeModal }: any) => {
     }
   };
 
+  // useEffect(() => {
+  //   if (user.profile.dob) {
+  //     const dateString = user.profile.dob;
+  //     const parts = dateString.split("/");
+  //     const day = parseInt(parts[0], 10);
+  //     const month = parseInt(parts[1], 10) - 1;
+  //     const year = parseInt(parts[2], 10);
+
+  //     const dobString = new Date(year, month, day);
+  //     console.log("dob");
+  //     console.log(dobString);
+  //     console.log(typeof dobString);
+
+  //   }
+  // }, [user.profile.dob]);
+
   const handleUpdate = async () => {
     setLoading(true);
-    toast.success("updated!");
+    try {
+      const updateData = {
+        dob,
+        country,
+        language,
+      };
+      const response: any = await axiosWrapper({
+        method: "post",
+        url: "/profile/update",
+        data: updateData,
+      });
+
+      setLoading(false);
+      if (response && response.data) {
+        if (response.data.success) {
+          toast.success(response.data.message);
+          dispatch(updateUserProfile(response.data.user));
+          closeModal();
+        } else {
+          toast.error(response.data.message);
+        }
+      }
+    } catch (error) {
+      setLoading(false);
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    }
   };
   return (
     <div
