@@ -28,42 +28,46 @@ const PersonalInformation = () => {
             where you can be contacted.
           </span>
         </div>
-        <div className="flex flex-wrap w-full mt-4 justify-between ">
-          <div className="relative rounded-2xl w-[45%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
-            <span className="font-bold text-base text-dark text-sm">
-              Username
-            </span>
-            <span className="text-sm">{user.username}</span>
+        {user && (
+          <div className="flex flex-wrap w-full mt-4 justify-between ">
+            <div className="relative rounded-2xl w-[45%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
+              <span className="font-bold text-base text-dark text-sm">
+                Username
+              </span>
+              <span className="text-sm">{user.username}</span>
+            </div>
+            <div className="relative rounded-2xl w-[45%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
+              <span className="font-bold text-base text-dark text-sm">
+                Date of birth
+              </span>
+              <span className="text-sm">
+                {user.profile?.dob ? user.profile?.dob : "N/A"}
+              </span>
+            </div>
+            <div className="relative rounded-2xl w-[45%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
+              <span className="font-bold text-base text-dark text-sm">
+                Country
+              </span>
+              <span className="text-sm">
+                {user?.profile?.country ? user.profile.country : "N/A"}
+              </span>
+            </div>
+            <div className="relative rounded-2xl w-[45%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
+              <span className="font-bold text-base text-dark text-sm">
+                Language
+              </span>
+              <span className="text-sm">
+                {user?.profile?.language ? user.profile.language : "N/A"}
+              </span>
+            </div>
+            <div className="relative rounded-2xl w-[70%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
+              <span className="font-bold text-base text-dark text-sm">
+                Contactable at
+              </span>
+              <span className="text-sm">{user.email}</span>
+            </div>
           </div>
-          <div className="relative rounded-2xl w-[45%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
-            <span className="font-bold text-base text-dark text-sm">
-              Date of birth
-            </span>
-            <span className="text-sm">{user.dob ? user.dob : "N/A"}</span>
-          </div>
-          <div className="relative rounded-2xl w-[45%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
-            <span className="font-bold text-base text-dark text-sm">
-              Country
-            </span>
-            <span className="text-sm">
-              {user.country ? user.country : "N/A"}
-            </span>
-          </div>
-          <div className="relative rounded-2xl w-[45%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
-            <span className="font-bold text-base text-dark text-sm">
-              Language
-            </span>
-            <span className="text-sm">
-              {user.language ? user.language : "N/A"}
-            </span>
-          </div>
-          <div className="relative rounded-2xl w-[70%] md:w-[45%] mr-2 mt-2 mb-2 md:ml-2 bg-white p-5 flex flex-col space-y-2 shadow-sm text-darkish">
-            <span className="font-bold text-base text-dark text-sm">
-              Contactable at
-            </span>
-            <span className="text-sm">{user.email}</span>
-          </div>
-        </div>
+        )}
       </div>
       {showUpdateForm && (
         <UpdatePersonalInfo closeModal={() => setShowUpdateForm(false)} />

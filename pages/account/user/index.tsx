@@ -44,9 +44,9 @@ const UserAccount = () => {
             <div className="md:min-h-[50vh] md:border-r border-gray-300 w-full md:w-1/4 flex flex-col pt-4">
               <img src="/avatar.png" className="rounded-full h-20 w-20" />
               <span className="font-bold text-dark text-base mt-2">
-                {user.username}
+                {user?.username}
               </span>
-              <span className=" text-gray-600 text-xs">{user.email}</span>
+              <span className=" text-gray-600 text-xs">{user?.email}</span>
               <div className="nav-tabs flex flex-col space-y-4 mt-10">
                 <span
                   className={`nav-tab-link hover:cursor-pointer hover:font-bold duration-200  ${

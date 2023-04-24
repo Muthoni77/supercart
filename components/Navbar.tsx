@@ -54,6 +54,7 @@ function Navbar() {
       if (response.data.success) {
         toast.success(response.data.message);
         dispatch(logout());
+        router.push("/");
       } else {
         toast.error(response.data.message);
       }
@@ -111,7 +112,7 @@ function Navbar() {
               alt="logo"
               className="w-[40px] md:w-[60px] "
             />
-            <div className="flex flex-col pl-1 md:pl-3 ">
+            <div className="flex flex-col pl-1 md:pl-3 " onClick={()=>router.push("/")}>
               <span className="text-lg md:text-2xl font-bold">SuperCart</span>
               <span className="hidden md:block mt-0 text-sm">
                 Shop smarter not harder
@@ -224,7 +225,7 @@ function Navbar() {
           )}
           <span
             onClick={() => {
-              router.push("/account/user/4");
+              router.push("/account/user/");
             }}
             className="text-darkish text-base hover:bg-gray-100 hover:cursor-pointer py-3 flex items-center  rounded-xl pl-2"
           >
