@@ -9,13 +9,12 @@ import { logout, refreshTokens } from "@/features/slices/AuthSlice";
 import { toast } from "react-toastify";
 import { store } from "@/features/store/store";
 
-let accessToken =
-  typeof window !== "undefined" ? localStorage.getItem("accessToken") : "";
-let refreshToken =
-  typeof window !== "undefined" ? localStorage.getItem("refreshToken") : "";
-let newAccessToken: string = "";
-
 const AxiosWrapper = async ({ method, url, data }: AxiosRequestType) => {
+  let accessToken =
+    typeof window !== "undefined" && localStorage.getItem("accessToken")!;
+  let refreshToken =
+    typeof window !== "undefined" && localStorage.getItem("refreshToken")!;
+  let newAccessToken: string = "";
   try {
     const axiosInstance = axios.create({
       method,
@@ -26,8 +25,13 @@ const AxiosWrapper = async ({ method, url, data }: AxiosRequestType) => {
     axiosInstance.interceptors.request.use(async (config: any) => {
       console.log("set access token");
       console.log(accessToken);
-      console.log("inside the interceptor");
-      const currentToken: DecodedTokenType = jwtDecode(accessToken!);
+      console.log(
+        "inside the interceptor",
+        localStorage.getItem("accessToken")
+      );
+      const currentToken: DecodedTokenType = jwtDecode(
+        accessToken || localStorage.getItem("accessToken")!
+      );
       const currentTime = moment().unix();
 
       //check if access token is expired

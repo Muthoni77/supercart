@@ -87,7 +87,7 @@ function Login() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      toast.success("Authentication was successfull");
+      // toast.success("Authentication was successfull");
       const userData = user as UserType;
       if (userData.phoneVerified) {
         router.push("/");
