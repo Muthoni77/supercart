@@ -1,6 +1,12 @@
-import { AuthPayloadType, AuthStateType, UserType } from "@/Types/Auth";
+import {
+  AuthPayloadType,
+  AuthStateType,
+  RefreshTokensType,
+  UserType,
+} from "@/Types/Auth";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const initialState: AuthStateType = {
   isAuthenticated:
@@ -39,6 +45,14 @@ const AuthSlice = createSlice({
       localStorage.setItem("user", JSON.stringify(action.payload));
       state.user = action.payload;
     },
+    refreshTokens: (state, action: PayloadAction<RefreshTokensType>) => {
+      console.log("refresh dispatch called");
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+      localStorage.setItem("accessToken", action.payload.accessToken);
+      localStorage.setItem("refreshToken", action.payload.refreshToken);
+      console.log("New tokens set");
+    },
 
     logout: (state) => {
       localStorage.removeItem("user");
@@ -53,6 +67,6 @@ const AuthSlice = createSlice({
   },
 });
 
-export const { updateUserDetails, updateUserProfile, logout } =
+export const { updateUserDetails, updateUserProfile, refreshTokens, logout } =
   AuthSlice.actions;
 export default AuthSlice.reducer;
