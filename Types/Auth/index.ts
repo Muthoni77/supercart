@@ -40,3 +40,15 @@ export interface LoginType {
   email: string;
   password: string;
 }
+
+export interface DecodedTokenType {
+  id: string;
+  email: string;
+  iat: number;
+  exp: number;
+}
+
+export interface RefreshTokensType {
+  accessToken: string;
+  refreshToken: string;
+}
