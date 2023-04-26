@@ -76,10 +76,14 @@ function ProductsSliderCoverMin() {
       </div>
       <Swiper
         onInit={(swiper) => {
-          swiper.params.navigation.prevEl = prevRef.current;
-          swiper.params.navigation.nextEl = nextRef.current;
-          swiper.navigation.init();
-          swiper.navigation.update();
+          if (swiper.params.navigation) {
+            const navigation = swiper.params.navigation as any;
+
+            navigation.prevEl = prevRef.current;
+            navigation.nextEl = nextRef.current;
+            swiper.navigation.init();
+            swiper.navigation.update();
+          }
         }}
         loop={true}
         autoplay={{ delay: 3000 }}
