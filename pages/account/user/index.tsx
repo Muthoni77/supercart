@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { UserType } from "@/Types/Auth";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -8,8 +8,10 @@ import PersonalInformation from "@/components/accountDetails/PersonalInformation
 import Billing from "@/components/accountDetails/Billing";
 import OrderHistory from "@/components/Orders/OrderHistory";
 import GiftCard from "@/components/Incentives/GiftCard";
+import { MdEdit } from "react-icons/md";
 
 const UserAccount = () => {
+  const photoUpdateRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("0");
   const user: UserType = useAppSelector((state) => {
@@ -41,8 +43,18 @@ const UserAccount = () => {
         <Navbar />
         <div className="min-h-screen pt-20 md:pt-24 relative pb-24">
           <div className="flex flex-col md:flex-row w-full md:w-5/6 mx-auto pt-6 px-6 md:px-20 ">
-            <div className="md:min-h-[50vh] md:border-r border-gray-300 w-full md:w-1/4 flex flex-col pt-4">
-              <img src="/avatar.png" className="rounded-full h-20 w-20" />
+            <div className="md:min-h-[50vh] relative md:border-r border-gray-300 w-full md:w-1/4 flex flex-col pt-4">
+              <span className="flex">
+                <img src="/avatar.png" className="rounded-full h-20 w-20" />
+                <MdEdit
+                  className="ml-2 hover:cursor-pointer text-[#fec242] hover:text-[#d18d01] hover:scale-105"
+                  size={20}
+                  onClick={() => {
+                    photoUpdateRef?.current?.click();
+                  }}
+                />
+                <input type="file" ref={photoUpdateRef} className="hidden" />
+              </span>
               <span className="font-bold text-dark text-base mt-2">
                 {user?.username}
               </span>
