@@ -129,6 +129,7 @@ function Login() {
           </div>
           <div className="mt-4 w-full md:w-4/6 px-4">
             <input
+              id="email"
               className="border w-full  py-3 px-4  rounded-3xl mt-2 text-xs placeholder-gray md:mt-4 bg-[#f4fff5]  outline-none"
               placeholder="Email"
               type="text"
@@ -138,6 +139,7 @@ function Login() {
             />
             <div className="w-full relative">
               <input
+                id="password"
                 className="border w-full  py-3 px-4  rounded-3xl mt-2 text-xs placeholder-gray md:mt-4 bg-[#f4fff5]  outline-none"
                 placeholder="Password"
                 type={`${showPassword ? "text" : "password"}`}
@@ -164,6 +166,8 @@ function Login() {
             </div>
 
             <button
+              data-testid="btnLogin"
+              role="button"
               className="w-full bg-[#0f172a] text-sm md:text-base rounded-3xl py-2 px-4 text-white hover:cursor-pointer hover:shadow-xl mt-8 flex items-center justify-center"
               onClick={handleValidate}
             >
