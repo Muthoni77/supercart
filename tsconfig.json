@@ -24,6 +24,6 @@
     "**/*.ts",
     "**/*.tsx",
     "__tests__/e2e/login.cy.js"
-  ],
+, "utils/imageCropper/useDebounceEffect.ts"  ],
   "exclude": ["node_modules"]
 }
