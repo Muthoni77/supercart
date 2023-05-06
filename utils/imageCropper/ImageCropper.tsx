@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { BsFillImageFill } from "react-icons/bs";
-import { MdClose } from "react-icons/md";
+import { MdCancel, MdClose, MdDone } from "react-icons/md";
 
 import "react-image-crop/dist/ReactCrop.css";
 import ReactCrop, {
@@ -12,6 +12,7 @@ import ReactCrop, {
 
 import { canvasPreview } from "./canvasPreview";
 import { useDebounceEffect } from "./useDebounceEffect";
+import { ImSpinner2 } from "react-icons/im";
 
 function centerAspectCrop(
   mediaWidth: number,
@@ -40,10 +41,10 @@ interface PropType {
 const ImageCropper = ({ closeModal }: PropType) => {
   const [crop, setCrop] = useState<Crop | undefined>({
     unit: "%", // Can be 'px' or '%'
-    x: 25,
-    y: 25,
-    width: 50,
-    height: 50,
+    x: 40,
+    y: 40,
+    width: 20,
+    height: 20,
   });
 
   //img input ref
@@ -58,6 +59,8 @@ const ImageCropper = ({ closeModal }: PropType) => {
   //state to check if image is selected
   const [imageSelected, setImageSelected] = useState<boolean>(false);
 
+  const [showPreview, setPreview] = useState<boolean>(false);
+
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const hiddenAnchorRef = useRef<HTMLAnchorElement>(null);
   const blobUrlRef = useRef("");
@@ -65,12 +68,12 @@ const ImageCropper = ({ closeModal }: PropType) => {
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
-  const [aspect, setAspect] = useState<number | undefined>(16 / 9);
+  const [aspect, setAspect] = useState<number | undefined>(1);
 
   // Function to handle the image selection
   function onSelectFile(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files.length > 0) {
-      setCrop(undefined); // Makes crop preview update between images.
+      // setCrop(undefined); // Makes crop preview update between images.
       const reader = new FileReader();
       reader.addEventListener("load", () =>
         setImgSrc(reader.result?.toString() || "")
@@ -83,15 +86,21 @@ const ImageCropper = ({ closeModal }: PropType) => {
   function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
     if (aspect) {
       const { width, height } = e.currentTarget;
-      setCrop(centerAspectCrop(width, height, aspect));
+      // setCrop(centerAspectCrop(width, height, aspect));
+      setCrop({
+        unit: "%",
+        x: 25,
+        y: 25,
+        width: 50,
+        height: 50,
+      });
     }
   }
 
-  function onDownloadCropClick() {
+  async function handleUpdatePic() {
     if (!previewCanvasRef.current) {
       throw new Error("Crop canvas does not exist");
     }
-
     previewCanvasRef.current.toBlob((blob) => {
       if (!blob) {
         throw new Error("Failed to create blob");
@@ -99,9 +108,14 @@ const ImageCropper = ({ closeModal }: PropType) => {
       if (blobUrlRef.current) {
         URL.revokeObjectURL(blobUrlRef.current);
       }
-      blobUrlRef.current = URL.createObjectURL(blob);
-      hiddenAnchorRef.current!.href = blobUrlRef.current;
-      hiddenAnchorRef.current!.click();
+
+      const file = new File([blob], "photo.jpg");
+      console.log("file");
+      console.log(file);
+
+      // blobUrlRef.current = URL.createObjectURL(blob);
+      // hiddenAnchorRef.current!.href = blobUrlRef.current;
+      // hiddenAnchorRef.current!.click();
     });
   }
 
@@ -161,84 +175,132 @@ const ImageCropper = ({ closeModal }: PropType) => {
           </div>
           {imageSelected ? (
             <>
-              <div className="w-full flex flex-col  flex justify-center items-center mt-3">
-                <span
-                  className="font-bold text-xl"
-                  style={{
-                    width: "100% !imporant",
-                  }}
-                >
-                  Crop your image
-                </span>
-
-                <span className="text-sm text-gray-800">
-                  (Drag the crop to find your face)
-                </span>
-              </div>
-              <div
-                className="w-full flex justify-center p-3"
-                // style={{ maxHeight: "60vh", overflow: "auto" }}
-              >
-                <ReactCrop
-                  crop={crop}
-                  onChange={(_, percentCrop) => setCrop(percentCrop)}
-                  onComplete={(c) => setCompletedCrop(c)}
-                  aspect={aspect}
-                  minHeight={100}
-                  minWidth={100}
-                  //   circularCrop
-                  // locked={true}
-                >
-                  <img
-                    ref={imgRef}
-                    src={imgSrc}
-                    className=""
-                    style={{ width: "100%", maxHeight: "80vh" }}
-                  />
-                </ReactCrop>
-              </div>
-              <center>
-                <button
-                  style={{ backgroundColor: "#007acc", width: "200px" }}
-                  className="text-white p-3 rounded-xl m-3 shadow border-none"
-                  onClick={() => {
-                    console.log(crop);
-                  }}
-                >
-                  Crop
-                </button>
-              </center>
-
-              {/* Preview */}
-              {!!completedCrop && (
+              {!showPreview && (
                 <>
-                  <div>
-                    <canvas
-                      ref={previewCanvasRef}
+                  <div className="w-full flex flex-col  flex justify-center items-center mt-3">
+                    <span
+                      className="font-bold text-xl"
                       style={{
-                        border: "1px solid black",
-                        objectFit: "contain",
-                        width: completedCrop.width,
-                        height: completedCrop.height,
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <button onClick={onDownloadCropClick}>Download Crop</button>
-                    <a
-                      ref={hiddenAnchorRef}
-                      download
-                      style={{
-                        position: "absolute",
-                        top: "-200vh",
-                        visibility: "hidden",
+                        width: "100% !imporant",
                       }}
                     >
-                      Hidden download
-                    </a>
+                      Crop your image
+                    </span>
+
+                    <span className="text-sm text-gray-800">
+                      (Drag the crop to find your face)
+                    </span>
                   </div>
+                  <div
+                    className="w-full flex justify-center p-3"
+                    // style={{ maxHeight: "60vh", overflow: "auto" }}
+                  >
+                    <ReactCrop
+                      crop={crop}
+                      onChange={(_, percentCrop) => setCrop(percentCrop)}
+                      onComplete={(c) => setCompletedCrop(c)}
+                      aspect={aspect}
+                      minHeight={100}
+                      minWidth={100}
+                      //   circularCrop
+                      // locked={true}
+                    >
+                      <img
+                        ref={imgRef}
+                        src={imgSrc}
+                        className=""
+                        style={{ width: "100%", maxHeight: "60vh" }}
+                        // onLoad={onImageLoad}
+                      />
+                    </ReactCrop>
+                  </div>
+                  <center>
+                    <button
+                      style={{
+                        backgroundColor: completedCrop ? "#007acc" : "gray",
+                        minWidth: "200px",
+                      }}
+                      className="text-white p-3 rounded-xl m-3 shadow border-none"
+                      onClick={() => {
+                        setPreview(true);
+                      }}
+                    >
+                      {completedCrop ? (
+                        "Crop"
+                      ) : (
+                        <span className="flex items-center">
+                          Waiting for you to crop{" "}
+                          <ImSpinner2 className="animate-spin ml-2" />
+                        </span>
+                      )}
+                    </button>
+                  </center>
                 </>
               )}
+
+              {/* Preview */}
+
+              <>
+                {!!completedCrop && (
+                  <div
+                    style={{ visibility: showPreview ? "visible" : "hidden" }}
+                    className={showPreview ? "relative p-3 my-6" : "absolute"}
+                  >
+                    <center>
+                      <span className="text-xl font-bold mb-3">
+                        Your cropped photo
+                      </span>
+                    </center>
+                    <div className="flex justify-center m-3">
+                      <canvas
+                        ref={previewCanvasRef}
+                        style={{
+                          border: "1px solid black",
+                          objectFit: "contain",
+                          width: completedCrop.width,
+                          height: completedCrop.height,
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <center>
+                        <button
+                          style={{ backgroundColor: "#007acc" }}
+                          className="text-white px-6 py-3 rounded-xl mx-3 mt-6 shadow border-none flex items-center"
+                          onClick={handleUpdatePic}
+                        >
+                          Proceed to update{" "}
+                          <MdDone size={20} className="ml-1" />
+                        </button>
+                      </center>
+                      <center>
+                        <button
+                          style={{
+                            backgroundColor: "indianred",
+                          }}
+                          className="text-white px-6 py-3 flex items-center rounded-xl m-3 shadow border-none"
+                          onClick={() => {
+                            setPreview(false);
+                          }}
+                        >
+                          Cancel <MdCancel size={20} className="ml-1" />
+                        </button>
+                      </center>
+                      <a
+                        ref={hiddenAnchorRef}
+                        download
+                        style={{
+                          position: "absolute",
+                          top: "-200vh",
+                          visibility: "hidden",
+                        }}
+                      >
+                        Hidden download
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </>
             </>
           ) : (
             <>
