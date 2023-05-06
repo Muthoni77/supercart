@@ -13,6 +13,7 @@ import ReactCrop, {
 import { canvasPreview } from "./canvasPreview";
 import { useDebounceEffect } from "./useDebounceEffect";
 import { ImSpinner2 } from "react-icons/im";
+import AxiosWrapper from "../axios/axiosWrapper";
 
 function centerAspectCrop(
   mediaWidth: number,
@@ -110,14 +111,27 @@ const ImageCropper = ({ closeModal }: PropType) => {
       }
 
       const file = new File([blob], "photo.jpg");
-      console.log("file");
-      console.log(file);
+      //update profile
+      uploadToDB(file);
 
       // blobUrlRef.current = URL.createObjectURL(blob);
       // hiddenAnchorRef.current!.href = blobUrlRef.current;
       // hiddenAnchorRef.current!.click();
     });
   }
+
+  //TO BE CONTINUED
+  const uploadToDB = async (file: any) => {
+    try {
+      const formData = new FormData();
+      formData.append("photo", file);
+      const response = await AxiosWrapper({
+        method: "post",
+        url: "auth/update",
+        data: formData,
+      });
+    } catch (error) {}
+  };
 
   useDebounceEffect(
     async () => {
