@@ -9,10 +9,15 @@ import Billing from "@/components/accountDetails/Billing";
 import OrderHistory from "@/components/Orders/OrderHistory";
 import GiftCard from "@/components/Incentives/GiftCard";
 import { MdEdit } from "react-icons/md";
+import ImageCropper from "@/utils/ImageCropper";
 
 const UserAccount = () => {
   const photoUpdateRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  const [photoChange, setPhotoChange] = useState("");
+  const [showCropper, setShowCropper] = useState<boolean>(true);
+
   const [activeTab, setActiveTab] = useState<string>("0");
   const user: UserType = useAppSelector((state) => {
     if (typeof state.auth.user !== "string") {
@@ -117,6 +122,7 @@ const UserAccount = () => {
             </div>
           </div>
         </div>
+            {showCropper && <ImageCropper />}
         <Footer />
       </div>
     </>
