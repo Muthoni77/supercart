@@ -9,10 +9,15 @@ import Billing from "@/components/accountDetails/Billing";
 import OrderHistory from "@/components/Orders/OrderHistory";
 import GiftCard from "@/components/Incentives/GiftCard";
 import { MdEdit } from "react-icons/md";
+import ImageCropper from "@/utils/imageCropper/ImageCropper";
+import Cropper from "@/utils/imageCropper/Cropper";
 
 const UserAccount = () => {
-  const photoUpdateRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  const [photoChange, setPhotoChange] = useState("");
+  const [showCropper, setShowCropper] = useState<boolean>(false);
+
   const [activeTab, setActiveTab] = useState<string>("0");
   const user: UserType = useAppSelector((state) => {
     if (typeof state.auth.user !== "string") {
@@ -46,14 +51,14 @@ const UserAccount = () => {
             <div className="md:min-h-[50vh] relative md:border-r border-gray-300 w-full md:w-1/4 flex flex-col pt-4">
               <span className="flex">
                 <img src="/avatar.png" className="rounded-full h-20 w-20" />
+
                 <MdEdit
                   className="ml-2 hover:cursor-pointer text-[#fec242] hover:text-[#d18d01] hover:scale-105"
                   size={20}
                   onClick={() => {
-                    photoUpdateRef?.current?.click();
+                    setShowCropper(true);
                   }}
                 />
-                <input type="file" ref={photoUpdateRef} className="hidden" />
               </span>
               <span className="font-bold text-dark text-base mt-2">
                 {user?.username}
@@ -117,6 +122,13 @@ const UserAccount = () => {
             </div>
           </div>
         </div>
+        {showCropper && (
+          <ImageCropper
+            closeModal={() => {
+              setShowCropper(false);
+            }}
+          />
+        )}
         <Footer />
       </div>
     </>
