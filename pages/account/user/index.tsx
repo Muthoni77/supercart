@@ -50,7 +50,10 @@ const UserAccount = () => {
           <div className="flex flex-col md:flex-row w-full md:w-5/6 mx-auto pt-6 px-6 md:px-20 ">
             <div className="md:min-h-[50vh] relative md:border-r border-gray-300 w-full md:w-1/4 flex flex-col pt-4">
               <span className="flex">
-                <img src="/avatar.png" className="rounded-full h-20 w-20" />
+                <img
+                  src={user?.profile?.photo || "/avatar.png"}
+                  className="rounded-full h-20 w-20"
+                />
 
                 <MdEdit
                   className="ml-2 hover:cursor-pointer text-[#fec242] hover:text-[#d18d01] hover:scale-105"
