@@ -3,7 +3,7 @@ import { ImSpinner2 } from "react-icons/im";
 interface SpinnerProps {
   color: string;
   size: number;
-  spinnerClassName: string;
+  spinnerClassName?: string;
 }
 const SpinnerOnly = ({ color, size, spinnerClassName }: SpinnerProps) => {
   return (

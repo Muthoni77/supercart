@@ -9,13 +9,19 @@ import { logout, refreshTokens } from "@/features/slices/AuthSlice";
 import { toast } from "react-toastify";
 import { store } from "@/features/store/store";
 
-const AxiosWrapper = async ({ method, url, data }: AxiosRequestType) => {
+const AxiosWrapper = async ({
+  method,
+  url,
+  data,
+  headers,
+}: AxiosRequestType) => {
   let accessToken =
     typeof window !== "undefined" && localStorage.getItem("accessToken")!;
   let refreshToken =
     typeof window !== "undefined" && localStorage.getItem("refreshToken")!;
   let newAccessToken: string = "";
   try {
+    console.log("url gotten", url);
     const axiosInstance = axios.create({
       method,
       url: BACKEND_URL + url,
@@ -45,6 +51,7 @@ const AxiosWrapper = async ({ method, url, data }: AxiosRequestType) => {
             url: BACKEND_URL + "/auth/refresh-token",
             headers: {
               Authorization: "Bearer " + refreshToken,
+              ...headers,
             },
           });
 
@@ -76,6 +83,9 @@ const AxiosWrapper = async ({ method, url, data }: AxiosRequestType) => {
       config.headers.Authorization = "Bearer " + accessToken;
       console.log("set access token");
       console.log(accessToken);
+
+      console.log("debug point two");
+      console.log(BACKEND_URL + url);
       return config;
     });
 

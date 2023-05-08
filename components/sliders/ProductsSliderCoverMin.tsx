@@ -91,7 +91,7 @@ function ProductsSliderCoverMin() {
         pagination={{ clickable: true }}
         slidesPerView={1}
         onSlideChange={(swiper) => handleSlideChange(swiper)}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSwiper={(swiper) => console.log(swiper)}
         className=" w-full m-0 md:pb-16   "
         breakpoints={{
           768: {

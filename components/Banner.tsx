@@ -39,7 +39,7 @@ function Banner() {
         pagination={{ clickable: true }}
         slidesPerView={1}
         onSlideChange={(swiper) => handleSlideChange(swiper)}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSwiper={(swiper) => console.log(swiper)}
         className="p-5 h-[60vh]  md:h-screen"
       >
         {/* Banner Slide 1 */}

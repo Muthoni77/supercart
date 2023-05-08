@@ -108,7 +108,7 @@ function ShopDepartments() {
           },
         }}
         onSlideChange={(swiper) => handleSlideChange(swiper)}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSwiper={(swiper) => console.log(swiper)}
         className="p-5 w-full   md:pb-16 "
       >
         {products &&

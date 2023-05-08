@@ -52,8 +52,6 @@ function Login() {
         data,
       });
 
-      console.log(response);
-
       setLoading(false);
       if (response && response.data) {
         // const data: ResponseDataType = response?.data!;
