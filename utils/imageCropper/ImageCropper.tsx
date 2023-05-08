@@ -14,6 +14,17 @@ import { canvasPreview } from "./canvasPreview";
 import { useDebounceEffect } from "./useDebounceEffect";
 import { ImSpinner2 } from "react-icons/im";
 import AxiosWrapper from "../axios/axiosWrapper";
+import { toast } from "react-toastify";
+import SpinnerWithMessage from "@/components/Spinners/SpinnerWithMessage";
+
+import { updateUserProfile } from "@/features/slices/AuthSlice";
+import { useAppDispatch } from "@/hooks";
+
+interface uploadResponse {
+  success: boolean;
+  message: string;
+  user: any;
+}
 
 function centerAspectCrop(
   mediaWidth: number,
@@ -40,6 +51,7 @@ interface PropType {
 }
 
 const ImageCropper = ({ closeModal }: PropType) => {
+  const dispatch = useAppDispatch();
   const [crop, setCrop] = useState<Crop | undefined>({
     unit: "%", // Can be 'px' or '%'
     x: 40,
@@ -59,6 +71,9 @@ const ImageCropper = ({ closeModal }: PropType) => {
 
   //state to check if image is selected
   const [imageSelected, setImageSelected] = useState<boolean>(false);
+
+  //loading state
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [showPreview, setPreview] = useState<boolean>(false);
 
@@ -111,26 +126,53 @@ const ImageCropper = ({ closeModal }: PropType) => {
       }
 
       const file = new File([blob], "photo.jpg");
+
       //update profile
       uploadToDB(file);
-
       // blobUrlRef.current = URL.createObjectURL(blob);
       // hiddenAnchorRef.current!.href = blobUrlRef.current;
       // hiddenAnchorRef.current!.click();
     });
   }
 
-  //TO BE CONTINUED
-  const uploadToDB = async (file: any) => {
+  const uploadToDB = async (file: File) => {
     try {
+      setLoading(true);
       const formData = new FormData();
-      formData.append("photo", file);
-      const response = await AxiosWrapper({
+      formData.append("file", file);
+
+      const response: any = await AxiosWrapper({
         method: "post",
-        url: "auth/update",
+        url: "/profile/update-photo",
         data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-    } catch (error) {}
+
+      console.log("response.data");
+      console.log(response.data);
+      const { success, message, user }: uploadResponse = response.data;
+      setLoading(false);
+      if (success) {
+        //successfull response
+        toast.success(message);
+        dispatch(updateUserProfile(user));
+      } else {
+        console.log(response);
+        throw new Error("Some error occured!");
+      }
+
+      console.log(response);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    } finally {
+      closeModal();
+    }
   };
 
   useDebounceEffect(
@@ -180,168 +222,196 @@ const ImageCropper = ({ closeModal }: PropType) => {
           style={{ backgroundColor: "white" }}
           className="p-8 rounded-2xl relative shadow-lg m-5 w-full  md:w-1/2 mt-10"
         >
-          <div className="relative z-50">
-            <MdClose
-              size={30}
-              className="text-red-500 absolute hoverUpEffect right-2 top-2"
-              onClick={closeModal}
-            />{" "}
-          </div>
-          {imageSelected ? (
+          {!loading ? (
             <>
-              {!showPreview && (
+              <div className="relative z-50">
+                <MdClose
+                  size={30}
+                  className="text-red-500 absolute hoverUpEffect right-2 top-2"
+                  onClick={closeModal}
+                />{" "}
+              </div>
+              {imageSelected ? (
                 <>
-                  <div className="w-full flex flex-col  flex justify-center items-center mt-3">
+                  {!showPreview && (
+                    <>
+                      <div className="w-full flex flex-col  flex justify-center items-center mt-3">
+                        <span
+                          className="font-bold text-xl"
+                          style={{
+                            width: "100% !imporant",
+                          }}
+                        >
+                          Crop your image
+                        </span>
+
+                        <span className="text-sm text-gray-800">
+                          (Drag the crop to find your face)
+                        </span>
+                      </div>
+                      <div
+                        className="w-full flex justify-center p-3"
+                        // style={{ maxHeight: "60vh", overflow: "auto" }}
+                      >
+                        <ReactCrop
+                          crop={crop}
+                          onChange={(_, percentCrop) => setCrop(percentCrop)}
+                          onComplete={(c) => setCompletedCrop(c)}
+                          aspect={aspect}
+                          minHeight={100}
+                          minWidth={100}
+                          //   circularCrop
+                          // locked={true}
+                        >
+                          <img
+                            ref={imgRef}
+                            src={imgSrc}
+                            className=""
+                            style={{ width: "100%", maxHeight: "60vh" }}
+                            // onLoad={onImageLoad}
+                          />
+                        </ReactCrop>
+                      </div>
+                      <center>
+                        <button
+                          style={{
+                            backgroundColor: completedCrop ? "#007acc" : "gray",
+                            minWidth: "200px",
+                          }}
+                          className="text-white p-3 rounded-xl m-3 shadow border-none"
+                          onClick={() => {
+                            setPreview(true);
+                          }}
+                        >
+                          {completedCrop ? (
+                            "Crop"
+                          ) : (
+                            <span className="flex items-center">
+                              Waiting for you to crop{" "}
+                              <ImSpinner2 className="animate-spin ml-2" />
+                            </span>
+                          )}
+                        </button>
+                      </center>
+                    </>
+                  )}
+
+                  {/* Preview */}
+
+                  <>
+                    {!!completedCrop && (
+                      <div
+                        style={{
+                          visibility: showPreview ? "visible" : "hidden",
+                        }}
+                        className={
+                          showPreview ? "relative p-3 my-6" : "absolute"
+                        }
+                      >
+                        <center>
+                          <span className="text-xl font-bold mb-3">
+                            Your cropped photo
+                          </span>
+                        </center>
+                        <div className="flex justify-center m-3">
+                          <canvas
+                            ref={previewCanvasRef}
+                            style={{
+                              border: "1px solid black",
+                              objectFit: "contain",
+                              width: completedCrop.width,
+                              height: completedCrop.height,
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <center>
+                            <button
+                              style={{ backgroundColor: "#007acc" }}
+                              className="text-white px-6 py-3 rounded-xl mx-3 mt-6 shadow border-none flex items-center"
+                              onClick={handleUpdatePic}
+                            >
+                              Proceed to update{" "}
+                              <MdDone size={20} className="ml-1" />
+                            </button>
+                          </center>
+                          <center>
+                            <button
+                              style={{
+                                backgroundColor: "indianred",
+                              }}
+                              className="text-white px-6 py-3 flex items-center rounded-xl m-3 shadow border-none"
+                              onClick={() => {
+                                setPreview(false);
+                              }}
+                            >
+                              Cancel <MdCancel size={20} className="ml-1" />
+                            </button>
+                          </center>
+                          <a
+                            ref={hiddenAnchorRef}
+                            download
+                            style={{
+                              position: "absolute",
+                              top: "-200vh",
+                              visibility: "hidden",
+                            }}
+                          >
+                            Hidden download
+                          </a>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                </>
+              ) : (
+                <>
+                  <div className="w-full flex flex-col relative flex justify-center items-center px-3 py-12">
                     <span
-                      className="font-bold text-xl"
+                      className="font-bold text-xl p-3"
                       style={{
                         width: "100% !imporant",
                       }}
                     >
-                      Crop your image
+                      Select a photo to upload
                     </span>
+                    <BsFillImageFill
+                      size={90}
+                      className="my-4"
+                      color={"#fcaa01"}
+                    />
 
-                    <span className="text-sm text-gray-800">
-                      (Drag the crop to find your face)
-                    </span>
-                  </div>
-                  <div
-                    className="w-full flex justify-center p-3"
-                    // style={{ maxHeight: "60vh", overflow: "auto" }}
-                  >
-                    <ReactCrop
-                      crop={crop}
-                      onChange={(_, percentCrop) => setCrop(percentCrop)}
-                      onComplete={(c) => setCompletedCrop(c)}
-                      aspect={aspect}
-                      minHeight={100}
-                      minWidth={100}
-                      //   circularCrop
-                      // locked={true}
-                    >
-                      <img
-                        ref={imgRef}
-                        src={imgSrc}
-                        className=""
-                        style={{ width: "100%", maxHeight: "60vh" }}
-                        // onLoad={onImageLoad}
-                      />
-                    </ReactCrop>
-                  </div>
-                  <center>
                     <button
-                      style={{
-                        backgroundColor: completedCrop ? "#007acc" : "gray",
-                        minWidth: "200px",
-                      }}
-                      className="text-white p-3 rounded-xl m-3 shadow border-none"
-                      onClick={() => {
-                        setPreview(true);
-                      }}
+                      style={{ backgroundColor: "#dbe0e3" }}
+                      className="border px-6 py-3 text-sm"
+                      onClick={() => imageInputRef?.current?.click()}
                     >
-                      {completedCrop ? (
-                        "Crop"
-                      ) : (
-                        <span className="flex items-center">
-                          Waiting for you to crop{" "}
-                          <ImSpinner2 className="animate-spin ml-2" />
-                        </span>
-                      )}
+                      Select photo
                     </button>
-                  </center>
+                    <input
+                      ref={imageInputRef}
+                      type="file"
+                      className="hidden"
+                      accept="image/*"
+                      onChange={onSelectFile}
+                    />
+                  </div>
                 </>
               )}
-
-              {/* Preview */}
-
-              <>
-                {!!completedCrop && (
-                  <div
-                    style={{ visibility: showPreview ? "visible" : "hidden" }}
-                    className={showPreview ? "relative p-3 my-6" : "absolute"}
-                  >
-                    <center>
-                      <span className="text-xl font-bold mb-3">
-                        Your cropped photo
-                      </span>
-                    </center>
-                    <div className="flex justify-center m-3">
-                      <canvas
-                        ref={previewCanvasRef}
-                        style={{
-                          border: "1px solid black",
-                          objectFit: "contain",
-                          width: completedCrop.width,
-                          height: completedCrop.height,
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <center>
-                        <button
-                          style={{ backgroundColor: "#007acc" }}
-                          className="text-white px-6 py-3 rounded-xl mx-3 mt-6 shadow border-none flex items-center"
-                          onClick={handleUpdatePic}
-                        >
-                          Proceed to update{" "}
-                          <MdDone size={20} className="ml-1" />
-                        </button>
-                      </center>
-                      <center>
-                        <button
-                          style={{
-                            backgroundColor: "indianred",
-                          }}
-                          className="text-white px-6 py-3 flex items-center rounded-xl m-3 shadow border-none"
-                          onClick={() => {
-                            setPreview(false);
-                          }}
-                        >
-                          Cancel <MdCancel size={20} className="ml-1" />
-                        </button>
-                      </center>
-                      <a
-                        ref={hiddenAnchorRef}
-                        download
-                        style={{
-                          position: "absolute",
-                          top: "-200vh",
-                          visibility: "hidden",
-                        }}
-                      >
-                        Hidden download
-                      </a>
-                    </div>
-                  </div>
-                )}
-              </>
             </>
           ) : (
             <>
-              <div className="w-full flex flex-col relative flex justify-center items-center px-3 py-12">
-                <span
-                  className="font-bold text-xl p-3"
-                  style={{
-                    width: "100% !imporant",
-                  }}
-                >
-                  Select a photo to upload
-                </span>
-                <BsFillImageFill size={90} className="my-4" color={"#fcaa01"} />
-
-                <button
-                  style={{ backgroundColor: "#dbe0e3" }}
-                  className="border px-6 py-3 text-sm"
-                  onClick={() => imageInputRef?.current?.click()}
-                >
-                  Select photo
-                </button>
-                <input
-                  ref={imageInputRef}
-                  type="file"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={onSelectFile}
+              <div
+                className="min-h-50vh relative bg-red-400 rounded-lg flex items-center justify-center "
+                style={{ minHeight: "50vh" }}
+              >
+                <SpinnerWithMessage
+                  color="black"
+                  size={20}
+                  message="Uploading your photo, please wait..."
+                  spinnerContainerClassName="absolute"
+                  spinnerClassName=""
+                  messageClassName="font-bold"
                 />
               </div>
             </>
