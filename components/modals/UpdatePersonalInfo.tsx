@@ -12,7 +12,7 @@ const UpdatePersonalInfo = ({ closeModal }: any) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const user: UserType = useAppSelector((state) => {
-    if (typeof state.auth.user !== "string") {
+    if (typeof state!.auth.user !== "string") {
       return state.auth.user;
     }
   })!;
