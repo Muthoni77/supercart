@@ -15,6 +15,7 @@ import {
 import { RiUserSettingsLine } from "react-icons/ri";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { IoHelpBuoyOutline } from "react-icons/io5";
+import { IoMdArrowDropdown } from "react-icons/io";
 import { CiLogin, CiLogout } from "react-icons/ci";
 import { MdClose, MdLogin, MdOutlineAccountCircle } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "@/hooks";
@@ -161,25 +162,51 @@ function Navbar() {
                 color={"#334155"}
                 className="hidden md:block mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
               />
-              <AiOutlineUser
-                onClick={() => {
-                  const dropCont =
-                    document.getElementsByClassName("profile-dropdown")[0];
+              {isAuthenticated ? (
+                <div className="flex items-center md:mr-5">
+                  <img
+                    src={user?.profile?.photo || "/avatar.png"}
+                    className="w-[30px] h-[30px] rounded-full m-0 hover:cursor-pointer "
+                    alt=""
+                    onClick={() => {
+                      const dropCont =
+                        document.getElementsByClassName("profile-dropdown")[0];
 
-                  if (window.innerWidth > 700) {
-                    dropCont?.classList.add("animate__slideInUp");
-                  } else {
-                    dropCont?.classList.add("animate__fadeInLeft");
-                  }
-                  setShowMobileNav(false);
-                  setShowProfileDropdown(!showProfileDropdown);
-                  // setTimeout(() => {
-                  // }, 200);
-                }}
-                size={40}
-                color={"#334155"}
-                className=" mr-0  ml-0 md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
-              />
+                      if (window.innerWidth > 700) {
+                        dropCont?.classList.add("animate__slideInUp");
+                      } else {
+                        dropCont?.classList.add("animate__fadeInLeft");
+                      }
+                      setShowMobileNav(false);
+                      setShowProfileDropdown(!showProfileDropdown);
+                      // setTimeout(() => {
+                      // }, 200);
+                    }}
+                  />
+                  <IoMdArrowDropdown size={20} />
+                </div>
+              ) : (
+                <AiOutlineUser
+                  onClick={() => {
+                    const dropCont =
+                      document.getElementsByClassName("profile-dropdown")[0];
+
+                    if (window.innerWidth > 700) {
+                      dropCont?.classList.add("animate__slideInUp");
+                    } else {
+                      dropCont?.classList.add("animate__fadeInLeft");
+                    }
+                    setShowMobileNav(false);
+                    setShowProfileDropdown(!showProfileDropdown);
+                    // setTimeout(() => {
+                    // }, 200);
+                  }}
+                  size={40}
+                  color={"#334155"}
+                  className=" mr-0  ml-0 md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
+                />
+              )}
+
               <AiOutlineShoppingCart
                 size={40}
                 color={"#334155"}
@@ -216,8 +243,8 @@ function Navbar() {
           {isAuthenticated && user && (
             <div className="flex items-center border-b pb-4 mb-4 px-4">
               <img
-                src="/avatar.png"
-                className="w-[40px]  rounded-full mr-3"
+                src={user?.profile?.photo || "/avatar.png"}
+                className="w-[40px] h-[40px] rounded-full mr-3"
                 alt=""
               />
               <div className="flex flex-col ">
