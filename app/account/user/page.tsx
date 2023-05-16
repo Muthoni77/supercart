@@ -1,9 +1,10 @@
+"use client";
 import { useState, useEffect, useRef } from "react";
 import { UserType } from "@/Types/Auth";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { useAppSelector } from "@/hooks";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import PersonalInformation from "@/components/accountDetails/PersonalInformation";
 import Billing from "@/components/accountDetails/Billing";
 import OrderHistory from "@/components/Orders/OrderHistory";

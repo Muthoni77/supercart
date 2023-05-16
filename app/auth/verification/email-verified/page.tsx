@@ -1,6 +1,7 @@
+"use client";
 import LoadingOverlay from "@/components/Spinners/LoadingOverlay";
 import SpinnerOnly from "@/components/Spinners/SpinnerOnly";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const EmailVerified = () => {

@@ -1,8 +1,9 @@
+"use client";
 import { ResponseDataType } from "@/Types/Requests";
 import LoadingOverlay from "@/components/Spinners/LoadingOverlay";
 import SpinnerOnly from "@/components/Spinners/SpinnerOnly";
 import publicAxiosWrapper from "@/utils/axios/publicAxiosWrapper";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { totalmem } from "os";
 import { useState } from "react";
 import { toast } from "react-toastify";
