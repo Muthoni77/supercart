@@ -19,8 +19,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // useEffect(() => {}, []);
-  AOS.init();
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <html lang="en">
       <body>

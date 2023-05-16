@@ -23,27 +23,25 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <>
-      <main className="">
-        <Navbar />
-        <Banner />
-        <ProductsSliderCover />
-        <ProductsSliderCoverMax
-          title1={"New Arrivals."}
-          title2={"We have AMAZING backpacks and bags"}
-        />
-        <hr className="m-4 md:mx-20 md:my-12" />
-        <Steps />
-        <ExploreCover />
-        <ProductsSliderCoverMax
-          title1={"Best Sellers."}
-          title2={"Best sellings of the month"}
-        />
-        <KidsBanner />
-        <ExpertsChoiceCover />
-        <ShopDepartments />
-        <Footer />
-      </main>
-    </>
+    <main className="">
+      <Navbar />
+      <Banner />
+      <ProductsSliderCover />
+      <ProductsSliderCoverMax
+        title1={"New Arrivals."}
+        title2={"We have AMAZING backpacks and bags"}
+      />
+      <hr className="m-4 md:mx-20 md:my-12" />
+      <Steps />
+      <ExploreCover />
+      <ProductsSliderCoverMax
+        title1={"Best Sellers."}
+        title2={"Best sellings of the month"}
+      />
+      <KidsBanner />
+      <ExpertsChoiceCover />
+      <ShopDepartments />
+      <Footer />
+    </main>
   );
 }
