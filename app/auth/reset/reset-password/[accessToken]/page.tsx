@@ -1,9 +1,10 @@
+"use client";
 import { useState, useEffect } from "react";
 import { ResponseDataType } from "@/Types/Requests";
 import LoadingOverlay from "@/components/Spinners/LoadingOverlay";
 import SpinnerOnly from "@/components/Spinners/SpinnerOnly";
 import publicAxiosWrapper from "@/utils/axios/publicAxiosWrapper";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { totalmem } from "os";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -11,9 +12,9 @@ import { BiHide, BiShow } from "react-icons/bi";
 import axios from "axios";
 import { BACKEND_URL } from "@/features/slices/GlobalSlice";
 
-const ResetPassword = () => {
+const ResetPassword = ({ params }: any) => {
   const router = useRouter();
-  const { accessToken } = router.query;
+  const { accessToken } = params;
 
   const [oldPassword, setOldPassword] = useState<string>("");
   const [password, setPassword] = useState<string>("");

@@ -1,7 +1,8 @@
+"use client";
 import { useState, useEffect } from "react";
 import PhoneNumberInput from "@/components/Inputs/PhoneNumberInput";
 import Head from "next/head";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { toast } from "react-toastify";
