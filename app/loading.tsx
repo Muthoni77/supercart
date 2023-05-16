@@ -1,7 +1,8 @@
+import PageLoading from "@/components/screenLoaders/PageLoading";
 import React from "react";
 
 const loading = () => {
-  return <div>loading aluta waitanga</div>;
+  return <PageLoading />;
 };
 
 export default loading;
