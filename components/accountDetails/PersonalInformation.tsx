@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import { UserType } from "@/Types/Auth";
 import { useAppSelector } from "@/hooks";

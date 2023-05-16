@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { BsGenderFemale, BsGenderMale } from "react-icons/bs";
 import { MdOutlineChildFriendly, MdOutlineDiamond } from "react-icons/md";

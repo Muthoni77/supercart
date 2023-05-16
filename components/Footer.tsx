@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { BsFacebook, BsTelegram, BsTwitter, BsYoutube } from "react-icons/bs";
 

@@ -1,3 +1,4 @@
+"use client";
 import { useAppSelector } from "@/hooks";
 import { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
@@ -8,10 +9,10 @@ import { toast } from "react-toastify";
 import axiosWrapper from "@/utils/axios/axiosWrapper";
 import { ResponseDataType } from "@/Types/Requests";
 import LoadingOverlay from "@/components/Spinners/LoadingOverlay";
-import { NextRouter, useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const PhoneVerification = () => {
-  const router: NextRouter = useRouter();
+  const router = useRouter();
   const [otp, setOtp] = useState("");
   const user: UserType = useAppSelector((state) => {
     if (typeof state.auth.user !== "string") {
