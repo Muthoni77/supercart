@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import ExploreTab from "./ExploreTab";
 import ProductCategoryCard from "../product/ProductCategoryCard";
