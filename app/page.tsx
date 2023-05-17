@@ -11,6 +11,7 @@ import KidsBanner from "@/components/KidsBanner";
 import ExpertsChoiceCover from "@/components/ExpertsChoiceCover";
 import ShopDepartments from "@/components/ShopDepartments";
 import Footer from "@/components/Footer";
+import LatestPostDisplay from "@/components/blog/LatestPostDisplay";
 
 export const metadata = {
   title: "SuperCart | Home",
@@ -41,6 +42,7 @@ export default function Home() {
       <KidsBanner />
       <ExpertsChoiceCover />
       <ShopDepartments />
+      <LatestPostDisplay />
       <Footer />
     </main>
   );
