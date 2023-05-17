@@ -3,8 +3,11 @@ import { useState } from "react";
 import ExploreTab from "./ExploreTab";
 import ProductCategoryCard from "../product/ProductCategoryCard";
 import { ProductCategoryCardType } from "@/Types/products";
+import ViewProductModal from "../product/ViewProductModal";
+import { useAppSelector } from "@/hooks";
 
 function ExploreCover() {
+  const { showProductModal } = useAppSelector((state) => state.products);
   const [categories, setCategories] = useState<ProductCategoryCardType[]>([
     {
       photo: "/products/1.webp",
@@ -63,6 +66,7 @@ function ExploreCover() {
           </div>
         ))}
       </div>
+      {showProductModal && <ViewProductModal />}
     </div>
   );
 }

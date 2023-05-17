@@ -28,3 +28,8 @@ export interface ProductDepartmentType {
   title: string;
   categories: number;
 }
+
+export interface ProductSliceInitialState {
+  showProductModal: boolean;
+  currentProduct: ProductCardPhotoType | null;
+}

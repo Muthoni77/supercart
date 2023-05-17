@@ -1,6 +1,11 @@
 import React from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { ProductCategoryCardType } from "@/Types/products";
+import { useAppDispatch } from "@/hooks";
+import {
+  setCurrentProduct,
+  toggleShowModal,
+} from "@/features/slices/ProductSlice";
 
 function ProductCategoryCard({
   photo,
@@ -9,8 +14,17 @@ function ProductCategoryCard({
   title,
   color,
 }: ProductCategoryCardType) {
+  const dispatch = useAppDispatch();
   return (
-    <div className="bg-white px-6 py-4 md:py-8  flex flex-col  hover:shadow-xl hover:cursor-pointer rounded-3xl">
+    <div
+      onClick={() => {
+        dispatch(toggleShowModal(true));
+        dispatch(
+          setCurrentProduct({ photo, products, manufacturer, title, color })
+        );
+      }}
+      className="bg-white px-6 py-4 md:py-8  flex flex-col  hover:shadow-xl hover:cursor-pointer rounded-3xl"
+    >
       <div className="flex justify-between items-center">
         <div
           className={`w-[80px] rounded-full`}
