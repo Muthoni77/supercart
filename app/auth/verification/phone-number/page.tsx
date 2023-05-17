@@ -74,7 +74,7 @@ const PhoneVerification = () => {
   };
 
   useEffect(() => {
-    if (!user.phoneVerified) {
+    if (!user?.phoneVerified) {
       toast.success("Check your phone for an OTP sent.");
     }
   }, []);
@@ -124,11 +124,11 @@ const PhoneVerification = () => {
   };
 
   useEffect(() => {
-    if (user.phoneVerified) {
+    if (user?.phoneVerified) {
       toast.info("Phone number is already verified");
       router.push("/");
     }
-  }, [user.phoneVerified]);
+  }, [user?.phoneVerified]);
 
   return (
     <div className="h-screen flex items-center justify-center bg-[#e3ffe6] w-full p-4">
