@@ -147,7 +147,7 @@ const PhoneVerification = () => {
           <center>
             <span className="mt-4 text-sm text-dark ">
               Enter the OTP sent to
-              <span className="font-bold">+{user.phone}</span>
+              <span className="font-bold">+{user?.phone}</span>
             </span>
           </center>
           <OtpInput
