@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Login from "@/pages/auth/login";
+import Login from "@/app/auth/login/page";
 
 import { Provider } from "react-redux";
 import { store } from "@/features/store/store";
 
-jest.mock("next/router", () => ({
+jest.mock("next/navigation", () => ({
   useRouter() {
     return {
       route: "",
