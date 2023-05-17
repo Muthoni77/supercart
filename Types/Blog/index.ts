@@ -1,4 +1,4 @@
-export interface BlogItemCartType {
+export interface BlogItemCardType {
   photo: string;
   heading: string;
   description: string;
