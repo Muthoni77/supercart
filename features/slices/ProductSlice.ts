@@ -2,7 +2,7 @@ import { ProductSliceInitialState } from "@/Types/products";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: ProductSliceInitialState = {
-  showProductModal: true,
+  showProductModal: false,
   currentProduct: null,
 };
 
