@@ -17,8 +17,8 @@ const AddToCartBtn = () => {
     }
   };
   return (
-    <div className="my-12 flex items-center justify-between ml-4">
-      <div className="flex items-center justify-between w-1/4">
+    <div className="pt-2 pb-7 flex items-center justify-between border-b-1 border-b-gray-200 border-b">
+      <div className="flex items-center justify-between w-1/3 bg-[#f5f8fb] p-3 rounded-3xl">
         <div
           className={`border rounded-full p-2 border-1 cursor-pointer hover:border-gray-700 border-[${
             num > 1 ? "#9ca3af" : "#c8cdd5"
@@ -39,8 +39,8 @@ const AddToCartBtn = () => {
           <AiOutlinePlus />
         </div>
       </div>
-      <div className="w-3/4 pl-8">
-        <div className="flex items-center justify-center rounded-3xl p-4  font-bold w-full bg-[#0f172a] text-white hover:cursor-pointer hoverDownEffect">
+      <div className="w-2/3 pl-4 ">
+        <div className="flex items-center justify-center rounded-3xl p-4  font-bold w-full bg-[#0f172a] text-white hover:cursor-pointer hoverDownEffect shadow-xl">
           <HiOutlineShoppingBag size={20} className="mr-2" /> Add to cart
         </div>
       </div>
