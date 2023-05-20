@@ -5,6 +5,7 @@ import { toggleShowModal } from "@/features/slices/ProductSlice";
 import { BsDot, BsStars } from "react-icons/bs";
 import ColorSelector from "../clickSelects/ColorSelector";
 import SizeSelector from "../clickSelects/SizeSelector";
+import AddToCartBtn from "./AddToCartBtn";
 
 const ViewProductModal = () => {
   const dispatch = useAppDispatch();
@@ -62,6 +63,7 @@ const ViewProductModal = () => {
 
             <ColorSelector />
             <SizeSelector />
+            <AddToCartBtn />
           </div>
         </div>
       </div>
