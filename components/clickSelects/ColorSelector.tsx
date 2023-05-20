@@ -1,11 +1,42 @@
 import { useState } from "react";
 
+interface ColorType {
+  name: string;
+  value: number;
+}
+
 const ColorSelector = () => {
-  const [selected, setSelected] = useState<string>("");
+  const [colors, setColors] = useState<ColorType[]>([
+    { name: "Black", value: 1 },
+    { name: "White", value: 2 },
+    { name: "Orange", value: 3 },
+    { name: "Sky Blue", value: 4 },
+    { name: "Natural", value: 5 },
+  ]);
+  const [selected, setSelected] = useState<ColorType>(colors[0]);
   return (
-    <div>
-      <div>
-        Color: <span className="font-semibold">{selected}</span>
+    <div className="my-6">
+      <div className="text-sm my-2">
+        Color: <span className="font-semibold">{selected.name}</span>
+      </div>
+      <div className="flex my-2 item-center space-x-1">
+        {colors.map((item) => (
+          <div
+            key={item.name}
+            style={{ boxSizing: "border-box" }}
+            className={`cursor-pointer w-[18.5%] p-[2px] rounded-3xl border border-2 ${
+              selected.name === item.name ? " border-[#007acc]" : "border-white"
+            } `}
+          >
+            <img
+              className={`w-full rounded-3xl h-[33px]`}
+              src={`./products/colors/${item.value}.png`}
+              onClick={() => {
+                setSelected(item);
+              }}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
