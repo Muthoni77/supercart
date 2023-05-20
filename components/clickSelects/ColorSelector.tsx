@@ -19,7 +19,7 @@ const ColorSelector = () => {
       <div className="text-sm my-2">
         Color: <span className="font-semibold">{selected.name}</span>
       </div>
-      <div className="flex my-2 item-center space-x-1">
+      <div className="flex my-3 item-center space-x-1">
         {colors.map((item) => (
           <div
             key={item.name}
@@ -27,13 +27,13 @@ const ColorSelector = () => {
             className={`cursor-pointer w-[18.5%] p-[2px] rounded-3xl border border-2 ${
               selected.name === item.name ? " border-[#007acc]" : "border-white"
             } `}
+            onClick={() => {
+              setSelected(item);
+            }}
           >
             <img
               className={`w-full rounded-3xl h-[33px]`}
               src={`./products/colors/${item.value}.png`}
-              onClick={() => {
-                setSelected(item);
-              }}
             />
           </div>
         ))}
