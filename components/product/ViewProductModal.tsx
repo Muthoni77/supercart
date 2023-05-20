@@ -34,7 +34,7 @@ const ViewProductModal = () => {
           <div className="w-full md:w-1/2 bg-[#f2f4f5] rounded-2xl flex justify-center">
             <img className="w-full" src={currentProduct?.photo} />
           </div>
-          <div className="w-full md:w-1/2  px-6">
+          <div className="w-full md:w-1/2  px-8">
             <span className="font-extrabold text-3xl">
               {currentProduct?.title}
             </span>
