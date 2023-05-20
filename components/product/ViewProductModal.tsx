@@ -5,6 +5,7 @@ import { toggleShowModal } from "@/features/slices/ProductSlice";
 import { BsDot, BsStars } from "react-icons/bs";
 import ColorSelector from "../clickSelects/ColorSelector";
 import SizeSelector from "../clickSelects/SizeSelector";
+import AddToCartBtn from "./AddToCartBtn";
 
 const ViewProductModal = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +40,7 @@ const ViewProductModal = () => {
               {currentProduct?.title}
             </span>
 
-            <div className="flex items-center my-4">
+            <div className="flex items-center mt-4">
               <span className="text-[#26c661] border-[#26c661] border-2 rounded-xl text-base w-[60px] font-bold p-[3px] flex items-center justify-center">
                 ${currentProduct?.price || "84"}
               </span>
@@ -62,6 +63,7 @@ const ViewProductModal = () => {
 
             <ColorSelector />
             <SizeSelector />
+            <AddToCartBtn />
           </div>
         </div>
       </div>
