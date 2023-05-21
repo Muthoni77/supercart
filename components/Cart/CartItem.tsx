@@ -2,7 +2,7 @@ import React from "react";
 
 const CartItem = () => {
   return (
-    <div className="flex mt-3">
+    <div className={`flex mt-3 border-b border-gray-100 py-4`}>
       <div className="bg-[#f1f5f9] rounded-xl flex items-center justify-center w-1/5">
         <img src={"./products/1.webp"} className="w-full" />
       </div>

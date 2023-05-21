@@ -75,7 +75,7 @@ function Navbar() {
     <>
       <div
         id="navbar"
-        className="navbar w-screen fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100"
+        className="navbar w-full fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100"
       >
         <div className="md:container  mx-auto flex items-center justify-around md:justify-around z-[100]">
           {showMobileNav ? (
