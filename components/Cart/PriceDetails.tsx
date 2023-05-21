@@ -2,7 +2,7 @@ import React from "react";
 
 const PriceDetails = () => {
   return (
-    <div className="bg-[#f9fafb] w-full px-6 pb-4 pt-6 rounded-bl-3xl rounded-br-3xl">
+    <div className="bg-[#f9fafb] w-full px-6 pb-4 pt-6 rounded-bl-3xl rounded-br-3xl z-50">
       <div>
         <div className="flex  items-center justify-between font-bold">
           <span>Subtotal</span>
