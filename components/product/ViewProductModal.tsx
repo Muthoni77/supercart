@@ -19,10 +19,10 @@ const ViewProductModal = () => {
   }, []);
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center p-4"
+      className="fixed inset-0 flex items-center justify-center p-0 md:p-4"
       style={{ backgroundColor: "rgba(0,0,0,0.5)", zIndex: 1000 }}
     >
-      <div className="bg-white rounded-3xl p-6 relative w-full md:w-3/4 min-h-[70vh]">
+      <div className="bg-white md:rounded-3xl p-6 relative w-full md:w-3/4 h-screen md:h-auto min-h-[70vh]">
         <MdClose
           size={25}
           color="gray"
