@@ -25,6 +25,7 @@ import { toast } from "react-toastify";
 import axiosWrapper from "@/utils/axios/axiosWrapper";
 import { logout } from "@/features/slices/AuthSlice";
 import DarkOverlaySpinner from "./Spinners/DarkOverlaySpinner";
+import CartPreview from "./Cart/CartPreview";
 
 function Navbar() {
   const router = useRouter();
@@ -32,6 +33,8 @@ function Navbar() {
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
   const [showProfileDropdown, setShowProfileDropdown] =
     useState<boolean>(false);
+
+  const [showCart, setShowCart] = useState<boolean>(false);
 
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const user: UserType = useAppSelector((state) => {
@@ -179,6 +182,7 @@ function Navbar() {
                         dropCont?.classList.add("animate__fadeInLeft");
                       }
                       setShowMobileNav(false);
+                      setShowCart(false);
                       setShowProfileDropdown(!showProfileDropdown);
                       // setTimeout(() => {
                       // }, 200);
@@ -198,6 +202,7 @@ function Navbar() {
                       dropCont?.classList.add("animate__fadeInLeft");
                     }
                     setShowMobileNav(false);
+                    setShowCart(false);
                     setShowProfileDropdown(!showProfileDropdown);
                     // setTimeout(() => {
                     // }, 200);
@@ -212,6 +217,10 @@ function Navbar() {
                 size={40}
                 color={"#334155"}
                 className=" mr-0 ml-0  md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
+                onClick={() => {
+                  setShowProfileDropdown(false);
+                  setShowCart(!showCart);
+                }}
               />
             </div>
           </div>
@@ -362,6 +371,8 @@ function Navbar() {
           </div>
         </div>
       )}
+
+      {showCart && <CartPreview />}
       {loading && <DarkOverlaySpinner />}
     </>
   );
