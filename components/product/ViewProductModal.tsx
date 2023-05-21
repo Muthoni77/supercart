@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { useEffect } from "react";
 import { MdClose, MdStar } from "react-icons/md";
 import { toggleShowModal } from "@/features/slices/ProductSlice";
 import { BsDot, BsStars } from "react-icons/bs";
@@ -8,6 +8,10 @@ import SizeSelector from "../clickSelects/SizeSelector";
 import AddToCartBtn from "./AddToCartBtn";
 
 const ViewProductModal = () => {
+  //TODO
+  //size and color listeners
+  const [color, setColor] = useState<string>("");
+  const [size, setSize] = useState<string>("");
   const dispatch = useAppDispatch();
   const { currentProduct } = useAppSelector((state) => state.products);
   useEffect(() => {
