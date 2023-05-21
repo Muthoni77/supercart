@@ -61,7 +61,7 @@ const LatestPostDisplay = () => {
     },
   ]);
   return (
-    <div className="w-screen min-h-screen bg-[#f7f7f9] p-6 px-0 md:px-20 md:py-16">
+    <div className="w-full min-h-screen bg-[#f7f7f9]  m-0 p-6 px-0 md:px-20 md:py-16">
       <div className="w-full mt-6 mb-6 px-4">
         <span className="font-bold text-[20px] md:text-3xl">
           The latest news.
