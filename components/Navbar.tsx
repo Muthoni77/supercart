@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 import axiosWrapper from "@/utils/axios/axiosWrapper";
 import { logout } from "@/features/slices/AuthSlice";
 import DarkOverlaySpinner from "./Spinners/DarkOverlaySpinner";
-import Cart from "./Cart/Cart";
+import CartPreview from "./Cart/CartPreview";
 
 function Navbar() {
   const router = useRouter();
@@ -372,7 +372,7 @@ function Navbar() {
         </div>
       )}
 
-      {showCart && <Cart />}
+      {showCart && <CartPreview />}
       {loading && <DarkOverlaySpinner />}
     </>
   );
