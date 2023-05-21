@@ -19,23 +19,23 @@ const ViewProductModal = () => {
   }, []);
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center p-4"
+      className="fixed inset-0 flex items-center justify-center p-0 md:p-4"
       style={{ backgroundColor: "rgba(0,0,0,0.5)", zIndex: 1000 }}
     >
-      <div className="bg-white rounded-3xl p-6 relative w-full md:w-3/4 min-h-[70vh]">
+      <div className="bg-white overflow-y-auto md:rounded-3xl pt-6 md:pt-3 md:p-6 relative w-full md:w-3/4 h-screen md:h-auto min-h-[70vh]">
         <MdClose
           size={25}
           color="gray"
-          className="absolute right-4 top-4 hoverUpEffect"
+          className="absolute right-2 md:right-4 top-3 md:top-4 hoverUpEffect"
           onClick={() => {
             dispatch(toggleShowModal(false));
           }}
         />
-        <div className="w-full h-full flex p-6">
+        <div className="w-full h-full flex space-y-3 md:space-y-2 flex-col md:flex-row  p-6">
           <div className="w-full md:w-1/2 bg-[#f2f4f5] rounded-2xl flex justify-center">
             <img className="w-full" src={currentProduct?.photo} />
           </div>
-          <div className="w-full md:w-1/2  pl-8">
+          <div className="w-full md:w-1/2 mt-4 md:mt-0  md:pl-8 ">
             <span className="font-extrabold text-3xl">
               {currentProduct?.title}
             </span>
