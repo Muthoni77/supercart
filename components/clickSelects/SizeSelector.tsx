@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface SizeType {
   name: string;
@@ -14,11 +14,16 @@ const SizeSelector = ({ setSize }: any) => {
     { name: "2XL" },
     { name: "3XL" },
   ]);
-  const [selected, setSelected] = useState<SizeType>(sizes[0]);
+  const [selected, setSelected] = useState<string>(sizes[0].name);
+
+  useEffect(() => {
+    setSize(sizes[0].name);
+  }, []);
+
   return (
     <div className="my-6">
       <div className="text-sm my-2">
-        Size: <span className="font-semibold">{selected.name}</span>
+        Size: <span className="font-semibold">{selected}</span>
       </div>
       <div className="flex my-3 item-center space-x-2">
         {sizes.map((item) => (
@@ -26,12 +31,12 @@ const SizeSelector = ({ setSize }: any) => {
             key={item.name}
             style={{ boxSizing: "border-box" }}
             className={`cursor-pointer w-[14%] p-3 flex items-center font-semibold justify-center rounded-2xl border border-gray-300 border-1 ${
-              selected.name === item.name
+              selected === item.name
                 ? " bg-[#007acc] text-white"
                 : "text-black bg-white"
             } `}
             onClick={() => {
-              setSelected(item);
+              setSelected(item.name);
               setSize(item.name);
             }}
           >
