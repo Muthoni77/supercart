@@ -6,6 +6,8 @@ import { BsDot, BsStars } from "react-icons/bs";
 import ColorSelector from "../clickSelects/ColorSelector";
 import SizeSelector from "../clickSelects/SizeSelector";
 import AddToCartBtn from "./AddToCartBtn";
+import { addNewProduct } from "@/features/slices/CartSlice";
+import { CartItem } from "@/Types/products";
 
 const ViewProductModal = () => {
   //TODO
@@ -34,9 +36,9 @@ const ViewProductModal = () => {
   };
 
   const handleAddToCart = (num: number) => {
-    alert(num);
-    alert("size " + size);
-    alert("color " + color);
+    const cartItem: any = { ...currentProduct, quantity: num, size, color };
+    dispatch(addNewProduct(cartItem));
+    dispatch(toggleShowModal(false));
   };
   return (
     <div
