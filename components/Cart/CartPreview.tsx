@@ -17,10 +17,9 @@ const CartPreview = () => {
               className="w-full max-h-[50vh] no-scrollbar"
               style={{ overflowY: "auto" }}
             >
-              <CartItem />
-              <CartItem />
-              <CartItem />
-              <CartItem />
+              {products.map((product, index) => (
+                <CartItem product={product} />
+              ))}
             </div>
           </>
         ) : (

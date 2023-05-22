@@ -33,3 +33,8 @@ export interface ProductSliceInitialState {
   showProductModal: boolean;
   currentProduct: ProductCardPhotoType | null;
 }
+
+export interface CartItem extends ProductCategoryCardType {
+  quantity: number;
+  size: string;
+}

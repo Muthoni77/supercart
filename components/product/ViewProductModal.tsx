@@ -6,12 +6,15 @@ import { BsDot, BsStars } from "react-icons/bs";
 import ColorSelector from "../clickSelects/ColorSelector";
 import SizeSelector from "../clickSelects/SizeSelector";
 import AddToCartBtn from "./AddToCartBtn";
+import { addNewProduct } from "@/features/slices/CartSlice";
+import { CartItem } from "@/Types/products";
 
 const ViewProductModal = () => {
   //TODO
   //size and color listeners
   const [color, setColor] = useState<string>("");
   const [size, setSize] = useState<string>("");
+  const [quantity, setQuantity] = useState<number>(1);
   const dispatch = useAppDispatch();
   const { currentProduct } = useAppSelector((state) => state.products);
   useEffect(() => {
@@ -21,6 +24,22 @@ const ViewProductModal = () => {
       document.body.style.overflow = "visible";
     };
   }, []);
+
+  const handleSetColor = (color: string) => {
+    setColor(color);
+  };
+  const handleSetSize = (size: string) => {
+    setSize(size);
+  };
+  const handleSetQuantity = (num: number) => {
+    setQuantity(num);
+  };
+
+  const handleAddToCart = (num: number) => {
+    const cartItem: any = { ...currentProduct, quantity: num, size, color };
+    dispatch(addNewProduct(cartItem));
+    dispatch(toggleShowModal(false));
+  };
   return (
     <div
       className="fixed inset-0 flex items-center justify-center p-0 md:p-4"
@@ -41,7 +60,7 @@ const ViewProductModal = () => {
           </div>
           <div className="w-full md:w-1/2 mt-4 md:mt-0  md:pl-8 ">
             <span className="font-extrabold text-3xl">
-              {currentProduct?.title}
+              {currentProduct?.title} {quantity}
             </span>
 
             <div className="flex items-center mt-4">
@@ -65,9 +84,12 @@ const ViewProductModal = () => {
               </span>
             </div>
 
-            <ColorSelector />
-            <SizeSelector />
-            <AddToCartBtn />
+            <ColorSelector setColor={handleSetColor} />
+            <SizeSelector setSize={handleSetSize} />
+            <AddToCartBtn
+              setQuantity={handleSetQuantity}
+              addToCart={handleAddToCart}
+            />
           </div>
         </div>
       </div>

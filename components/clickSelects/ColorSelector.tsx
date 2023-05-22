@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface ColorType {
   name: string;
   value: number;
 }
 
-const ColorSelector = () => {
+const ColorSelector = ({ setColor }: any) => {
   const [colors, setColors] = useState<ColorType[]>([
     { name: "Black", value: 1 },
     { name: "White", value: 2 },
@@ -13,11 +13,15 @@ const ColorSelector = () => {
     { name: "Sky Blue", value: 4 },
     { name: "Natural", value: 5 },
   ]);
-  const [selected, setSelected] = useState<ColorType>(colors[0]);
+  const [selected, setSelected] = useState<string>(colors[0].name);
+
+  useEffect(() => {
+    setColor(colors[0].name);
+  }, []);
   return (
     <div className="my-6">
       <div className="text-sm my-2">
-        Color: <span className="font-semibold">{selected.name}</span>
+        Color: <span className="font-semibold">{selected}</span>
       </div>
       <div className="flex my-3 item-center space-x-1">
         {colors.map((item) => (
@@ -25,10 +29,11 @@ const ColorSelector = () => {
             key={item.name}
             style={{ boxSizing: "border-box" }}
             className={`cursor-pointer w-[18.5%] p-[2px] rounded-3xl border border-2 ${
-              selected.name === item.name ? " border-[#007acc]" : "border-white"
+              selected === item.name ? " border-[#007acc]" : "border-white"
             } `}
             onClick={() => {
-              setSelected(item);
+              setSelected(item.name);
+              setColor(item.name);
             }}
           >
             <img
