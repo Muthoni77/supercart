@@ -4,7 +4,7 @@ interface SizeType {
   name: string;
 }
 
-const SizeSelector = () => {
+const SizeSelector = ({ setSize }: any) => {
   const [sizes, setSizes] = useState<SizeType[]>([
     { name: "XS" },
     { name: "S" },
@@ -32,6 +32,7 @@ const SizeSelector = () => {
             } `}
             onClick={() => {
               setSelected(item);
+              setSize(item.name);
             }}
           >
             {item.name}
