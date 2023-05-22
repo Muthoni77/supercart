@@ -5,7 +5,7 @@ interface ColorType {
   value: number;
 }
 
-const ColorSelector = () => {
+const ColorSelector = ({ setColor }: any) => {
   const [colors, setColors] = useState<ColorType[]>([
     { name: "Black", value: 1 },
     { name: "White", value: 2 },
@@ -29,6 +29,7 @@ const ColorSelector = () => {
             } `}
             onClick={() => {
               setSelected(item);
+              setColor(item.name);
             }}
           >
             <img
