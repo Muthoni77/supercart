@@ -12,6 +12,7 @@ const ViewProductModal = () => {
   //size and color listeners
   const [color, setColor] = useState<string>("");
   const [size, setSize] = useState<string>("");
+  const [quantity, setQuantity] = useState<number>(1);
   const dispatch = useAppDispatch();
   const { currentProduct } = useAppSelector((state) => state.products);
   useEffect(() => {
@@ -27,6 +28,15 @@ const ViewProductModal = () => {
   };
   const handleSetSize = (size: string) => {
     setSize(size);
+  };
+  const handleSetQuantity = (num: number) => {
+    setQuantity(num);
+  };
+
+  const handleAddToCart = (num: number) => {
+    alert(num);
+    alert("size " + size);
+    alert("color " + color);
   };
   return (
     <div
@@ -48,7 +58,7 @@ const ViewProductModal = () => {
           </div>
           <div className="w-full md:w-1/2 mt-4 md:mt-0  md:pl-8 ">
             <span className="font-extrabold text-3xl">
-              {currentProduct?.title}
+              {currentProduct?.title} {quantity}
             </span>
 
             <div className="flex items-center mt-4">
@@ -74,7 +84,10 @@ const ViewProductModal = () => {
 
             <ColorSelector setColor={handleSetColor} />
             <SizeSelector setSize={handleSetSize} />
-            <AddToCartBtn />
+            <AddToCartBtn
+              setQuantity={handleSetQuantity}
+              addToCart={handleAddToCart}
+            />
           </div>
         </div>
       </div>
