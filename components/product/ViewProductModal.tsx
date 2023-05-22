@@ -21,6 +21,13 @@ const ViewProductModal = () => {
       document.body.style.overflow = "visible";
     };
   }, []);
+
+  const handleSetColor = (color: string) => {
+    setColor(color);
+  };
+  const handleSetSize = (size: string) => {
+    setSize(size);
+  };
   return (
     <div
       className="fixed inset-0 flex items-center justify-center p-0 md:p-4"
@@ -65,8 +72,8 @@ const ViewProductModal = () => {
               </span>
             </div>
 
-            <ColorSelector />
-            <SizeSelector />
+            <ColorSelector setColor={handleSetColor} />
+            <SizeSelector setSize={handleSetSize} />
             <AddToCartBtn />
           </div>
         </div>
