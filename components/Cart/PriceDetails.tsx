@@ -1,12 +1,14 @@
+import { useAppSelector } from "@/hooks";
 import React from "react";
 
 const PriceDetails = () => {
+  const { subtotal } = useAppSelector((state) => state.cart);
   return (
     <div className="bg-[#f9fafb] w-full px-6 pb-4 pt-6 rounded-bl-3xl rounded-br-3xl z-50">
       <div>
         <div className="flex  items-center justify-between font-bold">
           <span>Subtotal</span>
-          <span>$299.00</span>
+          <span>${subtotal}</span>
         </div>
         <span className="text-gray-500 text-sm mt-2">
           Shipping and taxes will be calculated at checkout
