@@ -19,7 +19,7 @@ const CartSlice = createSlice({
       CartSlice.caseReducers.calculateTotal(state, action);
     },
     calculateTotal: (state, action: any) => {
-      let total = 0.0;
+      let total = 0;
       state.products.forEach((product: any) => {
         let productPrice = product.quantity * product.price;
         total += productPrice;
