@@ -1,4 +1,5 @@
 import { CartItem } from "@/Types/products";
+import { removeProduct } from "@/features/slices/CartSlice";
 import { useAppDispatch } from "@/hooks";
 import React from "react";
 
@@ -8,7 +9,9 @@ interface PropTypes {
 
 const CartItem = ({ product }: PropTypes) => {
   const dispatch = useAppDispatch();
-  const handleRemove = () => {};
+  const handleRemove = () => {
+    dispatch(removeProduct(product.title));
+  };
   return (
     <div className={`flex mt-3 border-b border-gray-100 py-4`}>
       <div className="bg-[#f1f5f9] rounded-xl flex items-center justify-center w-1/5">
