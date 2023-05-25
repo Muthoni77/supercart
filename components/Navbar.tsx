@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -30,6 +30,9 @@ import CartPreview from "./Cart/CartPreview";
 function Navbar() {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const profileRef = useRef(null);
+  const cartRef = useRef(null);
+  const navbarRef = useRef(null);
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
   const [showProfileDropdown, setShowProfileDropdown] =
     useState<boolean>(false);
@@ -71,9 +74,26 @@ function Navbar() {
       }
     }
   };
+
+  // useEffect(() => {
+  //   window?.addEventListener("click", (e) => {
+  //     console.log("hahaa");
+
+  //     if (
+  //       e.target !== cartRef?.current &&
+  //       e.target.id !== "profileIcon" &&
+  //       e.target.id !== "shoppingCartIcon"
+  //     ) {
+  //       console.log("hello");
+  //       setShowCart(false);
+  //     }
+  //   });
+  // }, []);
+
   return (
     <>
       <div
+        ref={navbarRef}
         id="navbar"
         className="navbar w-full fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100"
       >
@@ -207,6 +227,7 @@ function Navbar() {
                     // setTimeout(() => {
                     // }, 200);
                   }}
+                  id="profileIcon"
                   size={40}
                   color={"#334155"}
                   className=" mr-0  ml-0 md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
@@ -214,6 +235,8 @@ function Navbar() {
               )}
 
               <AiOutlineShoppingCart
+                // ref={shoppingCartRef}
+                id="shoppingCartIcon"
                 size={40}
                 color={"#334155"}
                 className=" mr-0 ml-0  md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
@@ -372,7 +395,7 @@ function Navbar() {
         </div>
       )}
 
-      {showCart && <CartPreview />}
+      {showCart && <CartPreview ref={cartRef} />}
       {loading && <DarkOverlaySpinner />}
     </>
   );
