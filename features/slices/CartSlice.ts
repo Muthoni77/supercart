@@ -2,7 +2,7 @@ import { CartItem } from "@/Types/products";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-const initialState = {
+const initialState: any = {
   products: [],
 };
 
@@ -15,8 +15,14 @@ const CartSlice = createSlice({
       toast.success("Added to cart successfully");
     },
     addProductQuantity: (state, action) => {},
+    removeProduct: (state, action) => {
+      state.products = state.products.filter(
+        (product: any) => product.title! !== action.payload
+      );
+    },
   },
 });
 
-export const { addNewProduct, addProductQuantity } = CartSlice.actions;
+export const { addNewProduct, addProductQuantity, removeProduct } =
+  CartSlice.actions;
 export default CartSlice.reducer;
