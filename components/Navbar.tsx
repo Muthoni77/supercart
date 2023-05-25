@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -30,6 +30,9 @@ import CartPreview from "./Cart/CartPreview";
 function Navbar() {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const profileRef = useRef(null);
+  const cartRef = useRef(null);
+  const shoppingCartRef = useRef(null);
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
   const [showProfileDropdown, setShowProfileDropdown] =
     useState<boolean>(false);
@@ -71,6 +74,18 @@ function Navbar() {
       }
     }
   };
+
+  useEffect(() => {
+    window?.addEventListener("click", (e) => {
+      if (
+        e.target !== cartRef?.current &&
+        e.target !== shoppingCartRef?.current
+      ) {
+        setShowCart(false);
+      }
+    });
+  }, []);
+
   return (
     <>
       <div
@@ -214,6 +229,7 @@ function Navbar() {
               )}
 
               <AiOutlineShoppingCart
+                ref={shoppingCartRef}
                 size={40}
                 color={"#334155"}
                 className=" mr-0 ml-0  md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
@@ -372,7 +388,7 @@ function Navbar() {
         </div>
       )}
 
-      {showCart && <CartPreview />}
+      {showCart && <CartPreview ref={cartRef} />}
       {loading && <DarkOverlaySpinner />}
     </>
   );
