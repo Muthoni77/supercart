@@ -36,7 +36,13 @@ const ViewProductModal = () => {
   };
 
   const handleAddToCart = (num: number) => {
-    const cartItem: any = { ...currentProduct, quantity: num, size, color };
+    const cartItem: any = {
+      ...currentProduct,
+      quantity: num,
+      size,
+      color,
+      price: 84,
+    };
     dispatch(addNewProduct(cartItem));
     dispatch(toggleShowModal(false));
   };
