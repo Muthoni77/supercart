@@ -32,7 +32,7 @@ function Navbar() {
   const dispatch = useAppDispatch();
   const profileRef = useRef(null);
   const cartRef = useRef(null);
-  const shoppingCartRef = useRef(null);
+  const navbarRef = useRef(null);
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
   const [showProfileDropdown, setShowProfileDropdown] =
     useState<boolean>(false);
@@ -75,20 +75,25 @@ function Navbar() {
     }
   };
 
-  useEffect(() => {
-    window?.addEventListener("click", (e) => {
-      if (
-        e.target !== cartRef.current &&
-        e.target !== shoppingCartRef.current
-      ) {
-        setShowCart(false);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   window?.addEventListener("click", (e) => {
+  //     console.log("hahaa");
+
+  //     if (
+  //       e.target !== cartRef?.current &&
+  //       e.target.id !== "profileIcon" &&
+  //       e.target.id !== "shoppingCartIcon"
+  //     ) {
+  //       console.log("hello");
+  //       setShowCart(false);
+  //     }
+  //   });
+  // }, []);
 
   return (
     <>
       <div
+        ref={navbarRef}
         id="navbar"
         className="navbar w-full fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100"
       >
@@ -222,23 +227,24 @@ function Navbar() {
                     // setTimeout(() => {
                     // }, 200);
                   }}
+                  id="profileIcon"
                   size={40}
                   color={"#334155"}
                   className=" mr-0  ml-0 md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
                 />
               )}
 
-              <div
-                ref={shoppingCartRef}
+              <AiOutlineShoppingCart
+                // ref={shoppingCartRef}
+                id="shoppingCartIcon"
+                size={40}
+                color={"#334155"}
+                className=" mr-0 ml-0  md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
                 onClick={() => {
                   setShowProfileDropdown(false);
                   setShowCart(!showCart);
                 }}
-                className=" mr-0 ml-0  md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full"
-              >
-                <AiOutlineShoppingCart size={25} color={"#334155"} />
-                {/* {String(showCart).slice(0, 1)} */}
-              </div>
+              />
             </div>
           </div>
         </div>
