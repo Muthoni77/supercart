@@ -78,8 +78,8 @@ function Navbar() {
   useEffect(() => {
     window?.addEventListener("click", (e) => {
       if (
-        e.target !== cartRef?.current &&
-        e.target !== shoppingCartRef?.current
+        e.target !== cartRef.current &&
+        e.target !== shoppingCartRef.current
       ) {
         setShowCart(false);
       }
@@ -228,16 +228,17 @@ function Navbar() {
                 />
               )}
 
-              <AiOutlineShoppingCart
+              <div
                 ref={shoppingCartRef}
-                size={40}
-                color={"#334155"}
-                className=" mr-0 ml-0  md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full p-2"
                 onClick={() => {
                   setShowProfileDropdown(false);
                   setShowCart(!showCart);
                 }}
-              />
+                className=" mr-0 ml-0  md:ml-0 md:mr-5 hover:cursor-pointer hover:bg-[#f1f5f9] rounded-full"
+              >
+                <AiOutlineShoppingCart size={25} color={"#334155"} />
+                {/* {String(showCart).slice(0, 1)} */}
+              </div>
             </div>
           </div>
         </div>
