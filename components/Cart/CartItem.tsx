@@ -1,4 +1,5 @@
 import { CartItem } from "@/Types/products";
+import { useAppDispatch } from "@/hooks";
 import React from "react";
 
 interface PropTypes {
@@ -6,6 +7,8 @@ interface PropTypes {
 }
 
 const CartItem = ({ product }: PropTypes) => {
+  const dispatch = useAppDispatch();
+  const handleRemove = () => {};
   return (
     <div className={`flex mt-3 border-b border-gray-100 py-4`}>
       <div className="bg-[#f1f5f9] rounded-xl flex items-center justify-center w-1/5">
@@ -30,7 +33,10 @@ const CartItem = ({ product }: PropTypes) => {
           <span className="text-[#26c661] border-[#26c661] border-2 rounded-lg text-sm w-[60px] font-bold p-[2px] flex items-center justify-center">
             ${"84"}
           </span>
-          <span className="text-[#0ea5e9] text-sm hover:cursor-pointer hover:underline hover:text-[#0c89be]">
+          <span
+            onClick={handleRemove}
+            className="text-[#0ea5e9] text-sm hover:cursor-pointer hover:underline hover:text-[#0c89be]"
+          >
             Remove
           </span>
         </div>
