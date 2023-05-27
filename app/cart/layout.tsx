@@ -6,7 +6,7 @@ const CartLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar />
-      <div className="w-full min-h-[70vh]">{children}</div>
+      <div className="w-full min-h-[80vh] pt-[10vh]">{children}</div>
       <Footer />
     </>
   );
