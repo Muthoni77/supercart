@@ -18,7 +18,7 @@ const CartPreview = forwardRef(function ({}: any, ref: any) {
               style={{ overflowY: "auto" }}
             >
               {products.map((product: any, index: number) => (
-                <CartItem key={index} product={product} />
+                <CartItem key={index} product={product} isPreview={true} />
               ))}
             </div>
           </>
