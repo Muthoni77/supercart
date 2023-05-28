@@ -27,8 +27,6 @@ const CartSlice = createSlice({
       state.subtotal = total.toFixed(2);
     },
     setProductQuantity: (state, action) => {
-      console.log("dispatch hit");
-      console.log(action.payload);
       let newProducts = [];
       newProducts = state.products.map((product: any) => {
         if (product.title === action.payload.title) {
@@ -46,6 +44,7 @@ const CartSlice = createSlice({
       });
 
       state.products = newProducts;
+      CartSlice.caseReducers.calculateTotal(state, action);
     },
     removeProduct: (state, action) => {
       state.products = state.products.filter(
