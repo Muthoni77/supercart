@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
-const CartLayout = ({ children }: { children: React.ReactNode }) => {
+const CheckoutLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar />
@@ -12,4 +12,4 @@ const CartLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default CartLayout;
+export default CheckoutLayout;
