@@ -26,7 +26,26 @@ const CartSlice = createSlice({
       });
       state.subtotal = total.toFixed(2);
     },
-    addProductQuantity: (state, action) => {},
+    setProductQuantity: (state, action) => {
+      let newProducts = [];
+      newProducts = state.products.map((product: any) => {
+        if (product.title === action.payload.title) {
+          const newProduct = {
+            ...product,
+            quantity: action.payload.action
+              ? product.quantity + 1
+              : product.quantity - 1,
+          };
+
+          return newProduct;
+        }
+
+        return product;
+      });
+
+      state.products = newProducts;
+      CartSlice.caseReducers.calculateTotal(state, action);
+    },
     removeProduct: (state, action) => {
       state.products = state.products.filter(
         (product: any) => product.title! !== action.payload
@@ -36,6 +55,6 @@ const CartSlice = createSlice({
   },
 });
 
-export const { addNewProduct, addProductQuantity, removeProduct } =
+export const { addNewProduct, setProductQuantity, removeProduct } =
   CartSlice.actions;
 export default CartSlice.reducer;
