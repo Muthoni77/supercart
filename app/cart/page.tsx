@@ -13,7 +13,7 @@ const Cart = () => {
       <div className="w-full flex relative">
         <div className="w-[60%] border-r pr-8">
           {products?.map((product: any, index: number) => (
-            <CartItem key={index} product={product} />
+            <CartItem key={index} product={product} isPreview={false} />
           ))}
         </div>
         <div className="w-[40%] sticky top-0">
