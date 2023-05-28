@@ -12,7 +12,7 @@ const Cart = () => {
       <hr className="mt-8 mb-3" />
       <div className="w-full flex relative">
         <div className="w-[60%] border-r pr-8">
-          {products.map((product: any, index: number) => (
+          {products?.map((product: any, index: number) => (
             <CartItem key={index} product={product} />
           ))}
         </div>
