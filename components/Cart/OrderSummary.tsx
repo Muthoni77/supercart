@@ -32,7 +32,10 @@ const OrderSummary = () => {
         </div>
         <div className="flex items-center justify-between mt-6">
           <div className="w-full mx-auto">
-            <button className="w-full p-[14px] shadow border hover:cursor-pointer bg-[#0f172a] text-white hoverDownEffect  rounded-3xl">
+            <button
+              onClick={() => router.push("/checkout")}
+              className="w-full p-[14px] shadow border hover:cursor-pointer bg-[#0f172a] text-white hoverDownEffect  rounded-3xl"
+            >
               Checkout
             </button>
             <span
