@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CartItem } from "@/Types/products";
-import { removeProduct } from "@/features/slices/CartSlice";
+import { removeProduct, setProductQuantity } from "@/features/slices/CartSlice";
 import { useAppDispatch } from "@/hooks";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
@@ -19,6 +19,7 @@ const CartItem = ({ product }: PropTypes) => {
     switch (isAdding) {
       case true:
         setNum(num + 1);
+
         break;
       case false:
         num > 1 && setNum(num - 1);
@@ -26,6 +27,7 @@ const CartItem = ({ product }: PropTypes) => {
       default:
         break;
     }
+    dispatch(setProductQuantity({ title: product.title, action: isAdding }));
   };
   return (
     <div className={`flex mt-3 border-b border-gray-100 py-4`}>
