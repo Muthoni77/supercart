@@ -19,15 +19,21 @@ const CartItem = ({ product }: PropTypes) => {
     switch (isAdding) {
       case true:
         setNum(num + 1);
-
+        dispatch(
+          setProductQuantity({ title: product.title, action: isAdding })
+        );
         break;
       case false:
-        num > 1 && setNum(num - 1);
+        if (num > 1) {
+          setNum(num - 1);
+          dispatch(
+            setProductQuantity({ title: product.title, action: isAdding })
+          );
+        }
         break;
       default:
         break;
     }
-    dispatch(setProductQuantity({ title: product.title, action: isAdding }));
   };
   return (
     <div className={`flex mt-3 border-b border-gray-100 py-4`}>
