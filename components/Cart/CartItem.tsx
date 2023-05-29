@@ -14,7 +14,7 @@ const CartItem = ({ product, isPreview }: PropTypes) => {
   const handleRemove = () => {
     dispatch(removeProduct(product.title));
   };
-  const [num, setNum] = useState<number>(1);
+  const [num, setNum] = useState<number>(product.quantity);
 
   const handleSetNum = (isAdding: boolean) => {
     switch (isAdding) {
@@ -42,7 +42,7 @@ const CartItem = ({ product, isPreview }: PropTypes) => {
         <img src={product.photo} className="w-full" />
       </div>
       <div className="w-4/5 flex justify-between px-4">
-        <div className="flex flex-col justify-between space-y-4">
+        <div className="flex flex-col justify-between space-y-8">
           <div className="flex flex-col space-y-1">
             <span className="font-bold text-[#334155]">{product.title}</span>
             <span className="flex items-center text-gray-500 text-sm">
@@ -52,13 +52,8 @@ const CartItem = ({ product, isPreview }: PropTypes) => {
               </span>
             </span>
           </div>
-          <span className="flex items-center text-gray-500 text-sm mt-3">
-            Qty <span className="ml-1">{product.quantity}</span>
-          </span>
-        </div>
-        {!isPreview && (
-          <div className="">
-            <div className="flex items-center space-x-5 justify-between p-3 rounded-3xl">
+          {!isPreview ? (
+            <div className="flex items-center space-x-5 justify-between  rounded-3xl">
               <div
                 className={`border rounded-full p-2 border-1 ${
                   num > 1 && "cursor-pointer hover:border-gray-700"
@@ -79,8 +74,13 @@ const CartItem = ({ product, isPreview }: PropTypes) => {
                 <AiOutlinePlus />
               </div>
             </div>
-          </div>
-        )}
+          ) : (
+            <span className="flex items-center text-gray-500 text-sm mt-3">
+              Qty <span className="ml-1">{product.quantity}</span>
+            </span>
+          )}
+        </div>
+
         <div className="flex flex-col justify-between">
           <span className="text-[#26c661] border-[#26c661] border-2 rounded-lg text-sm w-[60px] font-bold p-[2px] flex items-center justify-center">
             ${"84"}
