@@ -26,7 +26,10 @@ const PriceDetails = () => {
           </div>
 
           <div className="w-1/2 pl-1">
-            <button className="w-full p-[14px] border hover:cursor-pointer bg-[#0f172a] text-white hoverDownEffect  rounded-3xl">
+            <button
+              onClick={() => router.push("/checkout")}
+              className="w-full p-[14px] border hover:cursor-pointer bg-[#0f172a] text-white hoverDownEffect  rounded-3xl"
+            >
               Checkout
             </button>
           </div>
