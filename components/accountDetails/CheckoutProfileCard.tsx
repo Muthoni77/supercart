@@ -12,11 +12,16 @@ const CheckoutProfileCard = ({
   title,
   details: { one, two },
   changeable,
+  openStatus,
   handleShowChangeForm,
 }: CheckoutProfileCardType) => {
   return (
     <>
-      <div className={`flex justify-between items-start p-6 border rounded-t-xl`}>
+      <div
+        className={`flex justify-between items-start p-6 border rounded-t-xl ${
+          !openStatus && "rounded-b-xl"
+        }`}
+      >
         <div className=" flex space-x-8">
           {icon}
           <div>
