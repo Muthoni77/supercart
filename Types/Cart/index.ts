@@ -5,4 +5,7 @@ export interface CheckoutProfileCardType {
     one: string;
     two?: string;
   };
+  changeable: boolean;
+  openStatus?: boolean;
+  handleShowChangeForm?: () => void;
 }

@@ -1,20 +1,22 @@
-import { CheckoutProfileCardType } from "@/Types/Cart";
 import React from "react";
-import { HiOutlineUserCircle } from "react-icons/hi";
-import {
-  MdDone,
-  MdOutlineCreditCard,
-  MdOutlineLocalShipping,
-} from "react-icons/md";
+import { CheckoutProfileCardType } from "@/Types/Cart";
+import { MdDone } from "react-icons/md";
 
 const CheckoutProfileCard = ({
   icon,
   title,
   details: { one, two },
+  changeable,
+  openStatus,
+  handleShowChangeForm,
 }: CheckoutProfileCardType) => {
   return (
     <>
-      <div className="flex justify-between items-start p-6 border rounded-xl">
+      <div
+        className={`flex justify-between items-start p-6 border rounded-t-xl ${
+          !openStatus && "rounded-b-xl"
+        }`}
+      >
         <div className=" flex space-x-8">
           {icon}
           <div>
@@ -23,14 +25,19 @@ const CheckoutProfileCard = ({
               <MdDone />
             </div>
             <div className="flex items-center mt-2 font-bold text-sm space-x-3">
-              <span>{one}</span>
+              <span>{one.toUpperCase()}</span>
               <span>{two}</span>
             </div>
           </div>
         </div>
-        <button className="py-2 rounded-lg bg-[#f8fafc] hover:bg-[#f0f4f9]  px-6">
-          change
-        </button>
+        {changeable && (
+          <button
+            onClick={handleShowChangeForm}
+            className="py-2 rounded-lg bg-[#f8fafc] hover:bg-[#f0f4f9]  px-6"
+          >
+            change
+          </button>
+        )}
       </div>
     </>
   );
