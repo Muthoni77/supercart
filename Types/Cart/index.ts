@@ -5,4 +5,5 @@ export interface CheckoutProfileCardType {
     one: string;
     two?: string;
   };
+  changeable: boolean;
 }
