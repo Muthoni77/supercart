@@ -6,6 +6,7 @@ import {
   MdOutlineLocalShipping,
 } from "react-icons/md";
 import CheckoutProfileCard from "./CheckoutProfileCard";
+import SelectPaymentMethod from "./SelectPaymentMethod";
 
 const CheckoutProfile = () => {
   return (
@@ -31,15 +32,18 @@ const CheckoutProfile = () => {
         />
 
         {/* Payment method*/}
-        <CheckoutProfileCard
-          icon={<MdOutlineCreditCard size={30} className="text-gray-800" />}
-          title="PAYMENT METHOD"
-          details={{
-            one: "GOOGLE/APP WALET",
-            two: "XXX-XXX-XXX-187",
-          }}
-          changeable={true}
-        />
+        <div>
+          <CheckoutProfileCard
+            icon={<MdOutlineCreditCard size={30} className="text-gray-800" />}
+            title="PAYMENT METHOD"
+            details={{
+              one: "GOOGLE/APP WALET",
+              two: "XXX-XXX-XXX-187",
+            }}
+            changeable={true}
+          />
+          <SelectPaymentMethod />
+        </div>
       </div>
     </>
   );
