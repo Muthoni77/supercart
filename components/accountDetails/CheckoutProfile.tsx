@@ -43,11 +43,18 @@ const CheckoutProfile = () => {
               two: "XXX-XXX-XXX-187",
             }}
             changeable={true}
+            openStatus={showSelectPaymentMethod}
             handleShowChangeForm={() => {
               setShowSelectPaymentMethod(true);
             }}
           />
-          {showSelectPaymentMethod && <SelectPaymentMethod />}
+          {showSelectPaymentMethod && (
+            <SelectPaymentMethod
+              handleHideChangeForm={() => {
+                setShowSelectPaymentMethod(false);
+              }}
+            />
+          )}
         </div>
       </div>
     </>
