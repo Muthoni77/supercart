@@ -1,11 +1,6 @@
-import { CheckoutProfileCardType } from "@/Types/Cart";
 import React from "react";
-import { HiOutlineUserCircle } from "react-icons/hi";
-import {
-  MdDone,
-  MdOutlineCreditCard,
-  MdOutlineLocalShipping,
-} from "react-icons/md";
+import { CheckoutProfileCardType } from "@/Types/Cart";
+import { MdDone } from "react-icons/md";
 
 const CheckoutProfileCard = ({
   icon,
@@ -30,7 +25,7 @@ const CheckoutProfileCard = ({
               <MdDone />
             </div>
             <div className="flex items-center mt-2 font-bold text-sm space-x-3">
-              <span>{one}</span>
+              <span>{one.toUpperCase()}</span>
               <span>{two}</span>
             </div>
           </div>
