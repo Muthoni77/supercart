@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import {
   MdDone,
@@ -9,6 +9,8 @@ import CheckoutProfileCard from "./CheckoutProfileCard";
 import SelectPaymentMethod from "./SelectPaymentMethod";
 
 const CheckoutProfile = () => {
+  const [showSelectPaymentMethod, setShowSelectPaymentMethod] =
+    useState<boolean>(false);
   return (
     <>
       <div className="w-full flex flex-col space-y-7">
@@ -41,8 +43,11 @@ const CheckoutProfile = () => {
               two: "XXX-XXX-XXX-187",
             }}
             changeable={true}
+            handleShowChangeForm={() => {
+              setShowSelectPaymentMethod(true);
+            }}
           />
-          <SelectPaymentMethod />
+          {showSelectPaymentMethod && <SelectPaymentMethod />}
         </div>
       </div>
     </>
