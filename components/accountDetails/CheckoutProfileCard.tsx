@@ -12,10 +12,11 @@ const CheckoutProfileCard = ({
   title,
   details: { one, two },
   changeable,
+  handleShowChangeForm,
 }: CheckoutProfileCardType) => {
   return (
     <>
-      <div className="flex justify-between items-start p-6 border rounded-xl">
+      <div className={`flex justify-between items-start p-6 border rounded-t-xl`}>
         <div className=" flex space-x-8">
           {icon}
           <div>
@@ -30,7 +31,10 @@ const CheckoutProfileCard = ({
           </div>
         </div>
         {changeable && (
-          <button className="py-2 rounded-lg bg-[#f8fafc] hover:bg-[#f0f4f9]  px-6">
+          <button
+            onClick={handleShowChangeForm}
+            className="py-2 rounded-lg bg-[#f8fafc] hover:bg-[#f0f4f9]  px-6"
+          >
             change
           </button>
         )}
