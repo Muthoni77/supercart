@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import {
   MdDone,
@@ -13,6 +13,13 @@ const CheckoutProfile = () => {
     useState<string>("mpesa");
   const [showSelectPaymentMethod, setShowSelectPaymentMethod] =
     useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (showSelectPaymentMethod) {
+      containerRef.current?.scrollIntoView();
+    }
+  }, [showSelectPaymentMethod]);
   return (
     <>
       <div className="w-full flex flex-col space-y-7">
@@ -36,7 +43,7 @@ const CheckoutProfile = () => {
         />
 
         {/* Payment method*/}
-        <div>
+        <div ref={containerRef}>
           <CheckoutProfileCard
             icon={<MdOutlineCreditCard size={30} className="text-gray-800" />}
             title="PAYMENT METHOD"
