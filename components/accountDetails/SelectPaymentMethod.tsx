@@ -1,13 +1,18 @@
-import React from "react";
+import { useEffect, useRef } from "react";
 import { BsCreditCard } from "react-icons/bs";
 
 interface PropTypes {
+  setSelectedPaymentMethod: (type: string) => void;
   handleHideChangeForm: () => void;
 }
-const SelectPaymentMethod = ({ handleHideChangeForm }: PropTypes) => {
+const SelectPaymentMethod = ({
+  handleHideChangeForm,
+  setSelectedPaymentMethod,
+}: PropTypes) => {
+    const confirmBtnRef=useRef<HTMLButtonElement>(null)
   return (
     <div className=" border-b border-l border-r p-3 flex flex-col space-y-7 p-6 rounded-b-xl">
-      <div>
+      <div onClick={() => setSelectedPaymentMethod("mpesa")}>
         <label
           htmlFor="mpesa"
           className="flex items-center space-x-5 cursor-pointer"
@@ -17,6 +22,7 @@ const SelectPaymentMethod = ({ handleHideChangeForm }: PropTypes) => {
             type="radio"
             name="payment_method"
             value={"mpesa"}
+            checked
             style={{ width: "28px", height: "28px" }}
           />
 
@@ -31,7 +37,7 @@ const SelectPaymentMethod = ({ handleHideChangeForm }: PropTypes) => {
           </div>
         </label>
       </div>
-      <div>
+      <div onClick={() => setSelectedPaymentMethod("card")}>
         <label
           htmlFor="card"
           className="flex items-center space-x-5 cursor-pointer"
@@ -53,6 +59,7 @@ const SelectPaymentMethod = ({ handleHideChangeForm }: PropTypes) => {
       </div>
       <div className="flex items-center space-x-3 pt-8">
         <button
+          ref={confirmBtnRef}
           onClick={() => {
             alert("Handling order");
           }}
