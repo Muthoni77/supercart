@@ -9,9 +9,14 @@ const SelectPaymentMethod = ({
   handleHideChangeForm,
   setSelectedPaymentMethod,
 }: PropTypes) => {
-    const confirmBtnRef=useRef<HTMLButtonElement>(null)
+
+
+
   return (
-    <div className=" border-b border-l border-r p-3 flex flex-col space-y-7 p-6 rounded-b-xl">
+    <div
+      
+      className=" border-b border-l border-r p-3 flex flex-col space-y-7 p-6 rounded-b-xl"
+    >
       <div onClick={() => setSelectedPaymentMethod("mpesa")}>
         <label
           htmlFor="mpesa"
@@ -59,7 +64,6 @@ const SelectPaymentMethod = ({
       </div>
       <div className="flex items-center space-x-3 pt-8">
         <button
-          ref={confirmBtnRef}
           onClick={() => {
             alert("Handling order");
           }}
