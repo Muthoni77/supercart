@@ -11,6 +11,7 @@ const CheckoutProfileCard = ({
   icon,
   title,
   details: { one, two },
+  changeable,
 }: CheckoutProfileCardType) => {
   return (
     <>
@@ -28,9 +29,11 @@ const CheckoutProfileCard = ({
             </div>
           </div>
         </div>
-        <button className="py-2 rounded-lg bg-[#f8fafc] hover:bg-[#f0f4f9]  px-6">
-          change
-        </button>
+        {changeable && (
+          <button className="py-2 rounded-lg bg-[#f8fafc] hover:bg-[#f0f4f9]  px-6">
+            change
+          </button>
+        )}
       </div>
     </>
   );
