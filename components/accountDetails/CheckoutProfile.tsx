@@ -9,6 +9,8 @@ import CheckoutProfileCard from "./CheckoutProfileCard";
 import SelectPaymentMethod from "./SelectPaymentMethod";
 
 const CheckoutProfile = () => {
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState<string>("mpesa");
   const [showSelectPaymentMethod, setShowSelectPaymentMethod] =
     useState<boolean>(false);
   return (
@@ -39,7 +41,7 @@ const CheckoutProfile = () => {
             icon={<MdOutlineCreditCard size={30} className="text-gray-800" />}
             title="PAYMENT METHOD"
             details={{
-              one: "GOOGLE/APP WALET",
+              one: selectedPaymentMethod,
               two: "XXX-XXX-XXX-187",
             }}
             changeable={true}
@@ -50,6 +52,7 @@ const CheckoutProfile = () => {
           />
           {showSelectPaymentMethod && (
             <SelectPaymentMethod
+              setSelectedPaymentMethod={setSelectedPaymentMethod}
               handleHideChangeForm={() => {
                 setShowSelectPaymentMethod(false);
               }}
