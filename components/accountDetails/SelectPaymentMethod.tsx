@@ -1,9 +1,12 @@
 import React from "react";
 import { BsCreditCard } from "react-icons/bs";
 
-const SelectPaymentMethod = () => {
+interface PropTypes {
+  handleHideChangeForm: () => void;
+}
+const SelectPaymentMethod = ({ handleHideChangeForm }: PropTypes) => {
   return (
-    <div className=" border-b border-l border-r p-3 flex flex-col space-y-6 p-6 rounded-b-xl">
+    <div className=" border-b border-l border-r p-3 flex flex-col space-y-7 p-6 rounded-b-xl">
       <div>
         <label
           htmlFor="mpesa"
@@ -47,6 +50,23 @@ const SelectPaymentMethod = () => {
             <span> Debit / Credit Card</span>
           </div>
         </label>
+      </div>
+      <div className="flex items-center space-x-3 pt-8">
+        <button
+          onClick={() => {
+            alert("Handling order");
+          }}
+          className=" py-4 px-16 border hover:cursor-pointer bg-[#0f172a] text-white hoverDownEffect  rounded-3xl"
+        >
+          Confirm Order
+        </button>
+
+        <button
+          onClick={handleHideChangeForm}
+          className=" p-[14px] hover:bg-[#f0f4f9] px-8 hover:cursor-pointer bg-white hoverDownEffect  rounded-3xl"
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );
