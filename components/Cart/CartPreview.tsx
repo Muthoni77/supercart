@@ -33,7 +33,7 @@ const CartPreview = forwardRef(function ({}: any, ref: any) {
               src="./cartEmpty.gif"
               className="w-3/4 mx-auto"
             />
-            <div className="mx-auto text-[#737373] text-sm text-center">
+            <div className="mx-auto text-[#4b4b4b] text-sm text-center">
               You currently don't have any items in your cart.
             </div>
           </div>
