@@ -2,15 +2,16 @@
 import CartItem from "@/components/Cart/CartItem";
 import OrderSummary from "@/components/Cart/OrderSummary";
 import CheckoutProfile from "@/components/accountDetails/CheckoutProfile";
-import { useAppSelector } from "@/hooks";
+import { useAppSelector, useAppDispatch } from "@/hooks";
 import React from "react";
 
 const Checkout = () => {
-  const { products } = useAppSelector((state) => state.cart);
-  const { subtotal } = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+  const { products, subtotal } = useAppSelector((state) => state.cart);
+  const { method } = useAppSelector((state) => state.payment);
 
   const handleCheckout = async () => {
-    alert("Lessi go");
+    alert(method);
   };
   return (
     <div className="p-4 container mx-auto py-20 px-8">
