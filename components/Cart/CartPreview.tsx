@@ -23,9 +23,16 @@ const CartPreview = forwardRef(function ({}: any, ref: any) {
             </div>
           </>
         ) : (
-          <div className="border border-[#ffc107] font-light text-[#ffc107] text-sm bg-[#fffae8] rounded-lg p-3 my-4 flex items-center justify-center">
-            You don't have any items in your cart.
+          <div className="px-3 py-6">
+            <img
+              alt="Oops! You have no items in the cart"
+              src="./cartEmpty.gif"
+              className="w-full"
+            />
           </div>
+          // <div className="border border-[#ffc107] font-light text-[#ffc107] text-sm bg-[#fffae8] rounded-lg p-3 my-4 flex items-center justify-center">
+          //   You don't have any items in your cart.
+          // </div>
         )}
       </div>
       {products.length > 0 && <PriceDetails />}
