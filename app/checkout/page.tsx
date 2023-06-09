@@ -4,6 +4,7 @@ import CartItem from "@/components/Cart/CartItem";
 import OrderSummary from "@/components/Cart/OrderSummary";
 import CheckoutProfile from "@/components/accountDetails/CheckoutProfile";
 import PaymentLoader from "@/components/screenLoaders/PaymentLoader";
+import { setCheckoutRequestID } from "@/features/slices/PaymentSlice";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import AxiosWrapper from "@/utils/axios/axiosWrapper";
 import React, { useState } from "react";
@@ -24,19 +25,21 @@ const Checkout = () => {
 
   const handleCheckout = async () => {
     setLoading(true);
-    window.document.body.style.overflow = "hidden";
     const data = {
-      Amount: subtotal,
+      Amount: subtotal.split(".")[0],
       PhoneNumber: user.phone,
     };
     const response: any = await AxiosWrapper({
       method: "post",
-      url: "payments/mpesa/checkout",
+      url: "/payments/mpesa/checkout",
       data,
     });
 
     console.log("payment response");
-    console.log(response.data);
+    console.log(response?.data);
+    console.log("response checkout id");
+    console.log(response?.data?.CheckoutRequestID);
+    dispatch(setCheckoutRequestID(response?.data?.CheckoutRequestID));
   };
   return (
     <>
