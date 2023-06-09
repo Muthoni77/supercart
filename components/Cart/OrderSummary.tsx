@@ -3,7 +3,11 @@ import { useAppSelector } from "@/hooks";
 import { useRouter, usePathname } from "next/navigation";
 import { BiInfoCircle } from "react-icons/bi";
 
-const OrderSummary = () => {
+interface PropTypes {
+  handleCheckout: () => void;
+}
+
+const OrderSummary = ({ handleCheckout }: PropTypes) => {
   const { subtotal } = useAppSelector((state) => state.cart);
   const router = useRouter();
   const pathname = usePathname();
@@ -37,7 +41,7 @@ const OrderSummary = () => {
         <div className="flex items-center justify-between mt-6">
           <div className="w-full mx-auto">
             <button
-              onClick={() => router.push("/checkout")}
+              onClick={handleCheckout}
               className="w-full p-[14px] shadow border hover:cursor-pointer bg-[#0f172a] text-white hoverDownEffect  rounded-3xl"
             >
               Checkout
