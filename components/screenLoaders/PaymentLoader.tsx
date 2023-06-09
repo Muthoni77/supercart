@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 const PaymentLoader = ({ message }: { message: string }) => {
   const { products, subtotal } = useAppSelector((state) => state.cart);
   const { method } = useAppSelector((state) => state.payment);
+
+  useEffect(() => {
+    window.document.body.style.overflow = "hidden";
+    return () => {
+      window.document.body.style.overflow = "auto";
+    };
+  }, []);
+
   return (
     <div
       className="fixed inset-0 flex items-center justify-center"
