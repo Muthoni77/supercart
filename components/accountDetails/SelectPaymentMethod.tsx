@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useAppSelector } from "@/hooks";
 import { BsCreditCard } from "react-icons/bs";
 
 interface PropTypes {
@@ -9,6 +9,7 @@ const SelectPaymentMethod = ({
   handleHideChangeForm,
   setSelectedPaymentMethod,
 }: PropTypes) => {
+    const { method } = useAppSelector((state) => state.payment);
   return (
     <div className=" border-b border-l border-r p-3 flex flex-col space-y-7 p-6 rounded-b-xl">
       <div onClick={() => setSelectedPaymentMethod("mpesa")}>
@@ -20,6 +21,7 @@ const SelectPaymentMethod = ({
             id="mpesa"
             type="radio"
             name="payment_method"
+            defaultChecked={method === "mpesa"}
             value={"mpesa"}
             checked
             style={{ width: "28px", height: "28px" }}
@@ -45,6 +47,7 @@ const SelectPaymentMethod = ({
             id="card"
             type="radio"
             name="payment_method"
+            defaultChecked={method === "card"}
             value={"card"}
             style={{ width: "28px", height: "28px" }}
           />
