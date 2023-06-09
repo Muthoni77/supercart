@@ -21,7 +21,6 @@ const AxiosWrapper = async ({
     typeof window !== "undefined" && localStorage.getItem("refreshToken")!;
   let newAccessToken: string = "";
   try {
-    console.log("url gotten", url);
     const axiosInstance = axios.create({
       method,
       url: BACKEND_URL + url,
