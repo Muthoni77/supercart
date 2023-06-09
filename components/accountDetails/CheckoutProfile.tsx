@@ -7,13 +7,21 @@ import {
 } from "react-icons/md";
 import CheckoutProfileCard from "./CheckoutProfileCard";
 import SelectPaymentMethod from "./SelectPaymentMethod";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { setMethod } from "@/features/slices/PaymentSlice";
 
 const CheckoutProfile = () => {
+  const dispatch = useAppDispatch();
+  const { method } = useAppSelector((state) => state.payment);
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
-    useState<string>("mpesa");
+    useState<string>(method);
   const [showSelectPaymentMethod, setShowSelectPaymentMethod] =
     useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleSetSelectedPaymentMethod = (selectedMethod: string) => {
+    dispatch(setMethod(selectedMethod));
+  };
 
   useEffect(() => {
     if (showSelectPaymentMethod) {
@@ -59,7 +67,7 @@ const CheckoutProfile = () => {
           />
           {showSelectPaymentMethod && (
             <SelectPaymentMethod
-              setSelectedPaymentMethod={setSelectedPaymentMethod}
+              setSelectedPaymentMethod={handleSetSelectedPaymentMethod}
               handleHideChangeForm={() => {
                 setShowSelectPaymentMethod(false);
               }}
