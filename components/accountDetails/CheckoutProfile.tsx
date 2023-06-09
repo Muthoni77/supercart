@@ -56,7 +56,7 @@ const CheckoutProfile = () => {
             icon={<MdOutlineCreditCard size={30} className="text-gray-800" />}
             title="PAYMENT METHOD"
             details={{
-              one: selectedPaymentMethod,
+              one: method,
               two: "XXX-XXX-XXX-187",
             }}
             changeable={true}
