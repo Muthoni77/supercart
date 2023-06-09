@@ -9,14 +9,8 @@ const SelectPaymentMethod = ({
   handleHideChangeForm,
   setSelectedPaymentMethod,
 }: PropTypes) => {
-
-
-
   return (
-    <div
-      
-      className=" border-b border-l border-r p-3 flex flex-col space-y-7 p-6 rounded-b-xl"
-    >
+    <div className=" border-b border-l border-r p-3 flex flex-col space-y-7 p-6 rounded-b-xl">
       <div onClick={() => setSelectedPaymentMethod("mpesa")}>
         <label
           htmlFor="mpesa"
@@ -65,7 +59,7 @@ const SelectPaymentMethod = ({
       <div className="flex items-center space-x-3 pt-8">
         <button
           onClick={() => {
-            alert("Handling order");
+            handleHideChangeForm();
           }}
           className=" py-4 px-16 border hover:cursor-pointer bg-[#0f172a] text-white hoverDownEffect  rounded-3xl"
         >
