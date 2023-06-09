@@ -8,7 +8,11 @@ const CartPreview = forwardRef(function ({}: any, ref: any) {
   //TODO
   //disable border bottom on last item and when item is only one
   return (
-    <div className="w-1/3 bg-white fixed top-[65px]  rounded-3xl  right-12 shadow z-[50]">
+    <div
+      className={`${
+        products.length > 0 ? "w-1/3" : "w-1/4"
+      } bg-white fixed top-[65px]  rounded-3xl  right-12 shadow z-[50]`}
+    >
       <div className="w-full flex flex-col space-y-3 p-6" ref={ref}>
         <span className="text-lg font-bold text-[#334155] ">Shopping Cart</span>
         {products.length > 0 ? (
@@ -23,8 +27,15 @@ const CartPreview = forwardRef(function ({}: any, ref: any) {
             </div>
           </>
         ) : (
-          <div className="border border-[#ffc107] font-light text-[#ffc107] text-sm bg-[#fffae8] rounded-lg p-3 my-4 flex items-center justify-center">
-            You don't have any items in your cart.
+          <div className="px-3 py-6">
+            <img
+              alt="Oops! You have no items in the cart"
+              src="./cartEmpty.gif"
+              className="w-3/4 mx-auto"
+            />
+            <div className="mx-auto text-[#4b4b4b] text-sm text-center">
+              You currently don't have any items in your cart.
+            </div>
           </div>
         )}
       </div>

@@ -7,6 +7,11 @@ import React from "react";
 
 const Checkout = () => {
   const { products } = useAppSelector((state) => state.cart);
+  const { subtotal } = useAppSelector((state) => state.cart);
+
+  const handleCheckout = async () => {
+    alert("Lessi go");
+  };
   return (
     <div className="p-4 container mx-auto py-20 px-8">
       <span className="font-bold text-3xl w-full">Checkout</span>
@@ -27,7 +32,7 @@ const Checkout = () => {
           </div>
 
           <div className="w-full sticky top-40 ">
-            <OrderSummary />
+            <OrderSummary handleCheckout={handleCheckout} />
           </div>
         </div>
       </div>

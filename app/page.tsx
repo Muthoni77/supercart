@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
@@ -12,6 +14,7 @@ import ExpertsChoiceCover from "@/components/ExpertsChoiceCover";
 import ShopDepartments from "@/components/ShopDepartments";
 import Footer from "@/components/Footer";
 import LatestPostDisplay from "@/components/blog/LatestPostDisplay";
+import PageLoading from "@/components/screenLoaders/PageLoading";
 
 export const metadata = {
   title: "SuperCart | Home",
@@ -23,6 +26,17 @@ export const metadata = {
 };
 
 export default function Home() {
+  const [initalRender, setInitalRender] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setInitalRender(false);
+    }
+  }, [typeof window]);
+
+  if (initalRender) {
+    return <PageLoading />;
+  }
   return (
     <main className="">
       <Navbar />

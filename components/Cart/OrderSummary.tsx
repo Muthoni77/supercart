@@ -3,7 +3,11 @@ import { useAppSelector } from "@/hooks";
 import { useRouter, usePathname } from "next/navigation";
 import { BiInfoCircle } from "react-icons/bi";
 
-const OrderSummary = () => {
+interface PropTypes {
+  handleCheckout?: () => void;
+}
+
+const OrderSummary = ({ handleCheckout }: PropTypes) => {
   const { subtotal } = useAppSelector((state) => state.cart);
   const router = useRouter();
   const pathname = usePathname();
@@ -36,12 +40,22 @@ const OrderSummary = () => {
         </div>
         <div className="flex items-center justify-between mt-6">
           <div className="w-full mx-auto">
-            <button
-              onClick={() => router.push("/checkout")}
-              className="w-full p-[14px] shadow border hover:cursor-pointer bg-[#0f172a] text-white hoverDownEffect  rounded-3xl"
-            >
-              Checkout
-            </button>
+            {!pathname.includes("checkout".toLowerCase()) ? (
+              <button
+                onClick={() => router.push("/checkout")}
+                className="w-full p-[14px] shadow border hover:cursor-pointer bg-[#0f172a] text-white hoverDownEffect  rounded-3xl"
+              >
+                Proceed to Checkout
+              </button>
+            ) : (
+              <button
+                onClick={handleCheckout}
+                className="w-full p-[14px] shadow border hover:cursor-pointer bg-[#0f172a] text-white hoverDownEffect  rounded-3xl"
+              >
+                Checkout
+              </button>
+            )}
+
             <span
               style={{ fontWeight: 500 }}
               className="flex items-center text-gray-500  text-sm mx-auto mt-4 justify-center"
