@@ -1,4 +1,5 @@
 "use client";
+import React, { useState, useEffect } from "react";
 import { UserType } from "@/Types/Auth";
 import CartItem from "@/components/Cart/CartItem";
 import OrderSummary from "@/components/Cart/OrderSummary";
@@ -7,9 +8,10 @@ import PaymentLoader from "@/components/screenLoaders/PaymentLoader";
 import { setCheckoutRequestID } from "@/features/slices/PaymentSlice";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import AxiosWrapper from "@/utils/axios/axiosWrapper";
-import React, { useState } from "react";
+import { socket } from "@/utils/socketResolver/socketResolver";
 
 const Checkout = () => {
+  const [isConnected, setIsConnected] = useState(socket.connected);
   const dispatch = useAppDispatch();
   const user: UserType = useAppSelector((state) => {
     if (typeof state.auth.user !== "string") {
@@ -41,9 +43,31 @@ const Checkout = () => {
     console.log(response?.data?.CheckoutRequestID);
     dispatch(setCheckoutRequestID(response?.data?.CheckoutRequestID));
   };
+
+  //socket instances
+  useEffect(() => {
+    function onConnect() {
+      setIsConnected(true);
+    }
+
+    function onDisconnect() {
+      setIsConnected(false);
+    }
+
+    socket.on("connect", onConnect);
+    socket.on("disconnect", onDisconnect);
+
+    return () => {
+      socket.off("connect", onConnect);
+      socket.off("disconnect", onDisconnect);
+    };
+  }, []);
   return (
     <>
       <div className="p-4 container mx-auto py-20 px-8">
+        <span className="font-bold text-3xl w-full">
+          Socket {String(isConnected)}
+        </span>
         <span className="font-bold text-3xl w-full">Checkout</span>
         <hr className="mt-8 mb-6" />
         <div className="w-full flex relative">
