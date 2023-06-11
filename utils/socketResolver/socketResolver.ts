@@ -12,6 +12,5 @@ export const socket = io(URL, {
 //   const socket = io.connect(connectUrl, {
 //     transports: ["websocket"],
 //   });
-
 //   return socket;
 // };
