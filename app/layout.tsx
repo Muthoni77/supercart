@@ -27,7 +27,11 @@ export default function RootLayout({
       <body>
         <Provider store={store}>
           {children}
-          <ToastContainer autoClose={2000} pauseOnHover={true} />
+          <ToastContainer
+            autoClose={2000}
+            pauseOnHover={true}
+            position={"bottom-left"}
+          />
         </Provider>
       </body>
     </html>

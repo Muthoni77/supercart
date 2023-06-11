@@ -8,11 +8,15 @@ import PaymentLoader from "@/components/screenLoaders/PaymentLoader";
 import { setCheckoutRequestID } from "@/features/slices/PaymentSlice";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import AxiosWrapper from "@/utils/axios/axiosWrapper";
-// import { socket } from "@/utils/socketResolver/socketResolver";
+import { wssResolver } from "@/utils/socketResolver/socketResolver";
 import { io } from "socket.io-client";
+import { PaymentsCallbackType } from "@/Types/Payments";
+import swal from "sweetalert";
+import { useRouter } from "next/navigation";
 
 const Checkout = () => {
-  const socket = io("http://localhost:4000");
+  const socket = wssResolver();
+  const router = useRouter();
   const [isConnected, setIsConnected] = useState(socket.connected);
   const dispatch = useAppDispatch();
   const user: UserType = useAppSelector((state) => {
@@ -28,24 +32,54 @@ const Checkout = () => {
   );
 
   const handleCheckout = async () => {
-    setLoading(true);
-    const data = {
-      Amount: subtotal.split(".")[0],
-      PhoneNumber: user.phone,
-    };
-    const response: any = await AxiosWrapper({
-      method: "post",
-      url: "/payments/mpesa/checkout",
-      data,
-    });
+    try {
+      setLoading(true);
+      const data = {
+        // Amount: subtotal.split(".")[0],
+        Amount: "1",
+        PhoneNumber: user.phone,
+      };
+      const response: any = await AxiosWrapper({
+        method: "post",
+        url: "/payments/mpesa/checkout",
+        data,
+      });
 
-    console.log("payment response");
-    console.log(response?.data);
-    console.log("response checkout id");
-    console.log(response?.data?.CheckoutRequestID);
-    dispatch(setCheckoutRequestID(response?.data?.CheckoutRequestID));
+      console.log("payment response");
+      console.log(response?.data);
+      console.log("response checkout id");
+      console.log(response?.data?.CheckoutRequestID);
+      dispatch(setCheckoutRequestID(response?.data?.CheckoutRequestID));
+    } catch (error) {
+      setLoading(false);
+      swal("Error", "Some error occurred, kindly try again later", "error");
+    }
   };
 
+  const handleMpesaCallback = ({
+    ResultCode,
+    ResultDesc,
+  }: PaymentsCallbackType) => {
+    setLoading(false);
+    if (ResultCode === 0) {
+      swal("Success", "Payment was successfull", "success");
+      router.push("/")
+
+      /**
+       * #TODO:
+       * Save products bought
+       * Clear cart
+       * Solve CI error
+       */
+      
+    } else {
+      setLoaderMessage("Processing payment, please wait...");
+      swal("Error", ResultDesc, "error");
+    }
+  };
+  const handleMpesaStatus = (status: string) => {
+    setLoaderMessage(status);
+  };
   //socket instances
   useEffect(() => {
     function onConnect() {
@@ -58,18 +92,19 @@ const Checkout = () => {
 
     socket.on("connect", onConnect);
     socket.on("disconnect", onDisconnect);
+    socket.on("mpesaCallback", handleMpesaCallback);
+    socket.on("mpesaStatus", handleMpesaStatus);
 
     return () => {
       socket.off("connect", onConnect);
       socket.off("disconnect", onDisconnect);
+      socket.off("mpesaCallback", handleMpesaCallback);
+      socket.off("mpesaStatus", handleMpesaStatus);
     };
   }, []);
   return (
     <>
       <div className="p-4 container mx-auto py-20 px-8">
-        <span className="font-bold text-3xl w-full">
-          Socket {String(isConnected)}
-        </span>
         <span className="font-bold text-3xl w-full">Checkout</span>
         <hr className="mt-8 mb-6" />
         <div className="w-full flex relative">
@@ -77,7 +112,14 @@ const Checkout = () => {
             <CheckoutProfile />
           </div>
           <div className="w-[40%] sticky top-0 ">
-            <span className="font-bold text-base mb-3 px-4">Order Summary</span>
+            <span className="font-bold text-base mb-3 px-4">
+              Order Summary
+              <button
+                onClick={() => socket.emit("hello", { author: user?.username })}
+              >
+                test emit
+              </button>
+            </span>
             <div
               className="w-full  px-4 flex flex-col max-h-[50vh] no-scrollbarss"
               style={{ overflowY: "auto" }}
