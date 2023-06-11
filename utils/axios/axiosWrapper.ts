@@ -28,12 +28,6 @@ const AxiosWrapper = async ({
     });
 
     axiosInstance.interceptors.request.use(async (config: any) => {
-      console.log("set access token");
-      console.log(accessToken);
-      console.log(
-        "inside the interceptor",
-        localStorage.getItem("accessToken")
-      );
       const currentToken: DecodedTokenType = jwtDecode(
         accessToken || localStorage.getItem("accessToken")!
       );
@@ -54,21 +48,16 @@ const AxiosWrapper = async ({
             },
           });
 
-          console.log("refresh token data");
-          console.log(response?.data);
-
           newAccessToken = response?.data?.accessToken;
           const newRefreshToken = response?.data?.refreshToken;
           accessToken = newAccessToken;
-          console.log("calling dispatch");
+
           store.dispatch(
             refreshTokens({
               accessToken: newAccessToken,
               refreshToken: newRefreshToken,
             })
           );
-
-          console.log("dispatch ended");
         } catch (error) {
           console.log("Session error");
           toast.error("Session error, logging you out");
@@ -80,11 +69,7 @@ const AxiosWrapper = async ({
       }
 
       config.headers.Authorization = "Bearer " + accessToken;
-      console.log("set access token");
-      console.log(accessToken);
 
-      console.log("debug point two");
-      console.log(BACKEND_URL + url);
       return config;
     });
 
@@ -93,8 +78,6 @@ const AxiosWrapper = async ({
       url: BACKEND_URL + url,
       data,
     });
-
-    console.log("returning response");
 
     return response;
   } catch (error) {
