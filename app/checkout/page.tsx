@@ -50,6 +50,9 @@ const Checkout = () => {
     console.log("This is the callback data from server");
     console.log(callbackData);
   };
+  const handleMpesaStatus = (status: string) => {
+    setLoaderMessage(status);
+  };
   //socket instances
   useEffect(() => {
     function onConnect() {
@@ -63,11 +66,13 @@ const Checkout = () => {
     socket.on("connect", onConnect);
     socket.on("disconnect", onDisconnect);
     socket.on("mpesaCallback", handleMpesaCallback);
+    socket.on("mpesaStatus", handleMpesaStatus);
 
     return () => {
       socket.off("connect", onConnect);
       socket.off("disconnect", onDisconnect);
       socket.off("mpesaCallback", handleMpesaCallback);
+      socket.off("mpesaStatus", handleMpesaStatus);
     };
   }, []);
   return (
