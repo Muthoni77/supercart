@@ -8,11 +8,10 @@ import PaymentLoader from "@/components/screenLoaders/PaymentLoader";
 import { setCheckoutRequestID } from "@/features/slices/PaymentSlice";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import AxiosWrapper from "@/utils/axios/axiosWrapper";
-// import { socket } from "@/utils/socketResolver/socketResolver";
+import { socket } from "@/utils/socketResolver/socketResolver";
 import { io } from "socket.io-client";
 
 const Checkout = () => {
-  const socket = io("http://localhost:4000");
   const [isConnected, setIsConnected] = useState(socket.connected);
   const dispatch = useAppDispatch();
   const user: UserType = useAppSelector((state) => {
@@ -48,6 +47,8 @@ const Checkout = () => {
 
   //socket instances
   useEffect(() => {
+    console.log("socket");
+    console.log(socket);
     function onConnect() {
       setIsConnected(true);
     }
