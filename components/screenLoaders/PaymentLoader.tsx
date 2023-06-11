@@ -19,7 +19,7 @@ const PaymentLoader = ({ message }: { message: string }) => {
       <div className="rounded-xl bg-white p-4 w-full md:w-1/2 min-h-[60vh] flex flex-col items-center justify-center">
         <span className="text-xl font-bold">Paying ksh {subtotal}/=</span>
         <img src="./pics/payment/mpesa2.png" className=" max-w-full " />
-        <span className="">{message}</span>
+        <span className=" text-center mx-auto">{message}</span>
         <img src="./loading2.gif" className="w-[80px] " />
       </div>
     </div>
