@@ -12,9 +12,11 @@ import { wssResolver } from "@/utils/socketResolver/socketResolver";
 import { io } from "socket.io-client";
 import { PaymentsCallbackType } from "@/Types/Payments";
 import swal from "sweetalert";
+import { useRouter } from "next/navigation";
 
 const Checkout = () => {
   const socket = wssResolver();
+  const router = useRouter();
   const [isConnected, setIsConnected] = useState(socket.connected);
   const dispatch = useAppDispatch();
   const user: UserType = useAppSelector((state) => {
@@ -30,22 +32,28 @@ const Checkout = () => {
   );
 
   const handleCheckout = async () => {
-    setLoading(true);
-    const data = {
-      Amount: subtotal.split(".")[0],
-      PhoneNumber: user.phone,
-    };
-    const response: any = await AxiosWrapper({
-      method: "post",
-      url: "/payments/mpesa/checkout",
-      data,
-    });
+    try {
+      setLoading(true);
+      const data = {
+        // Amount: subtotal.split(".")[0],
+        Amount: "1",
+        PhoneNumber: user.phone,
+      };
+      const response: any = await AxiosWrapper({
+        method: "post",
+        url: "/payments/mpesa/checkout",
+        data,
+      });
 
-    console.log("payment response");
-    console.log(response?.data);
-    console.log("response checkout id");
-    console.log(response?.data?.CheckoutRequestID);
-    dispatch(setCheckoutRequestID(response?.data?.CheckoutRequestID));
+      console.log("payment response");
+      console.log(response?.data);
+      console.log("response checkout id");
+      console.log(response?.data?.CheckoutRequestID);
+      dispatch(setCheckoutRequestID(response?.data?.CheckoutRequestID));
+    } catch (error) {
+      setLoading(false);
+      swal("Error", "Some error occurred, kindly try again later", "error");
+    }
   };
 
   const handleMpesaCallback = ({
@@ -55,7 +63,16 @@ const Checkout = () => {
     setLoading(false);
     if (ResultCode === 0) {
       swal("Success", "Payment was successfull", "success");
+      router.push("/")
+
+      /**
+       * #TODO:
+       * Save products bought
+       * Clear cart
+       */
+      
     } else {
+      setLoaderMessage("Processing payment, please wait...");
       swal("Error", ResultDesc, "error");
     }
   };
