@@ -8,10 +8,11 @@ import PaymentLoader from "@/components/screenLoaders/PaymentLoader";
 import { setCheckoutRequestID } from "@/features/slices/PaymentSlice";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import AxiosWrapper from "@/utils/axios/axiosWrapper";
-import { socket } from "@/utils/socketResolver/socketResolver";
+import { wssResolver } from "@/utils/socketResolver/socketResolver";
 import { io } from "socket.io-client";
 
 const Checkout = () => {
+  const socket = wssResolver();
   const [isConnected, setIsConnected] = useState(socket.connected);
   const dispatch = useAppDispatch();
   const user: UserType = useAppSelector((state) => {
@@ -79,11 +80,13 @@ const Checkout = () => {
             <CheckoutProfile />
           </div>
           <div className="w-[40%] sticky top-0 ">
-            <span
-              className="font-bold text-base mb-3 px-4"
-              onClick={() => socket.emit("hello", { author: user.username })}
-            >
+            <span className="font-bold text-base mb-3 px-4">
               Order Summary
+              <button
+                onClick={() => socket.emit("hello", { author: user?.username })}
+              >
+                test emit
+              </button>
             </span>
             <div
               className="w-full  px-4 flex flex-col max-h-[50vh] no-scrollbarss"
