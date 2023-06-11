@@ -69,6 +69,7 @@ const Checkout = () => {
        * #TODO:
        * Save products bought
        * Clear cart
+       * Solve CI error
        */
       
     } else {
