@@ -10,6 +10,8 @@ import { useAppSelector, useAppDispatch } from "@/hooks";
 import AxiosWrapper from "@/utils/axios/axiosWrapper";
 import { wssResolver } from "@/utils/socketResolver/socketResolver";
 import { io } from "socket.io-client";
+import { PaymentsCallbackType } from "@/Types/Payments";
+import swal from "sweetalert";
 
 const Checkout = () => {
   const socket = wssResolver();
@@ -46,9 +48,16 @@ const Checkout = () => {
     dispatch(setCheckoutRequestID(response?.data?.CheckoutRequestID));
   };
 
-  const handleMpesaCallback = (callbackData: any) => {
-    console.log("This is the callback data from server");
-    console.log(callbackData);
+  const handleMpesaCallback = ({
+    ResultCode,
+    ResultDesc,
+  }: PaymentsCallbackType) => {
+    setLoading(false);
+    if (ResultCode === 0) {
+      swal("Success", "Payment was successfull", "success");
+    } else {
+      swal("Error", ResultDesc, "error");
+    }
   };
   const handleMpesaStatus = (status: string) => {
     setLoaderMessage(status);
